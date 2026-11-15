@@ -1,0 +1,5329 @@
+# Complete Image Converter - Product Requirements Document (PRD)
+
+## Document Information
+
+| Field | Value |
+|-------|-------|
+| **Product Name** | All-in-One Image Converter Pro |
+| **Version** | 2.0.0 |
+| **Author** | OathanRex |
+| **Domain** | https://oathanrex.github.io/image-converter |
+| **Repository** | image-converter |
+| **Last Updated** | 2024 |
+| **Status** | Production Ready |
+
+---
+
+## Table of Contents
+
+1. [Executive Summary](#1-executive-summary)
+2. [Product Vision & Goals](#2-product-vision--goals)
+3. [Target Audience](#3-target-audience)
+4. [Core Features](#4-core-features)
+5. [Format Support](#5-format-support)
+6. [Resize & Dimension Features](#6-resize--dimension-features)
+7. [Compression & Optimization](#7-compression--optimization)
+8. [Crop & Transform Features](#8-crop--transform-features)
+9. [Filters & Adjustments](#9-filters--adjustments)
+10. [Watermark & Text Features](#10-watermark--text-features)
+11. [Special Effects](#11-special-effects)
+12. [Batch Processing](#12-batch-processing)
+13. [Metadata Features](#13-metadata-features)
+14. [Animated Image Features](#14-animated-image-features)
+15. [Collage & Combine Features](#15-collage--combine-features)
+16. [Comparison & Analysis](#16-comparison--analysis)
+17. [Export & Download Features](#17-export--download-features)
+18. [UI/UX Specifications](#18-uiux-specifications)
+19. [Accessibility Requirements](#19-accessibility-requirements)
+20. [Performance Requirements](#20-performance-requirements)
+21. [Security Requirements](#21-security-requirements)
+22. [Storage & Data Management](#22-storage--data-management)
+23. [PWA & Offline Features](#23-pwa--offline-features)
+24. [Error Handling](#24-error-handling)
+25. [Browser Compatibility](#25-browser-compatibility)
+26. [Technical Architecture](#26-technical-architecture)
+27. [File Structure](#27-file-structure)
+28. [API Specifications](#28-api-specifications)
+29. [Testing Requirements](#29-testing-requirements)
+30. [Deployment Guide](#30-deployment-guide)
+31. [Footer Links](#31-footer-links)
+32. [Development Phases](#32-development-phases)
+33. [Success Metrics](#33-success-metrics)
+
+---
+
+## 1. Executive Summary
+
+### 1.1 Product Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                                                                         │
+│              ALL-IN-ONE IMAGE CONVERTER PRO                             │
+│                                                                         │
+│   A comprehensive, privacy-focused, client-side image processing       │
+│   tool that runs entirely in the browser with zero server uploads.     │
+│                                                                         │
+│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
+│   │   CONVERT   │  │   RESIZE    │  │  COMPRESS   │  │    EDIT     │  │
+│   │  10+ formats│  │  50+ presets│  │  Smart opt  │  │  100+ tools │  │
+│   └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  │
+│                                                                         │
+│   ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  │
+│   │    BATCH    │  │  WATERMARK  │  │   COLLAGE   │  │   EXPORT    │  │
+│   │  100 files  │  │ Text+Image  │  │  Templates  │  │  ZIP+Cloud  │  │
+│   └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘  │
+│                                                                         │
+│                    100% PRIVATE • 100% FREE • 100% OFFLINE              │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 1.2 Key Value Propositions
+
+| Proposition | Description |
+|-------------|-------------|
+| **100% Private** | All processing happens locally in browser |
+| **Zero Uploads** | No data ever leaves user's device |
+| **Completely Free** | No subscriptions, no limits, no hidden costs |
+| **Works Offline** | Full functionality without internet |
+| **Professional Tools** | Feature set rivaling desktop applications |
+| **Cross-Platform** | Works on any device with modern browser |
+
+### 1.3 Tagline
+
+> **"Convert, resize, edit & optimize images directly in your browser. 100% Private — No server uploads, ever!"**
+
+---
+
+## 2. Product Vision & Goals
+
+### 2.1 Vision Statement
+
+To create the most comprehensive, privacy-respecting image processing tool that provides professional-grade features entirely within the browser, eliminating the need for desktop software or cloud-based solutions.
+
+### 2.2 Primary Goals
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│                        PRIMARY GOALS                           │
+├────────────────────────────────────────────────────────────────┤
+│                                                                │
+│  1. PRIVACY FIRST                                              │
+│     └── Zero server communication for image processing         │
+│     └── No tracking, no analytics, no cookies                  │
+│     └── Optional metadata stripping                            │
+│                                                                │
+│  2. PROFESSIONAL FEATURES                                      │
+│     └── Match desktop software capabilities                    │
+│     └── Support all common image operations                    │
+│     └── Batch processing for productivity                      │
+│                                                                │
+│  3. UNIVERSAL ACCESS                                           │
+│     └── Works on all modern browsers                           │
+│     └── Responsive design for all devices                      │
+│     └── Full accessibility compliance                          │
+│                                                                │
+│  4. PERFORMANCE                                                │
+│     └── Fast processing using Web Workers                      │
+│     └── Efficient memory management                            │
+│     └── Smooth UI even with large files                        │
+│                                                                │
+│  5. USER EXPERIENCE                                            │
+│     └── Intuitive interface                                    │
+│     └── Comprehensive keyboard shortcuts                       │
+│     └── Undo/redo support                                      │
+│                                                                │
+└────────────────────────────────────────────────────────────────┘
+```
+
+### 2.3 Success Metrics
+
+| Metric | Target |
+|--------|--------|
+| First Contentful Paint | < 1.5 seconds |
+| Time to Interactive | < 3 seconds |
+| Lighthouse Performance Score | > 90 |
+| Lighthouse Accessibility Score | 100 |
+| Processing Speed (5MB image) | < 3 seconds |
+| Max Concurrent Files | 100 files |
+| Max File Size | 50MB per file |
+| Offline Capability | 100% functional |
+
+---
+
+## 3. Target Audience
+
+### 3.1 Primary Users
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      TARGET AUDIENCE                            │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  👤 CONTENT CREATORS                                            │
+│     • Social media managers                                     │
+│     • Bloggers and writers                                      │
+│     • YouTubers and streamers                                   │
+│     • Podcasters (cover art)                                    │
+│                                                                 │
+│  👤 PHOTOGRAPHERS                                               │
+│     • Amateur photographers                                     │
+│     • Photography enthusiasts                                   │
+│     • Photo editors                                             │
+│                                                                 │
+│  👤 WEB PROFESSIONALS                                           │
+│     • Web developers                                            │
+│     • UI/UX designers                                           │
+│     • Frontend developers                                       │
+│     • Webmasters                                                │
+│                                                                 │
+│  👤 E-COMMERCE                                                  │
+│     • Online sellers                                            │
+│     • Product photographers                                     │
+│     • Marketplace sellers                                       │
+│                                                                 │
+│  👤 GENERAL USERS                                               │
+│     • Privacy-conscious individuals                             │
+│     • Students and educators                                    │
+│     • Small business owners                                     │
+│     • Anyone needing quick image edits                          │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 3.2 User Personas
+
+#### Persona 1: Sarah - Social Media Manager
+
+| Attribute | Value |
+|-----------|-------|
+| Age | 28 |
+| Role | Social Media Manager |
+| Tech Level | Intermediate |
+| Primary Need | Resize images for multiple platforms quickly |
+| Pain Points | Switching between tools, privacy concerns |
+| Goals | One tool for all social media image sizes |
+
+#### Persona 2: Mike - Web Developer
+
+| Attribute | Value |
+|-----------|-------|
+| Age | 34 |
+| Role | Frontend Developer |
+| Tech Level | Advanced |
+| Primary Need | Optimize images for web, convert to WebP |
+| Pain Points | Slow tools, lack of batch processing |
+| Goals | Fast batch optimization with modern formats |
+
+#### Persona 3: Emma - Privacy Advocate
+
+| Attribute | Value |
+|-----------|-------|
+| Age | 42 |
+| Role | Privacy Consultant |
+| Tech Level | Advanced |
+| Primary Need | Process images without cloud uploads |
+| Pain Points | Most tools upload to servers |
+| Goals | Complete offline image processing |
+
+---
+
+## 4. Core Features
+
+### 4.1 Feature Overview Matrix
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│                         FEATURE MATRIX                                   │
+├────────────────────┬─────────┬─────────┬─────────┬───────────────────────┤
+│ Feature Category   │ Basic   │ Advanced│ Pro     │ Description           │
+├────────────────────┼─────────┼─────────┼─────────┼───────────────────────┤
+│ Format Conversion  │   ✓     │    ✓    │    ✓    │ 10+ formats           │
+│ Resize             │   ✓     │    ✓    │    ✓    │ 50+ presets           │
+│ Compression        │   ✓     │    ✓    │    ✓    │ Quality control       │
+│ Crop               │   ✓     │    ✓    │    ✓    │ Aspect ratios         │
+│ Rotate/Flip        │   ✓     │    ✓    │    ✓    │ Transform tools       │
+│ Basic Adjustments  │   ✓     │    ✓    │    ✓    │ Brightness, contrast  │
+│ Filters            │         │    ✓    │    ✓    │ 30+ presets           │
+│ Color Adjustments  │         │    ✓    │    ✓    │ HSL, curves, levels   │
+│ Watermark          │         │    ✓    │    ✓    │ Text and image        │
+│ Batch Processing   │         │    ✓    │    ✓    │ Up to 100 files       │
+│ Collage            │         │         │    ✓    │ Templates             │
+│ GIF Handling       │         │         │    ✓    │ Extract/create        │
+│ Metadata           │         │         │    ✓    │ View/edit/strip       │
+│ PDF Creation       │         │         │    ✓    │ Images to PDF         │
+│ Comparison         │         │         │    ✓    │ Before/after          │
+│ History/Undo       │         │         │    ✓    │ 50 steps              │
+│ Presets            │         │         │    ✓    │ Save/load settings    │
+├────────────────────┴─────────┴─────────┴─────────┴───────────────────────┤
+│ Note: All features included in single free version                      │
+└──────────────────────────────────────────────────────────────────────────┘
+```
+
+### 4.2 Core Feature List
+
+| # | Feature | Priority | Status |
+|---|---------|----------|--------|
+| 1 | Multi-format conversion | P0 | Required |
+| 2 | Image resizing | P0 | Required |
+| 3 | Quality compression | P0 | Required |
+| 4 | Batch processing | P0 | Required |
+| 5 | Drag & drop upload | P0 | Required |
+| 6 | Clipboard paste | P0 | Required |
+| 7 | ZIP download | P0 | Required |
+| 8 | Crop tool | P1 | Required |
+| 9 | Rotate/flip | P1 | Required |
+| 10 | Basic adjustments | P1 | Required |
+| 11 | Filters/presets | P1 | Required |
+| 12 | Watermark | P1 | Required |
+| 13 | Before/after comparison | P1 | Required |
+| 14 | Undo/redo | P1 | Required |
+| 15 | Metadata handling | P2 | Required |
+| 16 | GIF handling | P2 | Required |
+| 17 | Collage creation | P2 | Required |
+| 18 | PDF creation | P2 | Optional |
+| 19 | Color analysis | P2 | Optional |
+| 20 | Advanced effects | P2 | Optional |
+
+---
+
+## 5. Format Support
+
+### 5.1 Input Formats
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        INPUT FORMAT SUPPORT                             │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  RASTER FORMATS                                                  │   │
+│  ├─────────────────────────────────────────────────────────────────┤   │
+│  │                                                                  │   │
+│  │  JPEG/JPG ─────────────────────────────────── ✓ Full Support    │   │
+│  │  ├── Standard JPEG                                               │   │
+│  │  ├── Progressive JPEG                                            │   │
+│  │  └── EXIF orientation support                                    │   │
+│  │                                                                  │   │
+│  │  PNG ──────────────────────────────────────── ✓ Full Support    │   │
+│  │  ├── 8-bit (palette)                                             │   │
+│  │  ├── 24-bit (RGB)                                                │   │
+│  │  ├── 32-bit (RGBA with alpha)                                    │   │
+│  │  └── Interlaced PNG                                              │   │
+│  │                                                                  │   │
+│  │  WebP ─────────────────────────────────────── ✓ Full Support    │   │
+│  │  ├── Lossy WebP                                                  │   │
+│  │  ├── Lossless WebP                                               │   │
+│  │  └── Animated WebP                                               │   │
+│  │                                                                  │   │
+│  │  GIF ──────────────────────────────────────── ✓ Full Support    │   │
+│  │  ├── Static GIF                                                  │   │
+│  │  └── Animated GIF (frame extraction)                             │   │
+│  │                                                                  │   │
+│  │  BMP ──────────────────────────────────────── ✓ Full Support    │   │
+│  │  ├── Windows Bitmap                                              │   │
+│  │  └── 24-bit and 32-bit                                           │   │
+│  │                                                                  │   │
+│  │  TIFF ─────────────────────────────────────── ✓ Basic Support   │   │
+│  │  └── Single-page TIFF (via canvas)                               │   │
+│  │                                                                  │   │
+│  │  ICO ──────────────────────────────────────── ✓ Basic Support   │   │
+│  │  └── Icon extraction                                             │   │
+│  │                                                                  │   │
+│  │  AVIF ─────────────────────────────────────── ✓ If Supported    │   │
+│  │  └── Browser-dependent support                                   │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  VECTOR FORMATS                                                  │   │
+│  ├─────────────────────────────────────────────────────────────────┤   │
+│  │                                                                  │   │
+│  │  SVG ──────────────────────────────────────── ✓ Rasterization   │   │
+│  │  ├── Rasterize at custom resolution                              │   │
+│  │  ├── Custom DPI support                                          │   │
+│  │  └── Preserve aspect ratio                                       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 5.2 Output Formats
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        OUTPUT FORMAT SUPPORT                            │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  FORMAT     │ QUALITY │ OPTIONS                                         │
+│  ───────────┼─────────┼───────────────────────────────────────────────  │
+│             │         │                                                 │
+│  JPEG       │ 1-100%  │ • Progressive encoding                          │
+│             │         │ • Baseline encoding                             │
+│             │         │ • Custom quality                                │
+│             │         │ • Optimize for size                             │
+│             │         │                                                 │
+│  PNG        │ 0-9     │ • Compression level (0=none, 9=max)             │
+│             │         │ • 8-bit palette mode                            │
+│             │         │ • 24-bit RGB                                    │
+│             │         │ • 32-bit RGBA (transparency)                    │
+│             │         │ • Interlaced output                             │
+│             │         │                                                 │
+│  WebP       │ 1-100%  │ • Lossy compression                             │
+│             │         │ • Lossless compression                          │
+│             │         │ • Quality control                               │
+│             │         │ • Alpha channel support                         │
+│             │         │                                                 │
+│  GIF        │ N/A     │ • Color reduction (2-256 colors)                │
+│             │         │ • Dithering options                             │
+│             │         │ • Transparency support                          │
+│             │         │                                                 │
+│  BMP        │ N/A     │ • 24-bit RGB                                    │
+│             │         │ • 32-bit RGBA                                   │
+│             │         │                                                 │
+│  AVIF       │ 1-100%  │ • If browser supports                           │
+│             │         │ • High compression ratio                        │
+│             │         │                                                 │
+│  ICO        │ N/A     │ • Multi-size generation                         │
+│             │         │ • Sizes: 16, 32, 48, 64, 128, 256               │
+│             │         │                                                 │
+│  PDF        │ N/A     │ • Single image                                  │
+│             │         │ • Multiple images combined                      │
+│             │         │ • Custom page size                              │
+│             │         │                                                 │
+│  Base64     │ N/A     │ • Data URL output                               │
+│             │         │ • For embedding in HTML/CSS                     │
+│             │         │                                                 │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 5.3 Format Conversion Matrix
+
+| From/To | JPEG | PNG | WebP | GIF | BMP | AVIF | ICO | PDF |
+|---------|------|-----|------|-----|-----|------|-----|-----|
+| JPEG | - | ✓ | ✓ | ✓ | ✓ | ✓* | ✓ | ✓ |
+| PNG | ✓ | - | ✓ | ✓ | ✓ | ✓* | ✓ | ✓ |
+| WebP | ✓ | ✓ | - | ✓ | ✓ | ✓* | ✓ | ✓ |
+| GIF | ✓ | ✓ | ✓ | - | ✓ | ✓* | ✓ | ✓ |
+| BMP | ✓ | ✓ | ✓ | ✓ | - | ✓* | ✓ | ✓ |
+| SVG | ✓ | ✓ | ✓ | ✓ | ✓ | ✓* | ✓ | ✓ |
+| TIFF | ✓ | ✓ | ✓ | ✓ | ✓ | ✓* | ✓ | ✓ |
+
+*AVIF support depends on browser capability
+
+---
+
+## 6. Resize & Dimension Features
+
+### 6.1 Resize Methods
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         RESIZE METHODS                                  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  EXACT DIMENSIONS                                                │   │
+│  │  • Set specific width and height in pixels                       │   │
+│  │  • Option to maintain or ignore aspect ratio                     │   │
+│  │  • Warning if ratio will be distorted                            │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  FIT WITHIN BOUNDS                                               │   │
+│  │  • Image fits inside specified dimensions                        │   │
+│  │  • Maintains aspect ratio                                        │   │
+│  │  • No cropping, may have empty space                             │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  FILL BOUNDS (COVER)                                             │   │
+│  │  • Image fills entire specified area                             │   │
+│  │  • Maintains aspect ratio                                        │   │
+│  │  • Excess is cropped                                             │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  SCALE BY PERCENTAGE                                             │   │
+│  │  • Scale from 10% to 500%                                        │   │
+│  │  • Maintains aspect ratio                                        │   │
+│  │  • Useful for batch resizing                                     │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  WIDTH ONLY                                                      │   │
+│  │  • Set only width, height auto-calculated                        │   │
+│  │  • Maintains aspect ratio                                        │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  HEIGHT ONLY                                                     │   │
+│  │  • Set only height, width auto-calculated                        │   │
+│  │  • Maintains aspect ratio                                        │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  LONGER EDGE                                                     │   │
+│  │  • Set the longer edge dimension                                 │   │
+│  │  • Shorter edge calculated automatically                         │   │
+│  │  • Great for mixed orientation batches                           │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  SHORTER EDGE                                                    │   │
+│  │  • Set the shorter edge dimension                                │   │
+│  │  • Longer edge calculated automatically                          │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  TARGET MEGAPIXELS                                               │   │
+│  │  • Resize to target total pixels (e.g., 12MP)                    │   │
+│  │  • Maintains aspect ratio                                        │   │
+│  │  • Useful for storage optimization                               │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 6.2 Interpolation Algorithms
+
+| Algorithm | Quality | Speed | Best For |
+|-----------|---------|-------|----------|
+| Nearest Neighbor | Low | Fastest | Pixel art, sharp edges |
+| Bilinear | Medium | Fast | General use, previews |
+| Bicubic | High | Medium | Photos, detailed images |
+| Lanczos | Highest | Slow | Professional quality |
+
+### 6.3 Preset Dimensions
+
+#### Social Media Presets
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     SOCIAL MEDIA PRESETS                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  INSTAGRAM                           │  FACEBOOK                        │
+│  ├── Post Square      1080 × 1080   │  ├── Post           1200 × 630   │
+│  ├── Post Portrait    1080 × 1350   │  ├── Cover          820 × 312    │
+│  ├── Post Landscape   1080 × 566    │  ├── Profile        180 × 180    │
+│  ├── Story/Reel       1080 × 1920   │  ├── Event Cover    1920 × 1080  │
+│  ├── Profile Picture  320 × 320     │  └── Ad Image       1200 × 628   │
+│  └── IGTV Cover       420 × 654     │                                  │
+│                                      │                                  │
+│  TWITTER                             │  LINKEDIN                        │
+│  ├── Post Image       1200 × 675    │  ├── Post           1200 × 627   │
+│  ├── Header           1500 × 500    │  ├── Cover          1584 × 396   │
+│  ├── Profile          400 × 400     │  ├── Profile        400 × 400    │
+│  └── Card Image       800 × 418     │  └── Company Logo   300 × 300    │
+│                                      │                                  │
+│  YOUTUBE                             │  TIKTOK                          │
+│  ├── Thumbnail        1280 × 720    │  ├── Video          1080 × 1920  │
+│  ├── Channel Banner   2560 × 1440   │  └── Profile        200 × 200    │
+│  ├── Channel Icon     800 × 800     │                                  │
+│  └── End Screen       1920 × 1080   │  PINTEREST                       │
+│                                      │  ├── Pin           1000 × 1500   │
+│  SNAPCHAT                            │  ├── Square Pin    1000 × 1000   │
+│  ├── Story            1080 × 1920   │  └── Profile       165 × 165     │
+│  └── Geofilter        1080 × 2340   │                                  │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Screen Resolutions
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      SCREEN RESOLUTIONS                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  HD / STANDARD                       │  ULTRA HD                        │
+│  ├── 720p HD         1280 × 720     │  ├── 4K UHD        3840 × 2160   │
+│  ├── 1080p Full HD   1920 × 1080    │  ├── 5K            5120 × 2880   │
+│  ├── 1440p QHD       2560 × 1440    │  └── 8K UHD        7680 × 4320   │
+│  └── 2K              2048 × 1080    │                                  │
+│                                      │                                  │
+│  MOBILE                              │  DESKTOP                         │
+│  ├── iPhone SE       640 × 1136     │  ├── WXGA          1280 × 800    │
+│  ├── iPhone 14       1170 × 2532    │  ├── SXGA          1280 × 1024   │
+│  ├── iPhone 14 Pro   1179 × 2556    │  ├── WSXGA+        1680 × 1050   │
+│  ├── iPhone 14 Plus  1284 × 2778    │  ├── WUXGA         1920 × 1200   │
+│  ├── iPad            2048 × 2732    │  └── WQXGA         2560 × 1600   │
+│  └── Android Common  1080 × 2400    │                                  │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Print Sizes (300 DPI)
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    PRINT SIZES (300 DPI)                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  STANDARD PRINTS                     │  PAPER SIZES                     │
+│  ├── 4 × 6 inches    1200 × 1800    │  ├── A5           1748 × 2480    │
+│  ├── 5 × 7 inches    1500 × 2100    │  ├── A4           2480 × 3508    │
+│  ├── 8 × 10 inches   2400 × 3000    │  ├── A3           3508 × 4961    │
+│  ├── 11 × 14 inches  3300 × 4200    │  ├── A2           4961 × 7016    │
+│  ├── 16 × 20 inches  4800 × 6000    │  ├── US Letter    2550 × 3300    │
+│  └── 20 × 24 inches  6000 × 7200    │  └── US Legal     2550 × 4200    │
+│                                      │                                  │
+│  LARGE FORMAT                        │  PHOTO PRINTS                    │
+│  ├── 24 × 36 inches  7200 × 10800   │  ├── Wallet       600 × 900      │
+│  ├── 30 × 40 inches  9000 × 12000   │  ├── 3.5 × 5      1050 × 1500    │
+│  └── 36 × 48 inches  10800 × 14400  │  └── Square 5×5   1500 × 1500    │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+#### Web & App Icons
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       WEB & APP ICONS                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  FAVICONS                            │  APP ICONS                       │
+│  ├── 16 × 16                        │  ├── iOS App Store   1024 × 1024 │
+│  ├── 32 × 32                        │  ├── iOS iPad        167 × 167   │
+│  ├── 48 × 48                        │  ├── iOS iPhone      180 × 180   │
+│  ├── 64 × 64                        │  ├── Android Play    512 × 512   │
+│  ├── 96 × 96                        │  ├── Android xxhdpi  144 × 144   │
+│  └── 128 × 128                      │  └── Windows Tile    150 × 150   │
+│                                      │                                  │
+│  PWA ICONS                           │  TOUCH ICONS                     │
+│  ├── 72 × 72                        │  ├── Apple Touch     180 × 180   │
+│  ├── 96 × 96                        │  ├── Apple Touch 152 152 × 152   │
+│  ├── 128 × 128                      │  └── Apple Touch 167 167 × 167   │
+│  ├── 144 × 144                      │                                  │
+│  ├── 152 × 152                      │                                  │
+│  ├── 192 × 192                      │                                  │
+│  ├── 384 × 384                      │                                  │
+│  └── 512 × 512                      │                                  │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+#### E-Commerce Presets
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      E-COMMERCE PRESETS                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  AMAZON                              │  EBAY                            │
+│  ├── Main Image      2000 × 2000    │  ├── Gallery        1600 × 1600  │
+│  ├── Additional      1500 × 1500    │  └── Zoom           1600 × 1600  │
+│  └── Thumbnail       100 × 100      │                                  │
+│                                      │                                  │
+│  SHOPIFY                             │  ETSY                            │
+│  ├── Product         2048 × 2048    │  ├── Listing        2000 × 2000  │
+│  ├── Collection      1024 × 1024    │  ├── Shop Icon      500 × 500    │
+│  └── Thumbnail       100 × 100      │  └── Banner         1200 × 300   │
+│                                      │                                  │
+│  WOOCOMMERCE                         │  SQUARESPACE                     │
+│  ├── Product         1200 × 1200    │  ├── Product        1500 × 1500  │
+│  ├── Gallery         800 × 800      │  └── Banner         1500 × 750   │
+│  └── Thumbnail       100 × 100      │                                  │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 6.4 Aspect Ratios
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        ASPECT RATIOS                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  COMMON RATIOS                                                          │
+│  ├── 1:1     Square              │  Photo, profile pictures            │
+│  ├── 4:3     Standard            │  Traditional photos, presentations  │
+│  ├── 3:2     Classic             │  35mm film, DSLR photos             │
+│  ├── 16:9   Widescreen           │  Videos, presentations, monitors    │
+│  ├── 21:9   Ultrawide            │  Cinema, ultrawide monitors         │
+│  ├── 9:16   Portrait Video       │  Stories, TikTok, Reels             │
+│  ├── 2:3    Portrait             │  Portrait photos                    │
+│  ├── 3:4    Portrait Standard    │  Portrait orientation               │
+│  ├── 4:5    Instagram Portrait   │  Instagram optimal                  │
+│  ├── 5:4    Large Format         │  Large format photography           │
+│  └── 1.618:1 Golden Ratio        │  Aesthetic compositions             │
+│                                                                         │
+│  CUSTOM RATIO                                                           │
+│  └── User-defined X:Y ratio                                             │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 7. Compression & Optimization
+
+### 7.1 Quality Control
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       QUALITY CONTROL                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  JPEG QUALITY                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  Range: 1 - 100                                                  │   │
+│  │                                                                  │   │
+│  │  1-30    : Low quality, smallest file size                       │   │
+│  │  31-60   : Medium quality, balanced                              │   │
+│  │  61-80   : Good quality, recommended for web                     │   │
+│  │  81-90   : High quality, professional use                        │   │
+│  │  91-100  : Maximum quality, largest file size                    │   │
+│  │                                                                  │   │
+│  │  Default: 85 (optimal balance)                                   │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PNG COMPRESSION                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  Compression Level: 0 - 9                                        │   │
+│  │                                                                  │   │
+│  │  0 : No compression (fastest, largest)                           │   │
+│  │  6 : Default compression (balanced)                              │   │
+│  │  9 : Maximum compression (slowest, smallest)                     │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  WEBP QUALITY                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  Lossy Mode: 1 - 100 (similar to JPEG)                           │   │
+│  │  Lossless Mode: No quality setting (always maximum)              │   │
+│  │                                                                  │   │
+│  │  Default: 80                                                     │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  AVIF QUALITY                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  Range: 1 - 100                                                  │   │
+│  │  Offers better compression than JPEG at same quality            │   │
+│  │                                                                  │   │
+│  │  Default: 80                                                     │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 7.2 Target File Size
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      TARGET FILE SIZE                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  FEATURE: Automatically adjust quality to meet target file size        │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  TARGET SIZE INPUT                                               │   │
+│  │  ├── Value: 1 - 50,000                                           │   │
+│  │  ├── Units: KB or MB                                             │   │
+│  │  └── Common presets:                                             │   │
+│  │      ├── 100 KB (email attachment)                               │   │
+│  │      ├── 500 KB (web page)                                       │   │
+│  │      ├── 1 MB (social media)                                     │   │
+│  │      ├── 2 MB (high quality web)                                 │   │
+│  │      └── 5 MB (print preview)                                    │   │
+│  │                                                                  │   │
+│  │  ALGORITHM                                                       │   │
+│  │  ├── Binary search for optimal quality                           │   │
+│  │  ├── Maximum 10 iterations                                       │   │
+│  │  ├── Tolerance: ±5% of target                                    │   │
+│  │  └── Falls back to minimum quality if target unreachable         │   │
+│  │                                                                  │   │
+│  │  OUTPUT                                                          │   │
+│  │  ├── Final quality used                                          │   │
+│  │  ├── Actual file size achieved                                   │   │
+│  │  └── Warning if target couldn't be met                           │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 7.3 Optimization Options
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     OPTIMIZATION OPTIONS                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  METADATA HANDLING                                                      │
+│  ├── [ ] Strip all metadata (smallest file)                            │
+│  ├── [ ] Preserve all metadata                                         │
+│  ├── [ ] Selective preservation:                                       │
+│  │   ├── [ ] Copyright information                                     │
+│  │   ├── [ ] Color profile (ICC)                                       │
+│  │   ├── [ ] Orientation (EXIF)                                        │
+│  │   ├── [ ] GPS/Location data                                         │
+│  │   ├── [ ] Camera information                                        │
+│  │   └── [ ] Date/Time information                                     │
+│  │                                                                      │
+│  ENCODING OPTIONS                                                       │
+│  ├── [ ] Progressive JPEG (loads gradually)                            │
+│  ├── [ ] Baseline JPEG (loads top to bottom)                           │
+│  ├── [ ] Interlaced PNG                                                 │
+│  ├── [ ] Optimize color palette (PNG)                                   │
+│  └── [ ] Lossless WebP mode                                             │
+│                                                                         │
+│  AUTO ADJUSTMENTS                                                       │
+│  ├── [ ] Auto-orient based on EXIF                                     │
+│  ├── [ ] Remove transparent pixels (trim)                              │
+│  └── [ ] Convert CMYK to RGB                                            │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 7.4 Smart Compression
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      SMART COMPRESSION                                  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  CONTENT-AWARE OPTIMIZATION                                             │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Photo Detection                                                 │   │
+│  │  ├── Continuous tones                                            │   │
+│  │  ├── High color variance                                         │   │
+│  │  └── Recommendation: JPEG/WebP with 80-85% quality              │   │
+│  │                                                                  │   │
+│  │  Graphic Detection                                               │   │
+│  │  ├── Sharp edges                                                 │   │
+│  │  ├── Solid colors                                                │   │
+│  │  ├── Text present                                                │   │
+│  │  └── Recommendation: PNG or WebP lossless                       │   │
+│  │                                                                  │   │
+│  │  Screenshot Detection                                            │   │
+│  │  ├── UI elements                                                 │   │
+│  │  ├── Text heavy                                                  │   │
+│  │  └── Recommendation: PNG with high compression                  │   │
+│  │                                                                  │   │
+│  │  Mixed Content                                                   │   │
+│  │  ├── Photos + text                                               │   │
+│  │  └── Recommendation: WebP for best balance                      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  FORMAT RECOMMENDATION                                                  │
+│  ├── Show estimated file sizes for each format                         │
+│  ├── Highlight recommended format                                       │
+│  └── Allow one-click apply recommendation                              │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 8. Crop & Transform Features
+
+### 8.1 Crop Tool
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          CROP TOOL                                      │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  CROP MODES                                                             │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  FREEFORM CROP                                                   │   │
+│  │  ├── Drag any edge or corner                                     │   │
+│  │  ├── No aspect ratio restriction                                 │   │
+│  │  └── Numeric input for precise values                            │   │
+│  │                                                                  │   │
+│  │  ASPECT RATIO LOCKED                                             │   │
+│  │  ├── Maintain selected ratio while resizing                      │   │
+│  │  ├── Quick ratio buttons (1:1, 4:3, 16:9, etc.)                 │   │
+│  │  └── Custom ratio input                                          │   │
+│  │                                                                  │   │
+│  │  CIRCULAR CROP                                                   │   │
+│  │  ├── Crop to circle shape                                        │   │
+│  │  ├── Output with transparency (PNG/WebP)                         │   │
+│  │  └── Adjustable circle position and size                         │   │
+│  │                                                                  │   │
+│  │  PRESET CROP                                                     │   │
+│  │  ├── Select from social media presets                            │   │
+│  │  └── Automatically applies correct aspect ratio                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  CROP GUIDES                                                            │
+│  ├── [ ] Rule of Thirds                                                │
+│  ├── [ ] Golden Ratio                                                  │
+│  ├── [ ] Diagonal Lines                                                │
+│  ├── [ ] Center Crosshair                                              │
+│  └── [ ] Custom Grid (N × N)                                           │
+│                                                                         │
+│  CROP ACTIONS                                                           │
+│  ├── Apply Crop                                                         │
+│  ├── Reset to Original                                                  │
+│  ├── Flip Orientation (swap width/height)                              │
+│  └── Auto-Detect Edges (trim whitespace)                               │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 8.2 Rotation & Flip
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      ROTATION & FLIP                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ROTATION                                                               │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  QUICK ROTATE                                                    │   │
+│  │  ├── Rotate Left 90°                                             │   │
+│  │  ├── Rotate Right 90°                                            │   │
+│  │  └── Rotate 180°                                                 │   │
+│  │                                                                  │   │
+│  │  CUSTOM ROTATION                                                 │   │
+│  │  ├── Slider: -180° to +180°                                      │   │
+│  │  ├── Numeric input: 0.1° precision                               │   │
+│  │  └── Presets: 15°, 30°, 45°, 60°                                 │   │
+│  │                                                                  │   │
+│  │  ROTATION OPTIONS                                                │   │
+│  │  ├── [ ] Expand canvas to fit (no crop)                          │   │
+│  │  ├── [ ] Crop to original size                                   │   │
+│  │  └── [ ] Fill background color                                   │   │
+│  │                                                                  │   │
+│  │  STRAIGHTEN/LEVEL                                                │   │
+│  │  ├── Manual straighten with horizon line                         │   │
+│  │  └── Grid overlay for precision                                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  FLIP                                                                   │
+│  ├── Flip Horizontal (mirror)                                          │
+│  └── Flip Vertical                                                      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 8.3 Perspective Correction
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   PERSPECTIVE CORRECTION                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  4-POINT PERSPECTIVE                                                    │
+│  ├── Drag 4 corner points to correct perspective                        │
+│  ├── Useful for straightening documents/photos                          │
+│  └── Grid overlay to verify alignment                                   │
+│                                                                         │
+│  KEYSTONE CORRECTION                                                    │
+│  ├── Vertical Keystone: Fix converging vertical lines                  │
+│  ├── Horizontal Keystone: Fix converging horizontal lines              │
+│  └── Slider controls: -100 to +100                                     │
+│                                                                         │
+│  LENS DISTORTION                                                        │
+│  ├── Barrel Distortion: Fix outward bulge                              │
+│  ├── Pincushion Distortion: Fix inward pinch                           │
+│  └── Slider: -100 to +100                                              │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 8.4 Canvas Operations
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      CANVAS OPERATIONS                                  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  EXTEND CANVAS                                                          │
+│  ├── Add padding/border around image                                    │
+│  ├── Individual sides: Top, Right, Bottom, Left                        │
+│  ├── Units: Pixels or Percentage                                        │
+│  ├── Background: Color picker or transparent                           │
+│  └── Anchor position: 9-point selector                                 │
+│                                                                         │
+│  TRIM CANVAS                                                            │
+│  ├── Remove transparent edges                                           │
+│  ├── Remove solid color edges (auto-detect)                            │
+│  ├── Custom color to trim                                               │
+│  └── Tolerance setting for color matching                              │
+│                                                                         │
+│  MAKE SQUARE                                                            │
+│  ├── Add padding to make image square                                   │
+│  ├── Background color or transparent                                    │
+│  └── Center image in square canvas                                     │
+│                                                                         │
+│  CHANGE CANVAS SIZE                                                     │
+│  ├── Set exact canvas dimensions                                        │
+│  ├── Anchor image position                                              │
+│  └── Fill with color or pattern                                        │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 9. Filters & Adjustments
+
+### 9.1 Basic Adjustments
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       BASIC ADJUSTMENTS                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  LIGHT                                                                  │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  Brightness      [-100 ════════════╪════════════ +100]           │   │
+│  │  Exposure        [-100 ════════════╪════════════ +100]           │   │
+│  │  Contrast        [-100 ════════════╪════════════ +100]           │   │
+│  │  Highlights      [-100 ════════════╪════════════ +100]           │   │
+│  │  Shadows         [-100 ════════════╪════════════ +100]           │   │
+│  │  Whites          [-100 ════════════╪════════════ +100]           │   │
+│  │  Blacks          [-100 ════════════╪════════════ +100]           │   │
+│  │  Gamma           [0.1 ═════════════╪═════════════ 3.0]           │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  COLOR                                                                  │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  Saturation      [-100 ════════════╪════════════ +100]           │   │
+│  │  Vibrance        [-100 ════════════╪════════════ +100]           │   │
+│  │  Temperature     [-100 ════════════╪════════════ +100]           │   │
+│  │                  (Cool Blue)        (Warm Orange)                │   │
+│  │  Tint            [-100 ════════════╪════════════ +100]           │   │
+│  │                  (Green)            (Magenta)                    │   │
+│  │  Hue             [-180 ════════════╪════════════ +180]           │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  DETAIL                                                                 │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │  Clarity         [-100 ════════════╪════════════ +100]           │   │
+│  │  Dehaze          [-100 ════════════╪════════════ +100]           │   │
+│  │  Sharpness       [0 ════════════════════════════ +100]           │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  RESET BUTTON: Reset all adjustments to default                        │
+│  AUTO BUTTON: Apply auto-enhancement                                    │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 9.2 Color Adjustments
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      COLOR ADJUSTMENTS                                  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  COLOR BALANCE                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  SHADOWS                                                         │   │
+│  │  Cyan ◄─────────────────────────────────────────────────► Red   │   │
+│  │  Magenta ◄──────────────────────────────────────────────► Green │   │
+│  │  Yellow ◄───────────────────────────────────────────────► Blue  │   │
+│  │                                                                  │   │
+│  │  MIDTONES                                                        │   │
+│  │  Cyan ◄─────────────────────────────────────────────────► Red   │   │
+│  │  Magenta ◄──────────────────────────────────────────────► Green │   │
+│  │  Yellow ◄───────────────────────────────────────────────► Blue  │   │
+│  │                                                                  │   │
+│  │  HIGHLIGHTS                                                      │   │
+│  │  Cyan ◄─────────────────────────────────────────────────► Red   │   │
+│  │  Magenta ◄──────────────────────────────────────────────► Green │   │
+│  │  Yellow ◄───────────────────────────────────────────────► Blue  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  SELECTIVE COLOR (HSL per color range)                                  │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Color Range: [Reds] [Oranges] [Yellows] [Greens]               │   │
+│  │               [Cyans] [Blues] [Purples] [Magentas]              │   │
+│  │                                                                  │   │
+│  │  For selected color:                                             │   │
+│  │  Hue         [-30 ═══════════════╪═══════════════ +30]           │   │
+│  │  Saturation  [-100 ══════════════╪══════════════ +100]           │   │
+│  │  Lightness   [-100 ══════════════╪══════════════ +100]           │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  CHANNEL MIXER                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Output Channel: [Red] [Green] [Blue]                            │   │
+│  │                                                                  │   │
+│  │  Red Source    [-200 ══════════════╪══════════════ +200]         │   │
+│  │  Green Source  [-200 ══════════════╪══════════════ +200]         │   │
+│  │  Blue Source   [-200 ══════════════╪══════════════ +200]         │   │
+│  │  Constant      [-200 ══════════════╪══════════════ +200]         │   │
+│  │                                                                  │   │
+│  │  [ ] Monochrome (Black & White)                                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 9.3 Curves & Levels
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       CURVES & LEVELS                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  CURVES                                                                 │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Channel: [RGB] [Red] [Green] [Blue]                             │   │
+│  │                                                                  │   │
+│  │  255 ┤      ╭───────────────────╮                                │   │
+│  │      │     ╱                     │                               │   │
+│  │      │    ╱                      │                               │   │
+│  │      │   ╱                       │                               │   │
+│  │      │  ╱                        │                               │   │
+│  │      │ ╱                         │                               │   │
+│  │    0 ┼────────────────────────────┤                              │   │
+│  │      0                          255                              │   │
+│  │                                                                  │   │
+│  │  • Click to add control points                                   │   │
+│  │  • Drag points to adjust curve                                   │   │
+│  │  • Double-click to remove point                                  │   │
+│  │                                                                  │   │
+│  │  Presets: [Linear] [S-Curve] [High Contrast] [Fade] [Cross]     │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  LEVELS                                                                 │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Channel: [RGB] [Red] [Green] [Blue]                             │   │
+│  │                                                                  │   │
+│  │  INPUT LEVELS                                                    │   │
+│  │  Black Point: [0  ] ──────────────────────────── White: [255]   │   │
+│  │  Gamma: [1.00]                                                   │   │
+│  │                                                                  │   │
+│  │  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ (Histogram)          │   │
+│  │  △                    △                    △                      │   │
+│  │  │                    │                    │                      │   │
+│  │  Black               Gamma              White                    │   │
+│  │                                                                  │   │
+│  │  OUTPUT LEVELS                                                   │   │
+│  │  Black: [0  ] ────────────────────────────────── White: [255]   │   │
+│  │                                                                  │   │
+│  │  [Auto Levels] [Auto Contrast] [Auto Color]                     │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 9.4 Sharpening & Blur
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      SHARPENING & BLUR                                  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  SHARPENING                                                             │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  UNSHARP MASK                                                    │   │
+│  │  Amount      [0 ════════════════════════════════ 200] %          │   │
+│  │  Radius      [0.1 ══════════════════════════════ 10] px          │   │
+│  │  Threshold   [0 ════════════════════════════════ 255] levels    │   │
+│  │                                                                  │   │
+│  │  HIGH PASS SHARPEN                                               │   │
+│  │  Radius      [0.1 ══════════════════════════════ 10] px          │   │
+│  │  Blend Mode  [Overlay ▼]                                         │   │
+│  │  Opacity     [0 ════════════════════════════════ 100] %          │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  BLUR EFFECTS                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  GAUSSIAN BLUR                                                   │   │
+│  │  Radius      [0 ════════════════════════════════ 100] px         │   │
+│  │                                                                  │   │
+│  │  MOTION BLUR                                                     │   │
+│  │  Angle       [-180 ═════════════╪═════════════ +180] °           │   │
+│  │  Distance    [0 ════════════════════════════════ 100] px         │   │
+│  │                                                                  │   │
+│  │  RADIAL BLUR                                                     │   │
+│  │  Amount      [0 ════════════════════════════════ 100]            │   │
+│  │  Center X    [0 ════════════════════════════════ 100] %          │   │
+│  │  Center Y    [0 ════════════════════════════════ 100] %          │   │
+│  │                                                                  │   │
+│  │  TILT-SHIFT BLUR                                                 │   │
+│  │  Focus Position  [0 ════════════════════════════ 100] %          │   │
+│  │  Focus Size      [0 ════════════════════════════ 100] %          │   │
+│  │  Blur Amount     [0 ════════════════════════════ 100]            │   │
+│  │  Direction       [Horizontal] [Vertical] [Radial]                │   │
+│  │                                                                  │   │
+│  │  LENS BLUR (Bokeh)                                               │   │
+│  │  Radius      [0 ════════════════════════════════ 50] px          │   │
+│  │  Brightness  [-100 ═════════════╪═════════════ +100]             │   │
+│  │  Threshold   [0 ════════════════════════════════ 255]            │   │
+│  │  Shape       [Circle] [Hexagon] [Octagon]                        │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 9.5 Noise Reduction & Addition
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    NOISE REDUCTION & ADDITION                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  NOISE REDUCTION                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Luminance     [0 ════════════════════════════════ 100]          │   │
+│  │  └── Reduce brightness noise                                     │   │
+│  │                                                                  │   │
+│  │  Color         [0 ════════════════════════════════ 100]          │   │
+│  │  └── Reduce color noise (chroma)                                 │   │
+│  │                                                                  │   │
+│  │  Detail        [0 ════════════════════════════════ 100]          │   │
+│  │  └── Preserve edge detail                                        │   │
+│  │                                                                  │   │
+│  │  Smoothness    [0 ════════════════════════════════ 100]          │   │
+│  │  └── Overall smoothing amount                                    │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ADD NOISE (Film Grain)                                                 │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Amount      [0 ════════════════════════════════ 100]            │   │
+│  │  Size        [1 ════════════════════════════════ 100]            │   │
+│  │  Roughness   [0 ════════════════════════════════ 100]            │   │
+│  │                                                                  │   │
+│  │  Type        [Gaussian] [Uniform]                                │   │
+│  │  [ ] Monochrome (grayscale noise only)                           │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+
+### 9.6 Preset Filters
+
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        PRESET FILTERS                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  INSTAGRAM STYLE                                                        │
+│  ├── Clarendon      Bright, intense colors                             │
+│  ├── Gingham        Soft, vintage feel                                 │
+│  ├── Moon           B&W with high contrast                             │
+│  ├── Lark           Bright, desaturated                                │
+│  ├── Reyes          Dusty, vintage                                     │
+│  ├── Juno           Warm tones, pop colors                             │
+│  ├── Slumber        Desaturated, dark                                  │
+│  ├── Crema          Creamy, warm                                       │
+│  ├── Ludwig         Minimal, enhanced reds                             │
+│  ├── Aden           Soft, pastel                                       │
+│  └── Perpetua       Deep colors, green tint                            │
+│                                                                         │
+│  CLASSIC                                                                │
+│  ├── Vintage        Aged, faded look                                   │
+│  ├── Retro          Bold colors, 70s vibe                              │
+│  ├── Dramatic       High contrast, intense                             │
+│  ├── Noir           Black & white film                                 │
+│  ├── Sepia          Brown-tinted classic                               │
+│  ├── Cold Blue      Cool color temperature                             │
+│  ├── Warm Sunset    Golden hour warmth                                 │
+│  ├── Faded          Low contrast, lifted blacks                        │
+│  ├── Matte          Flat shadows, soft                                 │
+│  └── Cinematic      Movie-like color grade                             │
+│                                                                         │
+│  SPECIAL                                                                │
+│  ├── Polaroid       Instant camera look                                │
+│  ├── Cross Process  Color negative to slide                            │
+│  ├── Duotone        Two-color toning                                   │
+│  │   └── Color 1: [■] Color 2: [■]                                     │
+│  ├── Split Tone     Different tones for shadows/highlights             │
+│  │   ├── Highlight Hue: [0-360]                                        │
+│  │   ├── Shadow Hue: [0-360]                                           │
+│  │   └── Balance: [-100 ═══╪═══ +100]                                  │
+│  ├── Infrared       False color infrared                               │
+│  ├── Cyanotype      Blue-tinted print                                  │
+│  └── Lomo           Vignette, saturated, cross-processed              │
+│                                                                         │
+│  BLACK & WHITE                                                          │
+│  ├── Standard B&W   Default grayscale conversion                       │
+│  ├── High Contrast  Bold blacks and whites                             │
+│  ├── Low Contrast   Soft, muted grays                                  │
+│  ├── Red Filter     Bright skies, dark foliage                         │
+│  ├── Orange Filter  Natural skin tones                                 │
+│  ├── Yellow Filter  Classic landscape look                             │
+│  ├── Green Filter   Bright foliage, dark skies                         │
+│  ├── Blue Filter    Moody, dark                                        │
+│  └── Infrared B&W   Glowing foliage effect                             │
+│                                                                         │
+│  FILTER CONTROLS                                                        │
+│  ├── Intensity      [0 ════════════════════════════ 100] %             │
+│  ├── [Apply Filter]                                                     │
+│  ├── [Preview Toggle]                                                   │
+│  └── [Save as Custom Preset]                                           │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 9.7 Auto Adjustments
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       AUTO ADJUSTMENTS                                  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ONE-CLICK ENHANCEMENTS                                                 │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [Auto Enhance]                                                  │   │
+│  │  └── Automatically adjusts brightness, contrast, saturation     │   │
+│  │      and sharpness for optimal appearance                       │   │
+│  │                                                                  │   │
+│  │  [Auto Levels]                                                   │   │
+│  │  └── Stretches histogram to use full tonal range               │   │
+│  │      Sets black and white points automatically                  │   │
+│  │                                                                  │   │
+│  │  [Auto Contrast]                                                 │   │
+│  │  └── Adjusts contrast while preserving colors                   │   │
+│  │      Enhances difference between light and dark                 │   │
+│  │                                                                  │   │
+│  │  [Auto Color]                                                    │   │
+│  │  └── Corrects color cast                                        │   │
+│  │      Neutralizes whites and grays                               │   │
+│  │                                                                  │   │
+│  │  [Auto White Balance]                                            │   │
+│  │  └── Detects and corrects color temperature                     │   │
+│  │      Makes whites appear neutral                                │   │
+│  │                                                                  │   │
+│  │  [Auto Tone]                                                     │   │
+│  │  └── Comprehensive tonal adjustment                             │   │
+│  │      Balances exposure, highlights, shadows                     │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  AUTO ADJUSTMENT SETTINGS                                               │
+│  ├── Strength       [0 ════════════════════════════ 100] %             │
+│  ├── [ ] Preserve skin tones                                           │
+│  ├── [ ] Avoid clipping highlights                                     │
+│  └── [ ] Avoid crushing blacks                                         │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 10. Watermark & Text Features
+
+### 10.1 Text Watermark
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       TEXT WATERMARK                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  TEXT CONTENT                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Text Input: [________________________________]                  │   │
+│  │                                                                  │   │
+│  │  VARIABLES (for batch processing):                               │   │
+│  │  ├── {filename}   - Original filename                            │   │
+│  │  ├── {date}       - Current date (YYYY-MM-DD)                    │   │
+│  │  ├── {time}       - Current time (HH:MM:SS)                      │   │
+│  │  ├── {datetime}   - Date and time combined                       │   │
+│  │  ├── {dimensions} - Image dimensions (WxH)                       │   │
+│  │  ├── {filesize}   - File size                                    │   │
+│  │  ├── {index}      - Batch index number                           │   │
+│  │  ├── {copyright}  - © symbol                                     │   │
+│  │  └── {year}       - Current year                                 │   │
+│  │                                                                  │   │
+│  │  Example: "© {year} OathanRex - {filename}"                      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  FONT SETTINGS                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Font Family     [Arial ▼]                                       │   │
+│  │  ├── Arial                                                       │   │
+│  │  ├── Helvetica                                                   │   │
+│  │  ├── Times New Roman                                             │   │
+│  │  ├── Georgia                                                     │   │
+│  │  ├── Verdana                                                     │   │
+│  │  ├── Courier New                                                 │   │
+│  │  ├── Impact                                                      │   │
+│  │  ├── Comic Sans MS                                               │   │
+│  │  └── [Upload Custom Font...]                                     │   │
+│  │                                                                  │   │
+│  │  Font Size       [8 ══════════════════════════════ 500] px       │   │
+│  │  Font Weight     [Normal ▼] Normal / Bold / Light                │   │
+│  │  Font Style      [Normal ▼] Normal / Italic                      │   │
+│  │                                                                  │   │
+│  │  [ ] Auto-size (scale with image)                                │   │
+│  │      Size: [1 ══════════════════════════════ 50] % of width     │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  COLOR & STYLE                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Text Color      [■ #FFFFFF] ← Color picker                      │   │
+│  │  Opacity         [0 ══════════════════════════════ 100] %        │   │
+│  │                                                                  │   │
+│  │  [ ] Background                                                  │   │
+│  │      Color       [■ #000000]                                     │   │
+│  │      Opacity     [0 ══════════════════════════════ 100] %        │   │
+│  │      Padding     [0 ══════════════════════════════ 50] px        │   │
+│  │      Radius      [0 ══════════════════════════════ 50] px        │   │
+│  │                                                                  │   │
+│  │  [ ] Stroke (Outline)                                            │   │
+│  │      Color       [■ #000000]                                     │   │
+│  │      Width       [1 ══════════════════════════════ 20] px        │   │
+│  │                                                                  │   │
+│  │  [ ] Shadow                                                      │   │
+│  │      Color       [■ #000000]                                     │   │
+│  │      Blur        [0 ══════════════════════════════ 50] px        │   │
+│  │      Offset X    [-50 ══════════════╪══════════════ +50] px      │   │
+│  │      Offset Y    [-50 ══════════════╪══════════════ +50] px      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  POSITION                                                               │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  PRESET POSITIONS                                                │   │
+│  │  ┌─────┬─────┬─────┐                                             │   │
+│  │  │ TL  │ TC  │ TR  │  TL = Top Left                              │   │
+│  │  ├─────┼─────┼─────┤  TC = Top Center                            │   │
+│  │  │ ML  │  C  │ MR  │  TR = Top Right                             │   │
+│  │  ├─────┼─────┼─────┤  ML = Middle Left                           │   │
+│  │  │ BL  │ BC  │ BR  │  C  = Center                                │   │
+│  │  └─────┴─────┴─────┘  MR = Middle Right                          │   │
+│  │                       BL = Bottom Left                           │   │
+│  │                       BC = Bottom Center                         │   │
+│  │                       BR = Bottom Right                          │   │
+│  │                                                                  │   │
+│  │  CUSTOM POSITION                                                 │   │
+│  │  X Position     [0 ══════════════════════════════ 100] %         │   │
+│  │  Y Position     [0 ══════════════════════════════ 100] %         │   │
+│  │                                                                  │   │
+│  │  OFFSET (from edge)                                              │   │
+│  │  Horizontal     [0 ══════════════════════════════ 200] px        │   │
+│  │  Vertical       [0 ══════════════════════════════ 200] px        │   │
+│  │                                                                  │   │
+│  │  ROTATION                                                        │   │
+│  │  Angle          [-180 ══════════════╪══════════════ +180] °      │   │
+│  │  Quick: [-90°] [-45°] [0°] [45°] [90°]                          │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  TILE MODE (Repeat watermark across image)                             │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [ ] Enable Tile Mode                                            │   │
+│  │                                                                  │   │
+│  │  Horizontal Spacing   [50 ══════════════════════════ 500] px     │   │
+│  │  Vertical Spacing     [50 ══════════════════════════ 500] px     │   │
+│  │  Tile Angle           [-90 ══════════════╪══════════════ +90] °  │   │
+│  │                                                                  │   │
+│  │  Pattern: [Grid ▼] Grid / Diagonal / Brick                       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.2 Image Watermark
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       IMAGE WATERMARK                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  WATERMARK IMAGE                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  ┌─────────────────────────────────────────┐                     │   │
+│  │  │                                         │                     │   │
+│  │  │     [Upload Watermark Image]            │                     │   │
+│  │  │                                         │                     │   │
+│  │  │     Drag & drop or click to browse      │                     │   │
+│  │  │     PNG with transparency recommended   │                     │   │
+│  │  │                                         │                     │   │
+│  │  └─────────────────────────────────────────┘                     │   │
+│  │                                                                  │   │
+│  │  Current: [logo.png] [Remove]                                    │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  SIZE & SCALE                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Size Mode       [Percentage ▼]                                  │   │
+│  │  ├── Percentage  - Scale relative to image                       │   │
+│  │  ├── Pixels      - Fixed pixel dimensions                        │   │
+│  │  └── Original    - Keep original watermark size                  │   │
+│  │                                                                  │   │
+│  │  IF PERCENTAGE:                                                  │   │
+│  │  Scale          [1 ══════════════════════════════ 100] %         │   │
+│  │  (% of image width)                                              │   │
+│  │                                                                  │   │
+│  │  IF PIXELS:                                                      │   │
+│  │  Width          [10 ══════════════════════════ 1000] px          │   │
+│  │  Height         [10 ══════════════════════════ 1000] px          │   │
+│  │  [ ] Maintain aspect ratio                                       │   │
+│  │                                                                  │   │
+│  │  Max Width      [_____] px (optional limit)                      │   │
+│  │  Max Height     [_____] px (optional limit)                      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  OPACITY & BLEND                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Opacity        [0 ══════════════════════════════ 100] %         │   │
+│  │                                                                  │   │
+│  │  Blend Mode     [Normal ▼]                                       │   │
+│  │  ├── Normal                                                      │   │
+│  │  ├── Multiply (darken)                                           │   │
+│  │  ├── Screen (lighten)                                            │   │
+│  │  ├── Overlay                                                     │   │
+│  │  ├── Soft Light                                                  │   │
+│  │  ├── Hard Light                                                  │   │
+│  │  └── Difference                                                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  POSITION (Same as text watermark)                                     │
+│  ├── Preset positions (9-point grid)                                   │
+│  ├── Custom X/Y percentage                                             │
+│  ├── Offset from edge                                                  │
+│  └── Rotation angle                                                    │
+│                                                                         │
+│  TILE MODE (Same as text watermark)                                    │
+│  ├── Enable/disable                                                    │
+│  ├── Spacing controls                                                  │
+│  └── Pattern selection                                                 │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 10.3 Watermark Templates
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     WATERMARK TEMPLATES                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  SAVE TEMPLATE                                                          │
+│  ├── Template Name: [________________]                                  │
+│  ├── [Save Current Settings as Template]                               │
+│  └── Saves: text/image, position, style, all settings                  │
+│                                                                         │
+│  SAVED TEMPLATES                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [□] Copyright Corner                                            │   │
+│  │      "© 2024" - Bottom right, 50% opacity                       │   │
+│  │      [Apply] [Edit] [Delete]                                     │   │
+│  │                                                                  │   │
+│  │  [□] Logo Overlay                                                │   │
+│  │      logo.png - Center, 30% opacity, 20% size                   │   │
+│  │      [Apply] [Edit] [Delete]                                     │   │
+│  │                                                                  │   │
+│  │  [□] Diagonal Pattern                                            │   │
+│  │      "SAMPLE" - Tiled at 45°, 20% opacity                       │   │
+│  │      [Apply] [Edit] [Delete]                                     │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  IMPORT/EXPORT                                                          │
+│  ├── [Export Templates (JSON)]                                         │
+│  └── [Import Templates]                                                │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 11. Special Effects
+
+### 11.1 Vignette
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          VIGNETTE                                       │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  Amount          [-100 ══════════════╪══════════════ +100]              │
+│                  (Lighten)          (Darken)                           │
+│                                                                         │
+│  Size            [0 ══════════════════════════════ 100]                 │
+│                  (Smaller)          (Larger)                           │
+│                                                                         │
+│  Roundness       [-100 ══════════════╪══════════════ +100]              │
+│                  (Rectangular)      (Circular)                         │
+│                                                                         │
+│  Feather         [0 ══════════════════════════════ 100]                 │
+│                  (Hard edge)        (Soft edge)                        │
+│                                                                         │
+│  Center X        [0 ══════════════════════════════ 100] %               │
+│  Center Y        [0 ══════════════════════════════ 100] %               │
+│                                                                         │
+│  [ ] Highlight Priority (preserve bright areas)                        │
+│                                                                         │
+│  Color           [■ #000000] (for custom vignette color)               │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 11.2 Film Grain
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         FILM GRAIN                                      │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  Amount          [0 ══════════════════════════════ 100]                 │
+│                                                                         │
+│  Size            [1 ══════════════════════════════ 100]                 │
+│                  (Fine grain)       (Coarse grain)                     │
+│                                                                         │
+│  Roughness       [0 ══════════════════════════════ 100]                 │
+│                  (Smooth)           (Rough)                            │
+│                                                                         │
+│  [ ] Color grain (if unchecked, monochrome grain)                      │
+│                                                                         │
+│  Film Presets:                                                          │
+│  ├── [ISO 100]  - Fine, minimal grain                                  │
+│  ├── [ISO 400]  - Light grain                                          │
+│  ├── [ISO 800]  - Medium grain                                         │
+│  ├── [ISO 1600] - Noticeable grain                                     │
+│  ├── [ISO 3200] - Heavy grain                                          │
+│  └── [ISO 6400] - Extreme grain                                        │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 11.3 Frame & Border
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       FRAME & BORDER                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  BORDER TYPE                                                            │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Style          [Simple ▼]                                       │   │
+│  │  ├── None                                                        │   │
+│  │  ├── Simple       - Solid color border                           │   │
+│  │  ├── Polaroid     - White border with shadow                     │   │
+│  │  ├── Film Strip   - Sprocket holes look                          │   │
+│  │  ├── Vintage      - Aged, rough edges                            │   │
+│  │  ├── Shadow       - Drop shadow only                             │   │
+│  │  ├── Rounded      - Rounded corners                              │   │
+│  │  └── Custom       - Full control                                 │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  BORDER SETTINGS (for Simple/Custom)                                   │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Width                                                           │   │
+│  │  ├── All sides    [0 ══════════════════════════ 200] px          │   │
+│  │  └── Individual:                                                 │   │
+│  │      Top    [___] Right [___] Bottom [___] Left [___]           │   │
+│  │                                                                  │   │
+│  │  Color           [■ #FFFFFF]                                     │   │
+│  │                                                                  │   │
+│  │  Corner Radius   [0 ══════════════════════════════ 50] %         │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  SHADOW                                                                 │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [ ] Enable Drop Shadow                                          │   │
+│  │                                                                  │   │
+│  │  Color           [■ #000000]                                     │   │
+│  │  Opacity         [0 ══════════════════════════════ 100] %        │   │
+│  │  Blur            [0 ══════════════════════════════ 100] px       │   │
+│  │  Offset X        [-100 ══════════════╪══════════ +100] px        │   │
+│  │  Offset Y        [-100 ══════════════╪══════════ +100] px        │   │
+│  │  Spread          [0 ══════════════════════════════ 50] px        │   │
+│  │                                                                  │   │
+│  │  [ ] Enable Inner Shadow                                         │   │
+│  │  (Similar controls as drop shadow)                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 11.4 Color Effects
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        COLOR EFFECTS                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  BASIC EFFECTS                                                          │
+│  ├── [ ] Invert Colors                                                 │
+│  ├── [ ] Grayscale                                                     │
+│  ├── [ ] Sepia         Intensity: [0 ════════════════ 100] %           │
+│  └── [ ] Colorize      Color: [■] Intensity: [0 ══════ 100] %          │
+│                                                                         │
+│  ARTISTIC EFFECTS                                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Posterize                                                       │   │
+│  │  Levels          [2 ══════════════════════════════ 32]           │   │
+│  │                                                                  │   │
+│  │  Threshold (High Contrast B&W)                                   │   │
+│  │  Level           [0 ══════════════════════════════ 255]          │   │
+│  │                                                                  │   │
+│  │  Solarize                                                        │   │
+│  │  Threshold       [0 ══════════════════════════════ 255]          │   │
+│  │                                                                  │   │
+│  │  Emboss                                                          │   │
+│  │  Strength        [0 ══════════════════════════════ 100]          │   │
+│  │  Direction       [Top-Left ▼]                                    │   │
+│  │                                                                  │   │
+│  │  Edge Detect                                                     │   │
+│  │  Method          [Sobel ▼] Sobel / Prewitt / Laplacian          │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  STYLIZED EFFECTS                                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Oil Paint                                                       │   │
+│  │  Radius          [1 ══════════════════════════════ 10]           │   │
+│  │  Levels          [1 ══════════════════════════════ 50]           │   │
+│  │                                                                  │   │
+│  │  Pixelate                                                        │   │
+│  │  Size            [2 ══════════════════════════════ 100] px       │   │
+│  │                                                                  │   │
+│  │  Mosaic                                                          │   │
+│  │  Tile Size       [5 ══════════════════════════════ 100] px       │   │
+│  │                                                                  │   │
+│  │  Halftone                                                        │   │
+│  │  Dot Size        [2 ══════════════════════════════ 20] px        │   │
+│  │  Angle           [0 ══════════════════════════════ 180] °        │   │
+│  │  Shape           [Circle ▼] Circle / Square / Diamond            │   │
+│  │                                                                  │   │
+│  │  Glitch                                                          │   │
+│  │  Amount          [0 ══════════════════════════════ 100]          │   │
+│  │  Seed            [Random] or [Fixed Value]                       │   │
+│  │  RGB Shift       [ ] Enable                                      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 11.5 HDR & Tone Mapping
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      HDR & TONE MAPPING                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  HDR EFFECT (Pseudo-HDR from single image)                             │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [ ] Enable HDR Effect                                           │   │
+│  │                                                                  │   │
+│  │  Strength        [0 ══════════════════════════════ 100]          │   │
+│  │  Radius          [1 ══════════════════════════════ 100]          │   │
+│  │                                                                  │   │
+│  │  Detail                                                          │   │
+│  │  Shadow Detail   [0 ══════════════════════════════ 100]          │   │
+│  │  Highlight Detail[0 ══════════════════════════════ 100]          │   │
+│  │                                                                  │   │
+│  │  Tone                                                            │   │
+│  │  Edge Glow       [0 ══════════════════════════════ 100]          │   │
+│  │  Smoothness      [0 ══════════════════════════════ 100]          │   │
+│  │                                                                  │   │
+│  │  Presets:                                                        │   │
+│  │  ├── [Natural]    - Subtle enhancement                           │   │
+│  │  ├── [Vivid]      - Punchy colors                                │   │
+│  │  ├── [Dramatic]   - High impact                                  │   │
+│  │  └── [Surreal]    - Extreme effect                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 12. Batch Processing
+
+### 12.1 Batch Configuration
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      BATCH PROCESSING                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  LIMITS & CONFIGURATION                                                 │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Maximum Files          100 per batch                            │   │
+│  │  Maximum Total Size     500 MB                                   │   │
+│  │  Maximum File Size      50 MB per file                           │   │
+│  │  Concurrent Processing  4 files (adjustable by CPU)              │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  QUEUE MANAGEMENT                                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Actions:                                                        │   │
+│  │  ├── [Add Files]        Add more files to queue                  │   │
+│  │  ├── [Clear Queue]      Remove all pending files                 │   │
+│  │  ├── [Pause/Resume]     Pause processing                         │   │
+│  │  ├── [Cancel]           Stop all processing                      │   │
+│  │  └── [Retry Failed]     Reprocess failed files                   │   │
+│  │                                                                  │   │
+│  │  Queue Display:                                                  │   │
+│  │  ┌───────────────────────────────────────────────────────────┐  │   │
+│  │  │ # │ Filename       │ Size    │ Status    │ Actions       │  │   │
+│  │  ├───┼────────────────┼─────────┼───────────┼───────────────┤  │   │
+│  │  │ 1 │ photo1.jpg     │ 2.5 MB  │ ✓ Done    │ [↓] [×]      │  │   │
+│  │  │ 2 │ photo2.png     │ 5.1 MB  │ ⟳ 45%    │ [⏸] [×]      │  │   │
+│  │  │ 3 │ photo3.jpg     │ 1.2 MB  │ ○ Pending │ [↑] [↓] [×]  │  │   │
+│  │  │ 4 │ photo4.webp    │ 800 KB  │ ✗ Error   │ [↻] [×]      │  │   │
+│  │  └───┴────────────────┴─────────┴───────────┴───────────────┘  │   │
+│  │                                                                  │   │
+│  │  Legend: ✓ Complete  ⟳ Processing  ○ Pending  ✗ Error           │   │
+│  │  Buttons: ↓ Download  ⏸ Pause  ↑↓ Reorder  × Remove  ↻ Retry   │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 12.2 Batch Naming
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        BATCH NAMING                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  NAMING PATTERN                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Pattern:        [{original}_converted]                          │   │
+│  │                                                                  │   │
+│  │  AVAILABLE VARIABLES:                                            │   │
+│  │  ├── {original}     Original filename (without extension)        │   │
+│  │  ├── {ext}          Original extension                           │   │
+│  │  ├── {newext}       New output extension                         │   │
+│  │  ├── {index}        Sequential number (1, 2, 3...)              │   │
+│  │  ├── {index:3}      Padded number (001, 002, 003...)            │   │
+│  │  ├── {width}        Output width                                 │   │
+│  │  ├── {height}       Output height                                │   │
+│  │  ├── {date}         Date (YYYY-MM-DD)                            │   │
+│  │  ├── {time}         Time (HHMMSS)                                │   │
+│  │  ├── {timestamp}    Unix timestamp                               │   │
+│  │  └── {random:4}     Random string (4 characters)                 │   │
+│  │                                                                  │   │
+│  │  EXAMPLES:                                                       │   │
+│  │  ├── {original}_web           → photo1_web.webp                  │   │
+│  │  ├── img_{index:3}            → img_001.jpg                      │   │
+│  │  ├── {date}_{original}        → 2024-01-15_photo1.png           │   │
+│  │  ├── {original}_{width}x{height} → photo1_1920x1080.jpg         │   │
+│  │  └── thumb_{original}_{random:4} → thumb_photo1_a7b2.jpg        │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  NAMING OPTIONS                                                         │
+│  ├── [ ] Convert to lowercase                                          │
+│  ├── [ ] Replace spaces with: [_]                                      │
+│  ├── [ ] Remove special characters                                     │
+│  ├── [ ] Remove diacritics (é → e)                                     │
+│  └── Start index at: [1]                                               │
+│                                                                         │
+│  CONFLICT HANDLING                                                      │
+│  ├── ( ) Overwrite existing files                                      │
+│  ├── (●) Add number suffix (_1, _2, etc.)                              │
+│  └── ( ) Skip if exists                                                │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 12.3 Multiple Outputs
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      MULTIPLE OUTPUTS                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  Generate multiple versions from each source image                      │
+│                                                                         │
+│  [ ] Enable Multiple Outputs                                            │
+│                                                                         │
+│  OUTPUT CONFIGURATIONS                                                  │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  OUTPUT 1                                           [Remove]     │   │
+│  │  ├── Suffix:        _large                                       │   │
+│  │  ├── Format:        [WebP ▼]                                     │   │
+│  │  ├── Quality:       80%                                          │   │
+│  │  ├── Max Width:     1920 px                                      │   │
+│  │  └── Max Height:    (auto)                                       │   │
+│  │                                                                  │   │
+│  │  OUTPUT 2                                           [Remove]     │   │
+│  │  ├── Suffix:        _medium                                      │   │
+│  │  ├── Format:        [WebP ▼]                                     │   │
+│  │  ├── Quality:       75%                                          │   │
+│  │  ├── Max Width:     800 px                                       │   │
+│  │  └── Max Height:    (auto)                                       │   │
+│  │                                                                  │   │
+│  │  OUTPUT 3                                           [Remove]     │   │
+│  │  ├── Suffix:        _thumb                                       │   │
+│  │  ├── Format:        [JPEG ▼]                                     │   │
+│  │  ├── Quality:       70%                                          │   │
+│  │  ├── Width:         200 px                                       │   │
+│  │  └── Height:        200 px (crop to square)                      │   │
+│  │                                                                  │   │
+│  │  [+ Add Output Configuration]                                    │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PRESET MULTI-OUTPUT TEMPLATES                                          │
+│  ├── [Responsive Web Images]   (large, medium, small, thumb)          │
+│  ├── [Social Media Pack]       (IG, FB, Twitter sizes)                 │
+│  ├── [E-commerce]              (main, gallery, thumb)                  │
+│  └── [Custom...]                                                       │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 12.4 Batch Presets
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       BATCH PRESETS                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  SAVE CURRENT SETTINGS AS PRESET                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Preset Name:     [Web Optimization              ]               │   │
+│  │  Description:     [Optimize images for web use    ]               │   │
+│  │                                                                  │   │
+│  │  Include:                                                        │   │
+│  │  ├── [✓] Format settings                                         │   │
+│  │  ├── [✓] Resize settings                                         │   │
+│  │  ├── [✓] Quality/compression                                     │   │
+│  │  ├── [✓] Adjustments & filters                                   │   │
+│  │  ├── [✓] Watermark settings                                      │   │
+│  │  ├── [✓] Naming pattern                                          │   │
+│  │  └── [✓] Output configurations                                   │   │
+│  │                                                                  │   │
+│  │  [Save Preset]                                                   │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  SAVED PRESETS                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [□] Web Optimization                                            │   │
+│  │      WebP, 80% quality, max 1920px                              │   │
+│  │      [Apply] [Edit] [Export] [Delete]                           │   │
+│  │                                                                  │   │
+│  │  [□] Social Media Ready                                          │   │
+│  │      JPEG, 90% quality, strip metadata                          │   │
+│  │      [Apply] [Edit] [Export] [Delete]                           │   │
+│  │                                                                  │   │
+│  │  [□] Print Preparation                                           │   │
+│  │      PNG, max quality, preserve metadata                        │   │
+│  │      [Apply] [Edit] [Export] [Delete]                           │   │
+│  │                                                                  │   │
+│  │  [□] Thumbnail Generator                                         │   │
+│  │      JPEG, 200x200, crop to square                              │   │
+│  │      [Apply] [Edit] [Export] [Delete]                           │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  IMPORT/EXPORT                                                          │
+│  ├── [Export All Presets (JSON)]                                       │
+│  └── [Import Presets]                                                  │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 12.5 Conditional Processing
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   CONDITIONAL PROCESSING                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  Apply different settings based on image properties                     │
+│                                                                         │
+│  [ ] Enable Conditional Processing                                      │
+│                                                                         │
+│  CONDITIONS                                                             │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  CONDITION 1                                        [Remove]     │   │
+│  │  IF image width > 3000 px                                        │   │
+│  │  THEN resize to max 2000 px width                               │   │
+│  │                                                                  │   │
+│  │  CONDITION 2                                        [Remove]     │   │
+│  │  IF file size > 5 MB                                             │   │
+│  │  THEN apply quality 70%                                          │   │
+│  │                                                                  │   │
+│  │  CONDITION 3                                        [Remove]     │   │
+│  │  IF aspect ratio is portrait (height > width)                    │   │
+│  │  THEN apply Instagram Story preset                               │   │
+│  │                                                                  │   │
+│  │  CONDITION 4                                        [Remove]     │   │
+│  │  IF format is PNG                                                │   │
+│  │  THEN convert to WebP with lossless                             │   │
+│  │                                                                  │   │
+│  │  [+ Add Condition]                                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  AVAILABLE CONDITIONS                                                   │
+│  ├── Width: > < = ≥ ≤ [value] px                                       │
+│  ├── Height: > < = ≥ ≤ [value] px                                      │
+│  ├── File size: > < = ≥ ≤ [value] KB/MB                                │
+│  ├── Aspect ratio: landscape / portrait / square                       │
+│  ├── Format: is / is not [format]                                      │
+│  ├── Filename: contains / starts with / ends with [text]               │
+│  └── Has transparency: yes / no                                        │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 13. Metadata Features
+
+### 13.1 View Metadata
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        VIEW METADATA                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  IMAGE INFORMATION                                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  FILE INFO                                                       │   │
+│  │  ├── Filename:        photo_2024.jpg                             │   │
+│  │  ├── File Size:       2.5 MB (2,621,440 bytes)                  │   │
+│  │  ├── Format:          JPEG                                       │   │
+│  │  ├── MIME Type:       image/jpeg                                 │   │
+│  │  └── Last Modified:   2024-01-15 14:32:00                       │   │
+│  │                                                                  │   │
+│  │  IMAGE DIMENSIONS                                                │   │
+│  │  ├── Width:           4000 px                                    │   │
+│  │  ├── Height:          3000 px                                    │   │
+│  │  ├── Megapixels:      12 MP                                      │   │
+│  │  ├── Aspect Ratio:    4:3                                        │   │
+│  │  └── Orientation:     Landscape                                  │   │
+│  │                                                                  │   │
+│  │  COLOR INFO                                                      │   │
+│  │  ├── Color Depth:     24-bit                                     │   │
+│  │  ├── Color Space:     sRGB                                       │   │
+│  │  ├── Has Alpha:       No                                         │   │
+│  │  └── Color Profile:   sRGB IEC61966-2.1                         │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  EXIF DATA                                                              │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  CAMERA                                                          │   │
+│  │  ├── Make:            Canon                                      │   │
+│  │  ├── Model:           Canon EOS R5                               │   │
+│  │  ├── Lens:            RF 24-70mm F2.8 L IS USM                  │   │
+│  │  └── Serial Number:   ********                                   │   │
+│  │                                                                  │   │
+│  │  SETTINGS                                                        │   │
+│  │  ├── Exposure Time:   1/250 sec                                  │   │
+│  │  ├── F-Number:        f/4.0                                      │   │
+│  │  ├── ISO:             400                                        │   │
+│  │  ├── Focal Length:    50mm                                       │   │
+│  │  ├── Exposure Mode:   Aperture Priority                          │   │
+│  │  ├── Metering Mode:   Pattern                                    │   │
+│  │  ├── Flash:           No Flash                                   │   │
+│  │  └── White Balance:   Auto                                       │   │
+│  │                                                                  │   │
+│  │  DATE & TIME                                                     │   │
+│  │  ├── Date Taken:      2024-01-15 10:30:45                       │   │
+│  │  ├── Date Digitized:  2024-01-15 10:30:45                       │   │
+│  │  └── Date Modified:   2024-01-15 14:32:00                       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  GPS DATA                                                               │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  ├── Latitude:        40.7128° N                                 │   │
+│  │  ├── Longitude:       74.0060° W                                 │   │
+│  │  ├── Altitude:        10 m                                       │   │
+│  │  └── [View on Map] (opens in new tab)                           │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  IPTC/XMP DATA                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  ├── Title:           Sunset at Beach                            │   │
+│  │  ├── Description:     Beautiful sunset over the ocean           │   │
+│  │  ├── Keywords:        sunset, beach, ocean, nature              │   │
+│  │  ├── Author:          John Doe                                   │   │
+│  │  ├── Copyright:       © 2024 John Doe                           │   │
+│  │  └── Rating:          ★★★★☆ (4/5)                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ACTIONS                                                                │
+│  ├── [Copy All Metadata]                                               │
+│  ├── [Export as JSON]                                                  │
+│  ├── [Export as CSV]                                                   │
+│  └── [Export as XML]                                                   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 13.2 Edit Metadata
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        EDIT METADATA                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  BASIC INFORMATION                                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Title:          [Sunset at Beach                     ]          │   │
+│  │                                                                  │   │
+│  │  Description:    [Beautiful sunset over the ocean     ]          │   │
+│  │                  [________________________________    ]          │   │
+│  │                  [________________________________    ]          │   │
+│  │                                                                  │   │
+│  │  Author:         [John Doe                            ]          │   │
+│  │                                                                  │   │
+│  │  Copyright:      [© 2024 John Doe                     ]          │   │
+│  │                  Quick: [© {year} ] [Your Name       ]           │   │
+│  │                                                                  │   │
+│  │  Rating:         [☆] [☆] [☆] [☆] [☆]  (click to rate)          │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  KEYWORDS                                                               │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Current: [sunset ×] [beach ×] [ocean ×] [nature ×]             │   │
+│  │                                                                  │   │
+│  │  Add Keywords: [type and press Enter       ] [Add]               │   │
+│  │                                                                  │   │
+│  │  Suggestions: landscape, travel, photography, golden hour        │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  DATE & TIME                                                            │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Date Taken:     [2024-01-15] [10:30:45]                        │   │
+│  │                  [Set to Now] [Clear]                           │   │
+│  │                                                                  │   │
+│  │  Shift Date:     [+/- Days] [Hours] [Minutes]                   │   │
+│  │                  (Useful for timezone corrections)              │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  GPS LOCATION                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Latitude:       [40.7128    ] ° [N ▼]                          │   │
+│  │  Longitude:      [74.0060    ] ° [W ▼]                          │   │
+│  │  Altitude:       [10         ] m                                 │   │
+│  │                                                                  │   │
+│  │  [Clear GPS Data]                                                │   │
+│  │  [Pick from Map...] (opens map picker)                          │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ACTIONS                                                                │
+│  ├── [Apply Changes]                                                   │
+│  ├── [Apply to All Selected Images]                                    │
+│  └── [Reset to Original]                                               │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 13.3 Metadata Actions
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      METADATA ACTIONS                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  STRIP METADATA                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Quick Actions:                                                  │   │
+│  │  ├── [Strip All Metadata]      Remove everything                │   │
+│  │  ├── [Strip GPS Only]          Remove location data             │   │
+│  │  ├── [Strip Camera Info]       Remove camera/lens info          │   │
+│  │  └── [Strip Personal Info]     Remove author, copyright         │   │
+│  │                                                                  │   │
+│  │  Selective Strip:                                                │   │
+│  │  ├── [ ] EXIF data                                               │   │
+│  │  ├── [ ] IPTC data                                               │   │
+│  │  ├── [ ] XMP data                                                │   │
+│  │  ├── [ ] GPS/Location                                            │   │
+│  │  ├── [ ] Camera information                                      │   │
+│  │  ├── [ ] Date/Time information                                   │   │
+│  │  ├── [ ] Thumbnail                                               │   │
+│  │  └── [ ] Color profile                                           │   │
+│  │                                                                  │   │
+│  │  Always Preserve:                                                │   │
+│  │  ├── [✓] Orientation                                             │   │
+│  │  ├── [✓] Color profile                                           │   │
+│  │  └── [ ] Copyright                                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  COPY METADATA                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Source Image:   [photo1.jpg ▼]                                  │   │
+│  │                                                                  │   │
+│  │  Copy to:                                                        │   │
+│  │  ├── ( ) Selected images only                                    │   │
+│  │  └── ( ) All images in batch                                     │   │
+│  │                                                                  │   │
+│  │  What to copy:                                                   │   │
+│  │  ├── [✓] Title, description, keywords                            │   │
+│  │  ├── [✓] Copyright and author                                    │   │
+│  │  ├── [ ] GPS location                                            │   │
+│  │  ├── [ ] Date/Time                                               │   │
+│  │  └── [ ] All metadata                                            │   │
+│  │                                                                  │   │
+│  │  [Copy Metadata]                                                 │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 14. Animated Image Features
+
+### 14.1 GIF Handling
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        GIF HANDLING                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  EXTRACT FRAMES                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Input GIF: animation.gif (24 frames, 2.1 MB)                   │   │
+│  │                                                                  │   │
+│  │  Extraction Options:                                             │   │
+│  │  ├── ( ) Extract all frames                                      │   │
+│  │  ├── ( ) Extract every Nth frame: [2 ▼]                         │   │
+│  │  ├── ( ) Extract specific frames: [1,5,10,24]                   │   │
+│  │  └── ( ) Extract frame range: [1] to [12]                       │   │
+│  │                                                                  │   │
+│  │  Output Format:   [PNG ▼]                                        │   │
+│  │  Naming Pattern:  [{original}_frame_{index:3}]                   │   │
+│  │                                                                  │   │
+│  │  [Extract Frames]                                                │   │
+│  │                                                                  │   │
+│  │  FRAME PREVIEW                                                   │   │
+│  │  ┌───┬───┬───┬───┬───┬───┬───┬───┐                              │   │
+│  │  │ 1 │ 2 │ 3 │ 4 │ 5 │ 6 │ 7 │ 8 │  ...                        │   │
+│  │  └───┴───┴───┴───┴───┴───┴───┴───┘                              │   │
+│  │  Click to select/deselect frames                                 │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  CREATE GIF                                                             │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Source Images: 12 images selected                               │   │
+│  │                                                                  │   │
+│  │  Animation Settings:                                             │   │
+│  │  ├── Frame Delay:      [100] ms (10 fps)                        │   │
+│  │  │   Quick: [50ms] [100ms] [200ms] [500ms] [1000ms]             │   │
+│  │  ├── Loop Count:       [0] (0 = infinite loop)                  │   │
+│  │  └── Direction:        [Forward ▼] Forward/Reverse/Ping-Pong    │   │
+│  │                                                                  │   │
+│  │  Quality Settings:                                               │   │
+│  │  ├── Max Colors:       [256 ▼] 2/4/8/16/32/64/128/256           │   │
+│  │  ├── Dithering:        [Floyd-Steinberg ▼]                      │   │
+│  │  │   Options: None / Ordered / Floyd-Steinberg / Atkinson       │   │
+│  │  └── Transparency:     [ ] Preserve transparency                 │   │
+│  │                                                                  │   │
+│  │  Size Settings:                                                  │   │
+│  │  ├── Width:            [_____] px (blank = original)            │   │
+│  │  ├── Height:           [_____] px                               │   │
+│  │  └── [ ] Maintain aspect ratio                                   │   │
+│  │                                                                  │   │
+│  │  [Create GIF]  [Preview Animation]                              │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  EDIT GIF                                                               │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Speed Adjustment:                                               │   │
+│  │  ├── Speed Multiplier: [0.5x] [1x] [1.5x] [2x] [3x]             │   │
+│  │  └── Custom FPS:       [___] fps                                │   │
+│  │                                                                  │   │
+│  │  Effects:                                                        │   │
+│  │  ├── [ ] Reverse animation                                       │   │
+│  │  ├── [ ] Boomerang (play forward then backward)                  │   │
+│  │  ├── [ ] Fade in (first N frames)                               │   │
+│  │  └── [ ] Fade out (last N frames)                               │   │
+│  │                                                                  │   │
+│  │  Trim Animation:                                                 │   │
+│  │  ├── Start Frame:      [1]                                       │   │
+│  │  └── End Frame:        [24]                                      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  CONVERT ANIMATED FORMATS                                               │
+│  ├── GIF → Animated WebP                                               │
+│  ├── GIF → APNG                                                        │
+│  ├── Animated WebP → GIF                                               │
+│  └── APNG → GIF                                                        │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 14.2 Sprite Sheet
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        SPRITE SHEET                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  CREATE SPRITE SHEET                                                    │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Source: 16 images selected                                      │   │
+│  │                                                                  │   │
+│  │  Layout:                                                         │   │
+│  │  ├── Columns:          [4] (auto = √n)                          │   │
+│  │  ├── Rows:             [4] (auto-calculated)                    │   │
+│  │  └── Direction:        [Left-to-Right, Top-to-Bottom ▼]         │   │
+│  │                                                                  │   │
+│  │  Sizing:                                                         │   │
+│  │  ├── Frame Width:      [100] px                                 │   │
+│  │  ├── Frame Height:     [100] px                                 │   │
+│  │  ├── Padding:          [0] px                                   │   │
+│  │  └── Background:       [Transparent ▼] or [Color picker]        │   │
+│  │                                                                  │   │
+│  │  Output:                                                         │   │
+│  │  ├── Total Size:       400 × 400 px                             │   │
+│  │  └── [ ] Generate CSS/JSON data                                 │   │
+│  │                                                                  │   │
+│  │  [Create Sprite Sheet]                                          │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  EXTRACT FROM SPRITE SHEET                                              │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Input: sprite_sheet.png (800 × 600 px)                         │   │
+│  │                                                                  │   │
+│  │  Grid Settings:                                                  │   │
+│  │  ├── Columns:          [8]                                       │   │
+│  │  ├── Rows:             [6]                                       │   │
+│  │  ├── Frame Width:      [100] px (auto-calculated)               │   │
+│  │  └── Frame Height:     [100] px                                 │   │
+│  │                                                                  │   │
+│  │  OR Manual:                                                      │   │
+│  │  ├── Frame Width:      [___] px                                 │   │
+│  │  └── Frame Height:     [___] px                                 │   │
+│  │                                                                  │   │
+│  │  Preview: (grid overlay on sprite sheet)                        │   │
+│  │  Click frames to select/deselect                                │   │
+│  │                                                                  │   │
+│  │  [Extract All] [Extract Selected]                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 15. Collage & Combine Features
+
+### 15.1 Photo Collage
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       PHOTO COLLAGE                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  TEMPLATE SELECTION                                                     │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  GRID LAYOUTS                                                    │   │
+│  │  ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐               │   │
+│  │  │█ █│ │█│ │█│ │█│█│ │█│█│█│ │█│█│                             │   │
+│  │  │   │ │█│ │─│ │─│─│ │─│─│─│ │█│█│                             │   │
+│  │  │   │ │ │ │█│ │█│█│ │█│█│█│ │─│─│                             │   │
+│  │  └─────┘ └─────┘ └─────┘ └─────┘ └─────┘ └─────┘               │   │
+│  │   2×1     1×2     2×2     2×3     3×3    Featured              │   │
+│  │                                                                  │   │
+│  │  CREATIVE LAYOUTS                                                │   │
+│  │  ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐ ┌─────┐                       │   │
+│  │  │█████│ │█ ██│ │█████│ │ ██ │ │  ◇  │                        │   │
+│  │  │█│█│█│ │█ ██│ │█│█│█│ │████│ │ ◇◇◇ │                        │   │
+│  │  └─────┘ └─────┘ └─────┘ └─────┘ └─────┘                       │   │
+│  │  Masonry Featured  Strips  Puzzle  Diamond                      │   │
+│  │                                                                  │   │
+│  │  [Free Layout] - Drag and position freely                       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  CANVAS SETTINGS                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Size:                                                           │   │
+│  │  ├── Width:            [1920] px                                │   │
+│  │  ├── Height:           [1080] px                                │   │
+│  │  └── Preset:           [16:9 Landscape ▼]                       │   │
+│  │      Options: Square, 4:3, 16:9, Instagram, Facebook, etc.      │   │
+│  │                                                                  │   │
+│  │  Background:                                                     │   │
+│  │  ├── Color:            [■ #FFFFFF]                              │   │
+│  │  ├── Gradient:         [Enable] [Color 1] [Color 2] [Angle]     │   │
+│  │  ├── Image:            [Upload background image]                 │   │
+│  │  └── Blur Background:  [0 ════════════════════ 50] px           │   │
+│  │                                                                  │   │
+│  │  Spacing:                                                        │   │
+│  │  ├── Cell Gap:         [10] px                                  │   │
+│  │  ├── Outer Padding:    [20] px                                  │   │
+│  │  └── [ ] Equal spacing all around                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  IMAGE SETTINGS (Per Cell)                                              │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Fit Mode:             [Cover ▼]                                 │   │
+│  │  ├── Cover   - Fill cell, crop excess                           │   │
+│  │  ├── Contain - Fit inside, may have gaps                        │   │
+│  │  ├── Fill    - Stretch to fill (may distort)                    │   │
+│  │  └── None    - Original size, centered                          │   │
+│  │                                                                  │   │
+│  │  Border:                                                         │   │
+│  │  ├── Width:            [0] px                                   │   │
+│  │  ├── Color:            [■ #FFFFFF]                              │   │
+│  │  └── Radius:           [0] px (rounded corners)                 │   │
+│  │                                                                  │   │
+│  │  Shadow:                                                         │   │
+│  │  ├── [ ] Enable shadow                                           │   │
+│  │  ├── Blur:             [10] px                                  │   │
+│  │  ├── Offset:           [5] px                                   │   │
+│  │  └── Color:            [■ #000000] [50%] opacity                │   │
+│  │                                                                  │   │
+│  │  Rotation:             [-15 ═════════╪═════════ +15] °          │   │
+│  │  (For free layout mode)                                         │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  COLLAGE EDITOR                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  ┌─────────────────────────────────────────────────────────┐    │   │
+│  │  │                                                         │    │   │
+│  │  │  ┌───────────────┬───────────────┬───────────────┐     │    │   │
+│  │  │  │               │               │               │     │    │   │
+│  │  │  │   [Image 1]   │   [Image 2]   │   [Image 3]   │     │    │   │
+│  │  │  │    [Edit]     │    [Edit]     │    [Edit]     │     │    │   │
+│  │  │  │               │               │               │     │    │   │
+│  │  │  ├───────────────┼───────────────┼───────────────┤     │    │   │
+│  │  │  │               │               │               │     │    │   │
+│  │  │  │   [Image 4]   │   [Image 5]   │   [Image 6]   │     │    │   │
+│  │  │  │    [Edit]     │    [Edit]     │    [Edit]     │     │    │   │
+│  │  │  │               │               │               │     │    │   │
+│  │  │  └───────────────┴───────────────┴───────────────┘     │    │   │
+│  │  │                                                         │    │   │
+│  │  └─────────────────────────────────────────────────────────┘    │   │
+│  │                                                                  │   │
+│  │  Cell Actions:                                                   │   │
+│  │  ├── Click to select cell                                        │   │
+│  │  ├── Drag to reposition image within cell                        │   │
+│  │  ├── Double-click to swap images                                 │   │
+│  │  ├── [Edit] - Crop, adjust, apply filter                        │   │
+│  │  └── Drag edges to resize cell (free layout)                    │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ACTIONS                                                                │
+│  ├── [Add Text] - Add text overlay                                     │
+│  ├── [Add Sticker] - Add decorative elements                           │
+│  ├── [Shuffle] - Randomly shuffle images                               │
+│  ├── [Preview] - Full-screen preview                                   │
+│  ├── [Reset] - Start over                                              │
+│  └── [Create Collage] - Generate final image                           │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 15.2 Combine/Merge Images
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      COMBINE/MERGE IMAGES                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  STACK IMAGES                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Direction:            [Vertical ▼]                              │   │
+│  │  ├── Vertical   - Stack top to bottom                            │   │
+│  │  └── Horizontal - Stack left to right                            │   │
+│  │                                                                  │   │
+│  │  Alignment:            [Center ▼]                                │   │
+│  │  ├── Start   - Align to left/top                                 │   │
+│  │  ├── Center  - Center align                                      │   │
+│  │  └── End     - Align to right/bottom                             │   │
+│  │                                                                  │   │
+│  │  Spacing:              [0] px between images                     │   │
+│  │                                                                  │   │
+│  │  Size Mode:            [Match Largest ▼]                         │   │
+│  │  ├── Keep Original - Don't resize any                            │   │
+│  │  ├── Match Largest - Scale up to largest                         │   │
+│  │  ├── Match Smallest - Scale down to smallest                     │   │
+│  │  └── Custom Width/Height - Set fixed dimension                   │   │
+│  │                                                                  │   │
+│  │  Background:           [■ #FFFFFF] (for gaps)                    │   │
+│  │                                                                  │   │
+│  │  [Stack Images]                                                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  OVERLAY/BLEND                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Base Image:           [image1.jpg ▼]                            │   │
+│  │  Overlay Image:        [image2.png ▼]                            │   │
+│  │                                                                  │   │
+│  │  Position:                                                       │   │
+│  │  ├── X:                [50] %                                   │   │
+│  │  ├── Y:                [50] %                                   │   │
+│  │  └── Anchor:           [Center ▼]                               │   │
+│  │                                                                  │   │
+│  │  Transform:                                                      │   │
+│  │  ├── Scale:            [100] %                                  │   │
+│  │  └── Rotation:         [0] °                                    │   │
+│  │                                                                  │   │
+│  │  Blending:                                                       │   │
+│  │  ├── Mode:             [Normal ▼]                               │   │
+│  │  │   Normal / Multiply / Screen / Overlay / Soft Light /        │   │
+│  │  │   Hard Light / Difference / Exclusion / Hue /               │   │
+│  │  │   Saturation / Color / Luminosity                           │   │
+│  │  └── Opacity:          [100] %                                  │   │
+│  │                                                                  │   │
+│  │  [Apply Overlay]                                                 │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  BEFORE/AFTER COMPARISON                                                │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Before Image:         [original.jpg ▼]                          │   │
+│  │  After Image:          [edited.jpg ▼]                            │   │
+│  │                                                                  │   │
+│  │  Layout:               [Side by Side ▼]                          │   │
+│  │  ├── Side by Side  - Images next to each other                   │   │
+│  │  ├── Top/Bottom    - Stacked vertically                          │   │
+│  │  └── Slider        - Interactive slider divider                  │   │
+│  │                                                                  │   │
+│  │  Labels:                                                         │   │
+│  │  ├── Before:           [Before]                                  │   │
+│  │  ├── After:            [After]                                   │   │
+│  │  └── Label Style:      [Top-Left ▼] Position                    │   │
+│  │                                                                  │   │
+│  │  Divider (for slider):                                           │   │
+│  │  ├── Color:            [■ #FFFFFF]                              │   │
+│  │  ├── Width:            [3] px                                   │   │
+│  │  └── Initial Position: [50] %                                   │   │
+│  │                                                                  │   │
+│  │  [Create Comparison]                                             │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  CONTACT SHEET                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Grid:                                                           │   │
+│  │  ├── Columns:          [4]                                       │   │
+│  │  ├── Rows:             [Auto] (based on image count)            │   │
+│  │  └── Thumbnail Size:   [200] px                                 │   │
+│  │                                                                  │   │
+│  │  Spacing:              [10] px                                   │   │
+│  │  Background:           [■ #FFFFFF]                              │   │
+│  │                                                                  │   │
+│  │  Labels:                                                         │   │
+│  │  ├── [ ] Show filename                                           │   │
+│  │  ├── [ ] Show dimensions                                         │   │
+│  │  ├── [ ] Show file size                                          │   │
+│  │  ├── [ ] Show index number                                       │   │
+│  │  └── Font Size:        [12] px                                  │   │
+│  │                                                                  │   │
+│  │  Header:                                                         │   │
+│  │  ├── [ ] Include header                                          │   │
+│  │  └── Title:            [Contact Sheet]                          │   │
+│  │                                                                  │   │
+│  │  [Generate Contact Sheet]                                        │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 15.3 PDF Creation
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        PDF CREATION                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  PAGE SETTINGS                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Page Size:            [A4 ▼]                                    │   │
+│  │  ├── A4         (210 × 297 mm)                                   │   │
+│  │  ├── A3         (297 × 420 mm)                                   │   │
+│  │  ├── A5         (148 × 210 mm)                                   │   │
+│  │  ├── Letter     (8.5 × 11 in)                                    │   │
+│  │  ├── Legal      (8.5 × 14 in)                                    │   │
+│  │  ├── Tabloid    (11 × 17 in)                                     │   │
+│  │  └── Custom     [___] × [___] [mm/in ▼]                          │   │
+│  │                                                                  │   │
+│  │  Orientation:          [Portrait ▼] Portrait / Landscape         │   │
+│  │                                                                  │   │
+│  │  Margins:                                                        │   │
+│  │  ├── Top:              [20] mm                                  │   │
+│  │  ├── Right:            [20] mm                                  │   │
+│  │  ├── Bottom:           [20] mm                                  │   │
+│  │  ├── Left:             [20] mm                                  │   │
+│  │  └── [ ] Same for all sides                                      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  IMAGE LAYOUT                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Images Per Page:      [1 ▼] 1 / 2 / 4 / 6 / 9 / Custom         │   │
+│  │                                                                  │   │
+│  │  Layout Presets:                                                 │   │
+│  │  ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐ ┌───────┐              │   │
+│  │  │       │ │   │   │ │ █ │ █ │ │ █│█│█ │ │█│█│█│              │   │
+│  │  │   █   │ │ █ │ █ │ │───┼───│ │───────│ │─┼─┼─│              │   │
+│  │  │       │ │   │   │ │ █ │ █ │ │ █│█│█ │ │█│█│█│              │   │
+│  │  └───────┘ └───────┘ └───────┘ └───────┘ └───────┘              │   │
+│  │     1         2         4         6         9                    │   │
+│  │                                                                  │   │
+│  │  Fit Mode:             [Fit to Page ▼]                           │   │
+│  │  ├── Fit to Page   - Maintain aspect ratio, fit inside          │   │
+│  │  ├── Fill Page     - Crop to fill entire page                   │   │
+│  │  ├── Stretch       - Stretch to fill (may distort)              │   │
+│  │  └── Actual Size   - Use original dimensions                    │   │
+│  │                                                                  │   │
+│  │  Spacing (for multi-image):                                      │   │
+│  │  ├── Horizontal:       [10] mm                                  │   │
+│  │  └── Vertical:         [10] mm                                  │   │
+│  │                                                                  │   │
+│  │  [ ] Center images on page                                       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PDF OPTIONS                                                            │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Quality:              [High ▼] Low / Medium / High / Maximum   │   │
+│  │                                                                  │   │
+│  │  Metadata:                                                       │   │
+│  │  ├── Title:            [Photo Collection              ]          │   │
+│  │  ├── Author:           [                              ]          │   │
+│  │  └── Subject:          [                              ]          │   │
+│  │                                                                  │   │
+│  │  Page Numbering:                                                 │   │
+│  │  ├── [ ] Include page numbers                                    │   │
+│  │  ├── Position:         [Bottom Center ▼]                        │   │
+│  │  └── Format:           [Page {n} of {total}]                    │   │
+│  │                                                                  │   │
+│  │  [ ] Include filename as caption                                │   │
+│  │  [ ] Include table of contents (for many images)                │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  [Preview PDF] [Generate PDF]                                          │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 16. Comparison & Analysis
+
+### 16.1 Visual Comparison
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      VISUAL COMPARISON                                  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  COMPARISON MODES                                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [Side by Side] [Slider] [Toggle] [Overlay] [Split]             │   │
+│  │                                                                  │   │
+│  │  SIDE BY SIDE                                                    │   │
+│  │  ┌─────────────────────┬─────────────────────┐                  │   │
+│  │  │                     │                     │                  │   │
+│  │  │      ORIGINAL       │      PROCESSED      │                  │   │
+│  │  │                     │                     │                  │   │
+│  │  │     2.5 MB          │      450 KB         │                  │   │
+│  │  │   4000×3000         │    1920×1440        │                  │   │
+│  │  │                     │                     │                  │   │
+│  │  └─────────────────────┴─────────────────────┘                  │   │
+│  │                                                                  │   │
+│  │  SLIDER                                                          │   │
+│  │  ┌───────────────────────────────────────────┐                  │   │
+│  │  │                     │                     │                  │   │
+│  │  │      ORIGINAL       ║      PROCESSED      │                  │   │
+│  │  │                     ║                     │                  │   │
+│  │  │                    ◄║►                    │                  │   │
+│  │  │                     ║                     │                  │   │
+│  │  └───────────────────────────────────────────┘                  │   │
+│  │  ← Drag slider to compare                                       │   │
+│  │                                                                  │   │
+│  │  TOGGLE (Click to switch)                                        │   │
+│  │  ┌───────────────────────────────────────────┐                  │   │
+│  │  │                                           │                  │   │
+│  │  │              [ORIGINAL]                   │                  │   │
+│  │  │                                           │                  │   │
+│  │  │         Click or press Space              │                  │   │
+│  │  │                                           │                  │   │
+│  │  └───────────────────────────────────────────┘                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  COMPARISON OPTIONS                                                     │
+│  ├── [ ] Sync zoom (zoom both images together)                         │
+│  ├── [ ] Sync pan (pan both images together)                           │
+│  ├── [ ] Show info overlay (size, dimensions)                          │
+│  ├── [ ] Show difference percentage                                    │
+│  └── Background: [Checkerboard ▼] for transparency                     │
+│                                                                         │
+│  ZOOM CONTROLS                                                          │
+│  ├── [Fit] [100%] [200%] [+] [-]                                       │
+│  ├── Mouse wheel to zoom                                               │
+│  └── Click and drag to pan                                             │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 16.2 Quality Analysis
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      QUALITY ANALYSIS                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  FILE SIZE COMPARISON                                                   │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Original:        2,500 KB (2.44 MB)                            │   │
+│  │  Processed:         450 KB                                       │   │
+│  │  ─────────────────────────────────────                          │   │
+│  │  Reduction:       2,050 KB (82% smaller)                        │   │
+│  │                                                                  │   │
+│  │  Original    ████████████████████████████████████████  2.5 MB   │   │
+│  │  Processed   ███████                                    450 KB  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  DIMENSION COMPARISON                                                   │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Original:        4000 × 3000 px (12 MP)                        │   │
+│  │  Processed:       1920 × 1440 px (2.76 MP)                      │   │
+│  │  ─────────────────────────────────────                          │   │
+│  │  Scale:           48% of original                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  QUALITY METRICS                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  SSIM (Structural Similarity):     0.9847 (98.47%)              │   │
+│  │  └── 1.0 = Identical, >0.95 = Excellent, >0.90 = Good          │   │
+│  │                                                                  │   │
+│  │  PSNR (Peak Signal-to-Noise):      42.3 dB                      │   │
+│  │  └── >40 dB = Excellent, >30 dB = Good, <20 dB = Poor          │   │
+│  │                                                                  │   │
+│  │  Quality Score:                    ★★★★★ Excellent              │   │
+│  │                                                                  │   │
+│  │  Visual Quality Assessment:                                      │   │
+│  │  ├── Sharpness:        ████████░░  80%                          │   │
+│  │  ├── Color Accuracy:   █████████░  90%                          │   │
+│  │  ├── Detail Retention: ████████░░  80%                          │   │
+│  │  └── Artifact Level:   █░░░░░░░░░  Low (good)                   │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  VISUAL DIFFERENCE MAP                                                  │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [ ] Show difference map                                         │   │
+│  │                                                                  │   │
+│  │  ┌───────────────────────────────────────────┐                  │   │
+│  │  │                                           │                  │   │
+│  │  │        (Difference visualization)        │                  │   │
+│  │  │        Red = Changed areas               │                  │   │
+│  │  │        Green = Unchanged areas           │                  │   │
+│  │  │                                           │                  │   │
+│  │  └───────────────────────────────────────────┘                  │   │
+│  │                                                                  │   │
+│  │  Sensitivity:      [Low ▼] Low / Medium / High                  │   │
+│  │  Different Pixels: 12.3%                                        │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 16.3 Histogram Display
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        HISTOGRAM                                        │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  HISTOGRAM VIEW                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Channel: [RGB ▼] RGB / Red / Green / Blue / Luminosity         │   │
+│  │                                                                  │   │
+│  │     ▄                                                            │   │
+│  │    ▄█▄                                                           │   │
+│  │   ▄███▄                    ▄▄                                    │   │
+│  │  ▄█████▄                  ▄██▄                                   │   │
+│  │ ▄███████▄                ▄████▄                   ▄              │   │
+│  │▄█████████▄▄            ▄██████▄▄               ▄▄██▄             │   │
+│  │████████████▄▄        ▄▄████████▄▄            ▄▄█████▄            │   │
+│  │██████████████▄▄    ▄▄██████████████▄▄      ▄▄████████▄▄          │   │
+│  │████████████████████████████████████████▄▄▄▄██████████████▄▄▄▄    │   │
+│  └──────────────────────────────────────────────────────────────────│   │
+│  0                         128                                   255│   │
+│  Shadows                 Midtones                         Highlights│   │
+│  │                                                                  │   │
+│  │  Statistics:                                                     │   │
+│  │  ├── Mean:             127 (49.8%)                              │   │
+│  │  ├── Median:           134                                       │   │
+│  │  ├── Std Deviation:    42                                        │   │
+│  │  ├── Min Value:        5                                         │   │
+│  │  ├── Max Value:        252                                       │   │
+│  │  └── Clipped:          0.2% shadows, 0.1% highlights            │   │
+│  │                                                                  │   │
+│  │  [ ] Overlay on image                                            │   │
+│  │  [ ] Logarithmic scale                                           │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  COMPARE HISTOGRAMS (Before/After)                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Original (faded)  ░░░░░▒▒▒▓▓▓███▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░  │   │
+│  │  Processed (solid) ░░░░▒▒▓▓████████▓▓▓▒▒░░░░░░░░░░░░░░▒▒▓▓███   │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 16.4 Color Analysis
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       COLOR ANALYSIS                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  DOMINANT COLORS                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Top 5 Colors:                                                   │   │
+│  │                                                                  │   │
+│  │  1. ████████████████████████████████  #3B82F6  35.2%            │   │
+│  │     RGB: 59, 130, 246   HSL: 217°, 91%, 60%                     │   │
+│  │                                                                  │   │
+│  │  2. ██████████████████████            #1E3A5F  22.8%            │   │
+│  │     RGB: 30, 58, 95     HSL: 214°, 52%, 25%                     │   │
+│  │                                                                  │   │
+│  │  3. ████████████████                  #F8FAFC  18.5%            │   │
+│  │     RGB: 248, 250, 252  HSL: 210°, 40%, 98%                     │   │
+│  │                                                                  │   │
+│  │  4. ██████████                        #10B981  12.1%            │   │
+│  │     RGB: 16, 185, 129   HSL: 160°, 84%, 39%                     │   │
+│  │                                                                  │   │
+│  │  5. ██████                            #F59E0B  11.4%            │   │
+│  │     RGB: 245, 158, 11   HSL: 38°, 92%, 50%                      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  COLOR PALETTE                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Generated Palette (10 colors):                                  │   │
+│  │                                                                  │   │
+│  │  ┌────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐            │   │
+│  │  │    │    │    │    │    │    │    │    │    │    │            │   │
+│  │  └────┴────┴────┴────┴────┴────┴────┴────┴────┴────┘            │   │
+│  │                                                                  │   │
+│  │  Click a color to copy its value                                │   │
+│  │                                                                  │   │
+│  │  Export As:                                                      │   │
+│  │  ├── [CSS Variables]   --color-1: #3B82F6;                      │   │
+│  │  ├── [JSON]            {"colors": ["#3B82F6", ...]}             │   │
+│  │  ├── [ASE]             Adobe Swatch Exchange                    │   │
+│  │  └── [GPL]             GIMP Palette                             │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  COLOR SPACE INFO                                                       │
+│  ├── Color Space:         sRGB                                         │
+│  ├── Color Depth:         24-bit (16.7 million colors)                │
+│  ├── Unique Colors:       1,247,832                                    │
+│  └── Has Transparency:    No                                           │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 17. Export & Download Features
+
+### 17.1 Download Options
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      DOWNLOAD OPTIONS                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  SINGLE FILE DOWNLOAD                                                   │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [Download] - Download current/selected image                    │   │
+│  │                                                                  │   │
+│  │  Quick Actions:                                                  │   │
+│  │  ├── [Download as JPEG]                                          │   │
+│  │  ├── [Download as PNG]                                           │   │
+│  │  ├── [Download as WebP]                                          │   │
+│  │  └── [Download Original]                                         │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  BATCH DOWNLOAD                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Download:                                                       │   │
+│  │  ├── ( ) All processed images (24 files)                        │   │
+│  │  ├── (●) Selected images only (12 files)                        │   │
+│  │  └── ( ) Custom selection...                                    │   │
+│  │                                                                  │   │
+│  │  Method:                                                         │   │
+│  │  ├── [Individual Files] - Downloads one by one                  │   │
+│  │  └── [ZIP Archive]      - Single ZIP file                       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ZIP OPTIONS                                                            │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Filename:             [converted_images.zip        ]            │   │
+│  │                                                                  │   │
+│  │  Compression:          [Normal ▼]                                │   │
+│  │  ├── Store    - No compression (fastest)                         │   │
+│  │  ├── Fast     - Light compression                                │   │
+│  │  ├── Normal   - Balanced                                         │   │
+│  │  └── Maximum  - Smallest file (slower)                           │   │
+│  │                                                                  │   │
+│  │  Organization:                                                   │   │
+│  │  ├── [ ] Create folder structure by format                       │   │
+│  │  │       /jpg/file1.jpg, /png/file2.png                         │   │
+│  │  ├── [ ] Create folder structure by size                         │   │
+│  │  │       /large/..., /medium/..., /small/...                    │   │
+│  │  └── [ ] Flat structure (all files in root)                     │   │
+│  │                                                                  │   │
+│  │  Include:                                                        │   │
+│  │  ├── [ ] Original images (in /originals folder)                 │   │
+│  │  ├── [ ] Metadata report (metadata.json)                        │   │
+│  │  ├── [ ] Processing log (log.txt)                               │   │
+│  │  └── [ ] Settings used (settings.json)                          │   │
+│  │                                                                  │   │
+│  │  Auto-split:                                                     │   │
+│  │  ├── [ ] Split if ZIP exceeds: [100] MB                         │   │
+│  │  └── Creates: images_part1.zip, images_part2.zip, etc.          │   │
+│  │                                                                  │   │
+│  │  [Create & Download ZIP]                                         │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 17.2 Share & Copy
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        SHARE & COPY                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  COPY TO CLIPBOARD                                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [Copy Image]          Copy image to system clipboard            │   │
+│  │                        Can paste in other apps                  │   │
+│  │                                                                  │   │
+│  │  [Copy as Base64]      Copy as data URL string                   │   │
+│  │                        data:image/png;base64,...                │   │
+│  │                                                                  │   │
+│  │  [Copy Filename]       Copy the filename                         │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  WEB SHARE (if browser supports)                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [Share...]            Opens native share dialog                 │   │
+│  │                        Share to apps, email, social media       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  EXPORT DATA URL                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Format:               [PNG ▼]                                   │   │
+│  │  Quality:              [85] % (for JPEG/WebP)                   │   │
+│  │                                                                  │   │
+│  │  [Generate Data URL]                                             │   │
+│  │                                                                  │   │
+│  │  Result:                                                         │   │
+│  │  ┌───────────────────────────────────────────────────────────┐  │   │
+│  │  │ data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA...       │  │   │
+│  │  └───────────────────────────────────────────────────────────┘  │   │
+│  │  [Copy] [Download as Text]                                      │   │
+│  │                                                                  │   │
+│  │  Length: 45,832 characters                                      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 17.3 Export Presets
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       EXPORT PRESETS                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  QUICK EXPORT                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [Web Optimized]                                                 │   │
+│  │  WebP, 80% quality, max 1920px, strip metadata                  │   │
+│  │                                                                  │   │
+│  │  [Social Media Ready]                                            │   │
+│  │  JPEG, 90% quality, sRGB, strip GPS                             │   │
+│  │                                                                  │   │
+│  │  [Print Quality]                                                 │   │
+│  │  PNG/TIFF, max quality, 300 DPI, preserve all metadata          │   │
+│  │                                                                  │   │
+│  │  [Email Attachment]                                              │   │
+│  │  JPEG, 75% quality, max 1200px, < 1MB target                    │   │
+│  │                                                                  │   │
+│  │  [Archive/Backup]                                                │   │
+│  │  PNG, lossless, original size, all metadata                     │   │
+│  │                                                                  │   │
+│  │  [Thumbnail]                                                     │   │
+│  │  JPEG, 70% quality, 200×200px square crop                       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  CUSTOM EXPORT SETTINGS                                                 │
+│  ├── [Save Current as Preset]                                          │
+│  └── [Manage Export Presets...]                                        │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 18. UI/UX Specifications
+
+### 18.1 Layout Structure
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       APPLICATION LAYOUT                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                          HEADER                                  │   │
+│  │  Logo   |   Navigation   |   Theme Toggle   |   Mobile Menu     │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                           HERO                                   │   │
+│  │                    Tagline & Call to Action                      │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                         FEATURES                                 │   │
+│  │                    Feature Cards Grid                            │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                       CONVERTER SECTION                          │   │
+│  │  ┌───────────────────────────────────────────────────────────┐  │   │
+│  │  │                      UPLOAD AREA                           │  │   │
+│  │  │               Drag & Drop / Click / Paste                  │  │   │
+│  │  └───────────────────────────────────────────────────────────┘  │   │
+│  │                                                                  │   │
+│  │  ┌────────────────────────┬──────────────────────────────────┐  │   │
+│  │  │                        │                                   │  │   │
+│  │  │    OPTIONS PANEL       │        PREVIEW PANEL              │  │   │
+│  │  │                        │                                   │  │   │
+│  │  │  • Format              │   ┌─────────────────────────┐    │  │   │
+│  │  │  • Quality             │   │                         │    │  │   │
+│  │  │  • Resize              │   │     Image Preview       │    │  │   │
+│  │  │  • Adjustments         │   │                         │    │  │   │
+│  │  │  • Filters             │   │     Before / After      │    │  │   │
+│  │  │  • Effects             │   │                         │    │  │   │
+│  │  │  • Watermark           │   └─────────────────────────┘    │  │   │
+│  │  │                        │                                   │  │   │
+│  │  └────────────────────────┴──────────────────────────────────┘  │   │
+│  │                                                                  │   │
+│  │  ┌───────────────────────────────────────────────────────────┐  │   │
+│  │  │                    IMAGE GRID                              │  │   │
+│  │  │  ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐ ┌────┐               │  │   │
+│  │  │  │img1│ │img2│ │img3│ │img4│ │img5│ │img6│               │  │   │
+│  │  │  └────┘ └────┘ └────┘ └────┘ └────┘ └────┘               │  │   │
+│  │  └───────────────────────────────────────────────────────────┘  │   │
+│  │                                                                  │   │
+│  │  ┌───────────────────────────────────────────────────────────┐  │   │
+│  │  │                   DOWNLOAD SECTION                         │  │   │
+│  │  │   Stats   |   [Download All]   |   [Download ZIP]         │  │   │
+│  │  └───────────────────────────────────────────────────────────┘  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                      SUPPORT BANNER                              │   │
+│  │              Enjoying this tool? Buy me a coffee!               │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                          FOOTER                                  │   │
+│  │   About   |   Links   |   Social   |   Legal   |   Copyright    │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 18.2 Theme System
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        THEME SYSTEM                                     │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  COLOR PALETTE                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  LIGHT THEME                                                     │   │
+│  │  ├── Primary:          #6366F1 (Indigo)                         │   │
+│  │  ├── Primary Dark:     #4F46E5                                  │   │
+│  │  ├── Primary Light:    #818CF8                                  │   │
+│  │  ├── Secondary:        #10B981 (Emerald)                        │   │
+│  │  ├── Background:       #F9FAFB                                  │   │
+│  │  ├── Surface:          #FFFFFF                                  │   │
+│  │  ├── Surface Hover:    #F3F4F6                                  │   │
+│  │  ├── Text Primary:     #111827                                  │   │
+│  │  ├── Text Secondary:   #6B7280                                  │   │
+│  │  ├── Text Muted:       #9CA3AF                                  │   │
+│  │  ├── Border:           #E5E7EB                                  │   │
+│  │  ├── Error:            #EF4444                                  │   │
+│  │  ├── Warning:          #F59E0B                                  │   │
+│  │  ├── Success:          #22C55E                                  │   │
+│  │  └── Info:             #3B82F6                                  │   │
+│  │                                                                  │   │
+│  │  DARK THEME                                                      │   │
+│  │  ├── Background:       #0F172A                                  │   │
+│  │  ├── Surface:          #1E293B                                  │   │
+│  │  ├── Surface Hover:    #334155                                  │   │
+│  │  ├── Text Primary:     #F1F5F9                                  │   │
+│  │  ├── Text Secondary:   #94A3B8                                  │   │
+│  │  ├── Text Muted:       #64748B                                  │   │
+│  │  └── Border:           #334155                                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  THEME DETECTION                                                        │
+│  ├── Auto-detect system preference (prefers-color-scheme)             │
+│  ├── Save user preference to localStorage                             │
+│  ├── Toggle button in header                                           │
+│  └── Smooth transition between themes                                  │
+│                                                                         │
+│  TYPOGRAPHY                                                             │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Font Family:          System font stack                         │   │
+│  │  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, etc.   │   │
+│  │                                                                  │   │
+│  │  Font Sizes:                                                     │   │
+│  │  ├── H1:               clamp(2rem, 6vw, 3.5rem)                 │   │
+│  │  ├── H2:               clamp(1.5rem, 4vw, 2rem)                 │   │
+│  │  ├── H3:               1.125rem                                 │   │
+│  │  ├── Body:             1rem (16px)                              │   │
+│  │  ├── Small:            0.875rem                                 │   │
+│  │  └── XSmall:           0.75rem                                  │   │
+│  │                                                                  │   │
+│  │  Line Heights:                                                   │   │
+│  │  ├── Headings:         1.2                                      │   │
+│  │  └── Body:             1.6                                      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  SPACING SCALE                                                          │
+│  ├── 2xs:    0.125rem (2px)                                           │
+│  ├── xs:     0.25rem (4px)                                            │
+│  ├── sm:     0.5rem (8px)                                             │
+│  ├── md:     1rem (16px)                                              │
+│  ├── lg:     1.5rem (24px)                                            │
+│  ├── xl:     2rem (32px)                                              │
+│  ├── 2xl:    3rem (48px)                                              │
+│  └── 3xl:    4rem (64px)                                              │
+│                                                                         │
+│  BORDER RADIUS                                                          │
+│  ├── sm:     0.375rem (6px)                                           │
+│  ├── md:     0.5rem (8px)                                             │
+│  ├── lg:     0.75rem (12px)                                           │
+│  ├── xl:     1rem (16px)                                              │
+│  └── full:   9999px                                                    │
+│                                                                         │
+│  SHADOWS                                                                │
+│  ├── sm:     0 1px 2px rgba(0,0,0,0.05)                               │
+│  ├── md:     0 4px 6px -1px rgba(0,0,0,0.1)                          │
+│  ├── lg:     0 10px 15px -3px rgba(0,0,0,0.1)                        │
+│  └── xl:     0 20px 25px -5px rgba(0,0,0,0.1)                        │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 18.3 Keyboard Shortcuts
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      KEYBOARD SHORTCUTS                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  FILE OPERATIONS                                                        │
+│  ├── Ctrl/Cmd + O         Open file picker                             │
+│  ├── Ctrl/Cmd + V         Paste image from clipboard                   │
+│  ├── Ctrl/Cmd + S         Download current/selected image              │
+│  ├── Ctrl/Cmd + Shift + S Download all as ZIP                          │
+│  └── Ctrl/Cmd + Enter     Process images                               │
+│                                                                         │
+│  SELECTION                                                              │
+│  ├── Ctrl/Cmd + A         Select all images                            │
+│  ├── Ctrl/Cmd + D         Deselect all                                 │
+│  ├── Ctrl/Cmd + Click     Toggle selection                             │
+│  ├── Shift + Click        Range selection                              │
+│  ├── Delete / Backspace   Remove selected images                       │
+│  ├── Arrow Keys           Navigate between images                      │
+│  └── Enter                Edit selected image                          │
+│                                                                         │
+│  EDITING                                                                │
+│  ├── Ctrl/Cmd + Z         Undo                                         │
+│  ├── Ctrl/Cmd + Shift + Z Redo                                         │
+│  ├── Ctrl/Cmd + Y         Redo (alternative)                           │
+│  ├── Ctrl/Cmd + C         Copy settings                                │
+│  └── Ctrl/Cmd + V         Paste settings                               │
+│                                                                         │
+│  VIEW                                                                   │
+│  ├── Space                Toggle preview before/after                  │
+│  ├── F                    Fullscreen preview                           │
+│  ├── G                    Toggle grid/list view                        │
+│  ├── + / =                Zoom in                                      │
+│  ├── -                    Zoom out                                     │
+│  ├── 0                    Fit to view                                  │
+│  ├── 1                    100% zoom (actual size)                      │
+│  └── H                    Show/hide histogram                          │
+│                                                                         │
+│  GENERAL                                                                │
+│  ├── Escape               Cancel / Close modal / Deselect              │
+│  ├── ?                    Show keyboard shortcuts help                 │
+│  ├── Ctrl/Cmd + ,         Open settings                                │
+│  └── Ctrl/Cmd + /         Toggle help panel                            │
+│                                                                         │
+│  CUSTOMIZATION                                                          │
+│  └── All shortcuts are customizable in Settings                        │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+### 18.4 Responsive Breakpoints
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    RESPONSIVE BREAKPOINTS                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  BREAKPOINTS                                                            │
+│  ├── Mobile Small:      < 360px                                        │
+│  ├── Mobile:            360px - 480px                                  │
+│  ├── Mobile Large:      480px - 768px                                  │
+│  ├── Tablet:            768px - 1024px                                 │
+│  ├── Desktop:           1024px - 1280px                                │
+│  ├── Desktop Large:     1280px - 1536px                                │
+│  └── Desktop XL:        > 1536px                                       │
+│                                                                         │
+│  LAYOUT CHANGES                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  MOBILE (< 768px)                                                │   │
+│  │  ├── Single column layout                                        │   │
+│  │  ├── Stacked options/preview                                     │   │
+│  │  ├── 2-column image grid                                         │   │
+│  │  ├── Mobile navigation menu                                      │   │
+│  │  ├── Touch-optimized controls                                    │   │
+│  │  ├── Full-width buttons                                          │   │
+│  │  └── Simplified toolbar                                          │   │
+│  │                                                                  │   │
+│  │  TABLET (768px - 1024px)                                         │   │
+│  │  ├── Two column layout                                           │   │
+│  │  ├── Side-by-side options/preview                                │   │
+│  │  ├── 3-4 column image grid                                       │   │
+│  │  └── Collapsible panels                                          │   │
+│  │                                                                  │   │
+│  │  DESKTOP (> 1024px)                                              │   │
+│  │  ├── Full layout with sidebars                                   │   │
+│  │  ├── 4-6 column image grid                                       │   │
+│  │  ├── Persistent panels                                           │   │
+│  │  ├── Keyboard shortcuts active                                   │   │
+│  │  └── Hover effects enabled                                       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  TOUCH OPTIMIZATION                                                     │
+│  ├── Minimum tap target: 44×44px                                       │
+│  ├── Swipe gestures for navigation                                     │
+│  ├── Pinch to zoom in preview                                          │
+│  ├── Long press for context menu                                       │
+│  └── Pull to refresh (PWA)                                             │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 19. Accessibility Requirements
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   ACCESSIBILITY (WCAG 2.1 AA)                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  PERCEIVABLE                                                            │
+│  ├── All images have descriptive alt text                              │
+│  ├── Color is not the only means of conveying information             │
+│  ├── Minimum contrast ratio 4.5:1 for normal text                      │
+│  ├── Minimum contrast ratio 3:1 for large text                         │
+│  ├── Text can be resized up to 200% without loss                       │
+│  ├── No content flashes more than 3 times per second                   │
+│  └── Captions/alternatives for any audio content                       │
+│                                                                         │
+│  OPERABLE                                                               │
+│  ├── All functionality available via keyboard                          │
+│  ├── No keyboard traps                                                  │
+│  ├── Skip links for main content                                       │
+│  ├── Focus indicators clearly visible                                  │
+│  ├── Adequate time limits (or ability to extend)                       │
+│  ├── Pause/stop capability for animations                              │
+│  └── Touch targets minimum 44×44px                                     │
+│                                                                         │
+│  UNDERSTANDABLE                                                         │
+│  ├── Language declared in HTML                                         │
+│  ├── Consistent navigation patterns                                    │
+│  ├── Consistent identification of elements                             │
+│  ├── Clear error messages with suggestions                             │
+│  ├── Labels for all form inputs                                        │
+│  └── Meaningful link text                                              │
+│                                                                         │
+│  ROBUST                                                                 │
+│  ├── Valid HTML markup                                                 │
+│  ├── ARIA landmarks for major sections                                 │
+│  ├── ARIA labels for custom controls                                   │
+│  ├── ARIA live regions for dynamic content                             │
+│  └── Compatible with assistive technologies                            │
+│                                                                         │
+│  SPECIFIC IMPLEMENTATIONS                                               │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  SCREEN READERS                                                  │   │
+│  │  ├── Announce image processing progress                          │   │
+│  │  ├── Announce successful operations                              │   │
+│  │  ├── Announce error messages                                     │   │
+│  │  └── Describe slider values when changed                         │   │
+│  │                                                                  │   │
+│  │  KEYBOARD NAVIGATION                                             │   │
+│  │  ├── Logical tab order                                           │   │
+│  │  ├── Arrow keys for image grid navigation                        │   │
+│  │  ├── Enter/Space to activate buttons                             │   │
+│  │  ├── Escape to close modals/cancel                               │   │
+│  │  └── Focus management in modals                                  │   │
+│  │                                                                  │   │
+│  │  VISUAL                                                          │   │
+│  │  ├── High contrast mode support                                  │   │
+│  │  ├── Reduced motion preference                                   │   │
+│  │  ├── Forced colors mode support                                  │   │
+│  │  └── Large text mode                                             │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 20. Performance Requirements
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   PERFORMANCE REQUIREMENTS                              │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  LOADING PERFORMANCE                                                    │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Metric                          Target           Acceptable     │   │
+│  │  ─────────────────────────────────────────────────────────────  │   │
+│  │  First Contentful Paint (FCP)    < 1.0s           < 1.5s        │   │
+│  │  Largest Contentful Paint (LCP)  < 2.0s           < 2.5s        │   │
+│  │  Time to Interactive (TTI)       < 2.5s           < 3.5s        │   │
+│  │  Cumulative Layout Shift (CLS)   < 0.1            < 0.25        │   │
+│  │  First Input Delay (FID)         < 100ms          < 200ms       │   │
+│  │  Total Blocking Time (TBT)       < 200ms          < 300ms       │   │
+│  │                                                                  │   │
+│  │  Lighthouse Scores (Target)                                      │   │
+│  │  ├── Performance:      > 90                                     │   │
+│  │  ├── Accessibility:    100                                      │   │
+│  │  ├── Best Practices:   > 95                                     │   │
+│  │  └── SEO:              > 95                                     │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PROCESSING PERFORMANCE                                                 │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  File Size              Processing Time (Target)                 │   │
+│  │  ─────────────────────────────────────────────────────────────  │   │
+│  │  < 1 MB                 < 500ms                                  │   │
+│  │  1-5 MB                 < 2s                                     │   │
+│  │  5-10 MB                < 5s                                     │   │
+│  │  10-25 MB               < 10s                                    │   │
+│  │  25-50 MB               < 20s                                    │   │
+│  │                                                                  │   │
+│  │  Batch Processing                                                │   │
+│  │  ├── Concurrent files:  4 (based on CPU cores)                  │   │
+│  │  ├── Progress updates:  Every 100ms                             │   │
+│  │  └── UI responsive:     Always                                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  MEMORY MANAGEMENT                                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  ├── Maximum memory usage:      70% of available                │   │
+│  │  ├── Warning threshold:         80% of available                │   │
+│  │  ├── Canvas cleanup:            Immediate after use             │   │
+│  │  ├── Blob URL revocation:       After download + 5s             │   │
+│  │  ├── Image cache limit:         100MB                           │   │
+│  │  └── Auto-cleanup:              On low memory detection         │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  OPTIMIZATION TECHNIQUES                                                │
+│  ├── Web Workers for image processing                                  │
+│  ├── OffscreenCanvas where supported                                   │
+│  ├── Lazy loading for thumbnails                                       │
+│  ├── Virtual scrolling for large image lists                          │
+│  ├── Debounced input handlers                                          │
+│  ├── Throttled render updates                                          │
+│  ├── Image data chunking for large files                               │
+│  ├── Progressive image loading                                         │
+│  └── Request Animation Frame for animations                            │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 21. Security Requirements
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     SECURITY REQUIREMENTS                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  PRIVACY GUARANTEES                                                     │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  ✓ NO server uploads - All processing is client-side            │   │
+│  │  ✓ NO tracking - No analytics or tracking scripts               │   │
+│  │  ✓ NO cookies - Except essential (theme preference)             │   │
+│  │  ✓ NO third-party requests - Completely self-contained          │   │
+│  │  ✓ NO data collection - Zero data leaves the browser            │   │
+│  │  ✓ NO account required - No login or registration               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  INPUT VALIDATION                                                       │
+│  ├── File type validation (MIME type + magic bytes)                    │
+│  ├── File size limits enforced                                         │
+│  ├── Maximum dimensions enforced                                       │
+│  ├── Filename sanitization (XSS prevention)                            │
+│  ├── Content verification (is it really an image?)                     │
+│  └── Reject executable content                                         │
+│                                                                         │
+│  XSS PREVENTION                                                         │
+│  ├── HTML entity encoding for all displayed content                    │
+│  ├── Sanitize filenames before display                                 │
+│  ├── No innerHTML with user content                                    │
+│  ├── Content Security Policy headers                                   │
+│  └── No eval() or dynamic code execution                               │
+│                                                                         │
+│  CONTENT SECURITY POLICY                                                │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  default-src 'self';                                             │   │
+│  │  script-src 'self';                                              │   │
+│  │  style-src 'self' 'unsafe-inline';                               │   │
+│  │  img-src 'self' blob: data:;                                    │   │
+│  │  font-src 'self';                                                │   │
+│  │  connect-src 'self';                                             │   │
+│  │  worker-src 'self' blob:;                                       │   │
+│  │  frame-ancestors 'none';                                         │   │
+│  │  base-uri 'self';                                                │   │
+│  │  form-action 'self';                                             │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  SECURE CODING PRACTICES                                                │
+│  ├── Object.freeze() for immutable configurations                     │
+│  ├── IIFE pattern to avoid global pollution                            │
+│  ├── Strict mode ('use strict')                                        │
+│  ├── Const/let instead of var                                          │
+│  ├── No prototype pollution vulnerabilities                            │
+│  └── Regular security audits                                           │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 22. Storage & Data Management
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   STORAGE & DATA MANAGEMENT                             │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  LOCAL STORAGE                                                          │
+│  ├── Theme preference                                                   │
+│  ├── Last used settings                                                 │
+│  ├── Custom presets                                                     │
+│  ├── UI preferences (panel positions, etc.)                           │
+│  ├── Language preference                                               │
+│  └── Maximum: 5MB                                                       │
+│                                                                         │
+│  INDEXED DB (Optional, for larger data)                                │
+│  ├── Cached processed images (for undo)                                │
+│  ├── Session recovery data                                              │
+│  ├── Custom watermark images                                            │
+│  ├── Maximum: 500MB                                                     │
+│  └── Auto-cleanup after 24 hours                                       │
+│  SESSION RECOVERY                                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Auto-save:           Every 60 seconds                          │   │
+│  │  Data saved:                                                     │   │
+│  │  ├── Image thumbnails (compressed)                               │   │
+│  │  ├── Processing settings                                         │   │
+│  │  ├── Queue status                                                │   │
+│  │  └── Edit history                                                │   │
+│  │                                                                  │   │
+│  │  Recovery prompt:     On page reload                             │   │
+│  │  Recovery expiry:     24 hours                                   │   │
+│  │  User options:        Restore / Discard / Don't ask again       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  EXPORT/IMPORT SETTINGS                                                 │
+│  ├── Export all settings as JSON                                       │
+│  ├── Export presets only                                               │
+│  ├── Import settings from JSON                                         │
+│  └── Reset to defaults                                                 │
+│                                                                         │
+│  CLEAR DATA                                                             │
+│  ├── Clear cache only                                                   │
+│  ├── Clear settings only                                               │
+│  ├── Clear all data                                                     │
+│  └── Clear on exit option                                              │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 23. PWA & Offline Features
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     PWA & OFFLINE FEATURES                              │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  WEB APP MANIFEST                                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  {                                                               │   │
+│  │    "name": "All-in-One Image Converter Pro",                    │   │
+│  │    "short_name": "ImgConverter",                                │   │
+│  │    "description": "Convert, resize & edit images privately",   │   │
+│  │    "start_url": "/image-converter/",                            │   │
+│  │    "display": "standalone",                                      │   │
+│  │    "orientation": "any",                                         │   │
+│  │    "theme_color": "#6366F1",                                    │   │
+│  │    "background_color": "#F9FAFB",                               │   │
+│  │    "categories": ["photo", "productivity", "utilities"],        │   │
+│  │    "icons": [                                                    │   │
+│  │      { "src": "icon-72.png", "sizes": "72x72" },               │   │
+│  │      { "src": "icon-96.png", "sizes": "96x96" },               │   │
+│  │      { "src": "icon-128.png", "sizes": "128x128" },            │   │
+│  │      { "src": "icon-144.png", "sizes": "144x144" },            │   │
+│  │      { "src": "icon-152.png", "sizes": "152x152" },            │   │
+│  │      { "src": "icon-192.png", "sizes": "192x192" },            │   │
+│  │      { "src": "icon-384.png", "sizes": "384x384" },            │   │
+│  │      { "src": "icon-512.png", "sizes": "512x512" }             │   │
+│  │    ],                                                            │   │
+│  │    "screenshots": [...],                                         │   │
+│  │    "shortcuts": [                                                │   │
+│  │      { "name": "Convert", "url": "/#converter" },               │   │
+│  │      { "name": "Collage", "url": "/#collage" }                  │   │
+│  │    ]                                                             │   │
+│  │  }                                                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  SERVICE WORKER                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Caching Strategy:                                               │   │
+│  │  ├── HTML/CSS/JS:      Cache First, then Network                │   │
+│  │  ├── Icons/Images:     Cache First                               │   │
+│  │  └── API calls:        N/A (none)                               │   │
+│  │                                                                  │   │
+│  │  Cached Resources:                                               │   │
+│  │  ├── index.html                                                  │   │
+│  │  ├── css/style.css                                               │   │
+│  │  ├── js/*.js (all modules)                                      │   │
+│  │  ├── assets/icons/*                                             │   │
+│  │  └── manifest.json                                              │   │
+│  │                                                                  │   │
+│  │  Offline Capability:                                             │   │
+│  │  ├── Full functionality offline                                 │   │
+│  │  ├── Offline indicator in UI                                    │   │
+│  │  └── Graceful degradation for missing features                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  INSTALLATION                                                           │
+│  ├── Install prompt on first visit (if supported)                      │
+│  ├── Custom install button in header                                   │
+│  ├── Installation instructions for manual install                      │
+│  └── Post-install welcome message                                      │
+│                                                                         │
+│  UPDATES                                                                │
+│  ├── Auto-check for updates on load                                    │
+│  ├── Notify user of available update                                   │
+│  ├── Option to update now or later                                     │
+│  └── Show changelog after update                                       │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 24. Error Handling
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        ERROR HANDLING                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ERROR TYPES & MESSAGES                                                 │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  FILE ERRORS                                                     │   │
+│  │  ├── FileReadError                                               │   │
+│  │  │   Message: "Unable to read file. It may be corrupted."       │   │
+│  │  │   Recovery: Retry / Skip                                     │   │
+│  │  │                                                               │   │
+│  │  ├── FileTooLargeError                                           │   │
+│  │  │   Message: "File exceeds 50MB limit."                        │   │
+│  │  │   Recovery: Skip / Compress first                            │   │
+│  │  │                                                               │   │
+│  │  ├── UnsupportedFormatError                                      │   │
+│  │  │   Message: "Format not supported. Try JPG, PNG, WebP, GIF." │   │
+│  │  │   Recovery: Skip                                              │   │
+│  │  │                                                               │   │
+│  │  ├── EmptyFileError                                              │   │
+│  │  │   Message: "File is empty (0 bytes)."                        │   │
+│  │  │   Recovery: Skip                                              │   │
+│  │  │                                                               │   │
+│  │  └── TooManyFilesError                                           │   │
+│  │      Message: "Maximum 100 files at once."                      │   │
+│  │      Recovery: First 100 will be processed                      │   │
+│  │                                                                  │   │
+│  │  PROCESSING ERRORS                                               │   │
+│  │  ├── ProcessingError                                             │   │
+│  │  │   Message: "Failed to process image."                        │   │
+│  │  │   Recovery: Retry / Skip / Reduce quality                    │   │
+│  │  │                                                               │   │
+│  │  ├── MemoryError                                                 │   │
+│  │  │   Message: "Not enough memory. Try smaller images."          │   │
+│  │  │   Recovery: Clear cache / Process fewer files                │   │
+│  │  │                                                               │   │
+│  │  ├── DimensionError                                              │   │
+│  │  │   Message: "Image dimensions too large (max 32000px)."       │   │
+│  │  │   Recovery: Auto-resize / Skip                               │   │
+│  │  │                                                               │   │
+│  │  └── CanvasError                                                 │   │
+│  │      Message: "Browser canvas limit reached."                   │   │
+│  │      Recovery: Reduce size / Split processing                   │   │
+│  │                                                                  │   │
+│  │  DOWNLOAD ERRORS                                                 │   │
+│  │  ├── DownloadError                                               │   │
+│  │  │   Message: "Download failed. Check browser permissions."     │   │
+│  │  │   Recovery: Retry / Copy to clipboard                        │   │
+│  │  │                                                               │   │
+│  │  └── ZipCreationError                                            │   │
+│  │      Message: "Failed to create ZIP. Try fewer files."          │   │
+│  │      Recovery: Download individually                            │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  RECOVERY STRATEGIES                                                    │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  AUTO RETRY                                                      │   │
+│  │  ├── Enabled by default                                          │   │
+│  │  ├── Maximum attempts: 3                                         │   │
+│  │  ├── Delay between attempts: 1 second                           │   │
+│  │  └── Exponential backoff                                        │   │
+│  │                                                                  │   │
+│  │  FALLBACK OPTIONS                                                │   │
+│  │  ├── Reduce quality automatically                               │   │
+│  │  ├── Reduce dimensions automatically                            │   │
+│  │  ├── Skip problematic files                                     │   │
+│  │  └── Use alternative processing method                          │   │
+│  │                                                                  │   │
+│  │  USER PROMPT                                                     │   │
+│  │  ├── Show clear error message                                   │   │
+│  │  ├── Offer recovery options                                     │   │
+│  │  ├── Allow skip/retry/cancel                                    │   │
+│  │  └── Option to "apply to all"                                   │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  ERROR LOGGING                                                          │
+│  ├── Console logging (debug mode)                                      │
+│  ├── Error export for debugging                                        │
+│  ├── Performance metrics logging                                       │
+│  └── No external error reporting (privacy)                             │
+│                                                                         │
+│  GRACEFUL DEGRADATION                                                   │
+│  ├── No Web Worker → Main thread processing                            │
+│  ├── No OffscreenCanvas → Regular canvas                               │
+│  ├── No WebP support → Fallback to JPEG                                │
+│  ├── Low memory → Chunk processing                                     │
+│  └── Old browser → Basic features only                                 │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 25. Browser Compatibility
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     BROWSER COMPATIBILITY                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  OFFICIALLY SUPPORTED                                                   │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Browser              Minimum Version    Recommended            │   │
+│  │  ─────────────────────────────────────────────────────────────  │   │
+│  │  Google Chrome        80+                Latest                  │   │
+│  │  Mozilla Firefox      75+                Latest                  │   │
+│  │  Safari               13.1+              Latest                  │   │
+│  │  Microsoft Edge       80+                Latest                  │   │
+│  │  Opera                67+                Latest                  │   │
+│  │  Samsung Internet     12+                Latest                  │   │
+│  │  Chrome (Android)     80+                Latest                  │   │
+│  │  Safari (iOS)         13.4+              Latest                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  NOT SUPPORTED                                                          │
+│  ├── Internet Explorer (any version)                                   │
+│  ├── Legacy Edge (pre-Chromium)                                        │
+│  └── Browsers without ES6+ support                                     │
+│                                                                         │
+│  FEATURE DETECTION                                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Feature              Fallback                                   │   │
+│  │  ─────────────────────────────────────────────────────────────  │   │
+│  │  Web Workers          Main thread processing                    │   │
+│  │  OffscreenCanvas      Regular canvas                            │   │
+│  │  WebP encoding        JPEG encoding                             │   │
+│  │  AVIF encoding        Disabled/WebP fallback                    │   │
+│  │  Clipboard API        Manual download only                      │   │
+│  │  File System Access   Standard download                         │   │
+│  │  Web Share API        Copy to clipboard                         │   │
+│  │  Service Worker       No offline support                        │   │
+│  │  CSS backdrop-filter  Solid background                          │   │
+│  │  CSS container queries Media queries                            │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  SAFARI-SPECIFIC HANDLING                                               │
+│  ├── Canvas memory limit detection (16MP)                              │
+│  ├── Auto-scale large images                                           │
+│  ├── Blob URL handling differences                                     │
+│  ├── Touch event normalization                                         │
+│  └── Fullscreen API differences                                        │
+│                                                                         │
+│  MOBILE CONSIDERATIONS                                                  │
+│  ├── Memory constraints detection                                      │
+│  ├── Touch-optimized controls                                          │
+│  ├── Virtual keyboard handling                                         │
+│  ├── Viewport scaling                                                  │
+│  └── Battery status awareness                                          │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 26. Technical Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    TECHNICAL ARCHITECTURE                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  TECHNOLOGY STACK                                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Frontend:                                                       │   │
+│  │  ├── HTML5 (Semantic, accessible)                               │   │
+│  │  ├── CSS3 (Custom properties, Grid, Flexbox)                    │   │
+│  │  └── JavaScript ES6+ (Vanilla, no frameworks)                   │   │
+│  │                                                                  │   │
+│  │  APIs Used:                                                      │   │
+│  │  ├── Canvas API (2D image manipulation)                         │   │
+│  │  ├── File API (File reading)                                    │   │
+│  │  ├── Blob API (Binary data handling)                            │   │
+│  │  ├── Web Workers API (Background processing)                    │   │
+│  │  ├── OffscreenCanvas API (Worker rendering)                     │   │
+│  │  ├── Drag and Drop API                                          │   │
+│  │  ├── Clipboard API (Paste/copy)                                 │   │
+│  │  ├── Web Share API (Native sharing)                             │   │
+│  │  ├── Fullscreen API                                             │   │
+│  │  ├── Storage APIs (localStorage, IndexedDB)                     │   │
+│  │  └── Service Worker API (Offline/PWA)                           │   │
+│  │                                                                  │   │
+│  │  No External Dependencies:                                       │   │
+│  │  ├── No jQuery                                                   │   │
+│  │  ├── No React/Vue/Angular                                       │   │
+│  │  ├── No lodash/underscore                                       │   │
+│  │  ├── No moment.js                                               │   │
+│  │  └── No external CDNs                                           │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  MODULE ARCHITECTURE                                                    │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  ��  ┌─────────────────────────────────────────────────────────┐    │   │
+│  │  │                      APP (Main)                          │    │   │
+│  │  │  • State management                                      │    │   │
+│  │  │  • Event coordination                                    │    │   │
+│  │  │  • UI updates                                            │    │   │
+│  │  └───────────────────────────┬─────────────────────────────┘    │   │
+│  │                              │                                   │   │
+│  │      ┌───────────────────────┼───────────────────────┐          │   │
+│  │      │                       │                       │          │   │
+│  │      ▼                       ▼                       ▼          │   │
+│  │  ┌─────────┐           ┌─────────┐           ┌─────────┐       │   │
+│  │  │ UTILS   │           │CONVERTER│           │   UI    │       │   │
+│  │  │         │           │         │           │         │       │   │
+│  │  │• Format │           │• Process│           │• Toast  │       │   │
+│  │  │• File   │◄─────────►│• Resize │◄─────────►│• Modal  │       │   │
+│  │  │• DOM    │           │• Crop   │           │• Preview│       │   │
+│  │  │• Storage│           │• Filter │           │• History│       │   │
+│  │  │• ZIP    │           │• Effect │           │• A11y   │       │   │
+│  │  └─────────┘           └────┬────┘           └─────────┘       │   │
+│  │                              │                                   │   │
+│  │                              ▼                                   │   │
+│  │                      ┌─────────────┐                            │   │
+│  │                      │ WEB WORKERS │                            │   │
+│  │                      │             │                            │   │
+│  │                      │ • Processor │                            │   │
+│  │                      │ • ZIP       │                            │   │
+│  │                      │ • Effects   │                            │   │
+│  │                      └─────────────┘                            │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  DATA FLOW                                                              │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  [User Upload] → [Validation] → [State] → [Process Queue]      │   │
+│  │                                     │                           │   │
+│  │                                     ▼                           │   │
+│  │  [Web Worker] ← [Process Request] ← [Queue Manager]            │   │
+│  │       │                                                         │   │
+│  │       ▼                                                         │   │
+│  │  [Canvas Processing] → [Blob Output] → [State Update]          │   │
+│  │                                            │                    │   │
+│  │                                            ▼                    │   │
+│  │  [UI Update] ← [Preview Render] ← [Processed Image]            │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 27. File Structure
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        FILE STRUCTURE                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  image-converter/                                                       │
+│  │                                                                      │
+│  ├── index.html                 # Main HTML file                        │
+│  ├── manifest.json              # PWA manifest                          │
+│  ├── sw.js                      # Service Worker                        │
+│  ├── robots.txt                 # Search engine directives              │
+│  ├── sitemap.xml                # Sitemap for SEO                       │
+│  │                                                                      │
+│  ├── css/                                                               │
+│  │   ├── style.css              # Main stylesheet                       │
+│  │   ├── components/                                                    │
+│  │   │   ├── buttons.css        # Button styles                         │
+│  │   │   ├── forms.css          # Form input styles                     │
+│  │   │   ├── modals.css         # Modal dialogs                         │
+│  │   │   ├── toast.css          # Toast notifications                   │
+│  │   │   ├── progress.css       # Progress indicators                   │
+│  │   │   ├── preview.css        # Image preview styles                  │
+│  │   │   ├── upload.css         # Upload area styles                    │
+│  │   │   └── grid.css           # Image grid styles                     │
+│  │   ├── themes/                                                        │
+│  │   │   ├── variables.css      # CSS custom properties                 │
+│  │   │   ├── light.css          # Light theme overrides                 │
+│  │   │   └── dark.css           # Dark theme overrides                  │
+│  │   └── responsive.css         # Media queries                         │
+│  │                                                                      │
+│  ├── js/                                                                │
+│  │   ├── app.js                 # Main application                      │
+│  │   ├── config.js              # Configuration constants               │
+│  │   ├── state.js               # State management                      │
+│  │   │                                                                  │
+│  │   ├── core/                                                          │
+│  │   │   ├── converter.js       # Image conversion                      │
+│  │   │   ├── resizer.js         # Resize operations                     │
+│  │   │   ├── compressor.js      # Compression logic                     │
+│  │   │   ├── cropper.js         # Crop functionality                    │
+│  │   │   └── transformer.js     # Rotate, flip, perspective             │
+│  │   │                                                                  │
+│  │   ├── effects/                                                       │
+│  │   │   ├── filters.js         # Preset filters                        │
+│  │   │   ├── adjustments.js     # Basic adjustments                     │
+│  │   │   ├── color.js           # Color adjustments                     │
+│  │   │   ├── curves.js          # Curves & levels                       │
+│  │   │   ├── blur.js            # Blur effects                          │
+│  │   │   ├── sharpen.js         # Sharpening                            │
+│  │   │   └── effects.js         # Special effects                       │
+│  │   │                                                                  │
+│  │   ├── features/                                                      │
+│  │   │   ├── watermark.js       # Watermark system                      │
+│  │   │   ├── metadata.js        # Metadata handling                     │
+│  │   │   ├── collage.js         # Collage creation                      │
+│  │   │   ├── gif.js             # GIF handling                          │
+│  │   │   ├── pdf.js             # PDF creation                          │
+│  │   │   ├── comparison.js      # Before/after comparison               │
+│  │   │   ├── batch.js           # Batch processing                      │
+│  │   │   └── presets.js         # Preset management                     │
+│  │   │                                                                  │
+│  │   ├── ui/                                                            │
+│  │   │   ├── components.js      # UI components                         │
+│  │   │   ├── modals.js          # Modal system                          │
+│  │   │   ├── toast.js           # Toast notifications                   │
+│  │   │   ├── preview.js         # Preview panel                         │
+│  │   │   ├── history.js         # Undo/redo                             │
+│  │   │   ├── shortcuts.js       # Keyboard shortcuts                    │
+│  │   │   ├── accessibility.js   # A11y features                         │
+│  │   │   └── upload.js          # Upload handling                       │
+│  │   │                                                                  │
+│  │   ├── utils/                                                         │
+│  │   │   ├── file.js            # File utilities                        │
+│  │   │   ├── image.js           # Image utilities                       │
+│  │   │   ├── format.js          # Format helpers                        │
+│  │   │   ├── color.js           # Color utilities                       │
+│  │   │   ├── math.js            # Math utilities                        │
+│  │   │   ├── dom.js             # DOM utilities                         │
+│  │   │   ├── storage.js         # Storage utilities                     │
+│  │   │   ├── zip.js             # ZIP creation                          │
+│  │   │   ├── pdf-lib.js         # PDF generation                        │
+│  │   │   └── export.js          # Export utilities                      │
+│  │   │                                                                  │
+│  │   └── workers/                                                       │
+│  │       ├── image-processor.worker.js                                  │
+│  │       ├── zip.worker.js                                              │
+│  │       └── effects.worker.js                                          │
+│  │                                                                      │
+│  ├── assets/                                                            │
+│  │   ├── icons/                                                         │
+│  │   │   ├── favicon.ico                                                │
+│  │   │   ├── icon-72.png                                                │
+│  │   │   ├── icon-96.png                                                │
+│  │   │   ├── icon-128.png                                               │
+│  │   │   ├── icon-144.png                                               │
+│  │   │   ├── icon-152.png                                               │
+│  │   │   ├── icon-192.png                                               │
+│  │   │   ├── icon-384.png                                               │
+│  │   │   ├── icon-512.png                                               │
+│  │   │   ├── apple-touch-icon.png                                       │
+│  │   │   └── maskable-icon.png                                          │
+│  │   └── images/                                                        │
+│  │       ├── logo.svg                                                   │
+│  │       ├── og-image.png        # Open Graph image                     │
+│  │       └── screenshot.png      # For PWA                              │
+│  │                                                                      │
+│  ├── locales/                   # (Optional) Translations               │
+│  │   ├── en.json                                                        │
+│  │   ├── es.json                                                        │
+│  │   └── ...                                                            │
+│  │                                                                      │
+│  ├── docs/                                                              │
+│  │   ├── README.md                                                      │
+│  │   ├── CHANGELOG.md                                                   │
+│  │   ├── CONTRIBUTING.md                                                │
+│  │   └── API.md                                                         │
+│  │                                                                      │
+│  └── tests/                     # (Optional) Tests                      │
+│      ├── unit/                                                          │
+│      └── e2e/                                                           │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 28. API Specifications
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      API SPECIFICATIONS                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  PUBLIC JavaScript API (for embedding/extending)                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  // Convert single image                                         │   │
+│  │  ImageConverter.convert(file, {                                  │   │
+│  │    format: 'image/webp',                                        │   │
+│  │    quality: 0.8,                                                │   │
+│  │    width: 1920,                                                 │   │
+│  │    height: null,                                                │   │
+│  │    maintainAspectRatio: true                                    │   │
+│  │  }).then(result => {                                            │   │
+│  │    // result.blob, result.width, result.height, result.size    │   │
+│  │  });                                                             │   │
+│  │                                                                  │   │
+│  │  // Batch convert                                                │   │
+│  │  ImageConverter.batch(files, options, onProgress)               │   │
+│  │    .then(results => { ... });                                   │   │
+│  │                                                                  │   │
+│  │  // Get image metadata                                           │   │
+│  │  ImageConverter.getMetadata(file)                               │   │
+│  │    .then(metadata => { ... });                                  │   │
+│  │                                                                  │   │
+│  │  // Apply filter                                                 │   │
+│  │  ImageConverter.applyFilter(file, 'vintage', 0.8)               │   │
+│  │    .then(result => { ... });                                    │   │
+│  │                                                                  │   │
+│  │  // Create collage                                               │   │
+│  │  ImageConverter.createCollage(files, {                          │   │
+│  │    template: '2x2',                                             │   │
+│  │    width: 1920,                                                 │   │
+│  │    height: 1080,                                                │   │
+│  │    spacing: 10                                                  │   │
+│  │  }).then(result => { ... });                                    │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  CONFIGURATION OBJECT                                                   │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  const CONFIG = {                                                │   │
+│  │    // Limits                                                     │   │
+│  │    MAX_FILE_SIZE: 50 * 1024 * 1024,    // 50MB                  │   │
+│  │    MAX_FILES: 100,                                              │   │
+│  │    MAX_DIMENSION: 32000,                                        │   │
+│  │    MAX_TOTAL_SIZE: 500 * 1024 * 1024,  // 500MB                 │   │
+│  │                                                                  │   │
+│  │    // Processing                                                 │   │
+│  │    WORKER_POOL_SIZE: navigator.hardwareConcurrency || 4,        │   │
+│  │    PROCESS_CHUNK_SIZE: 10,                                      │   │
+│  │    PROCESS_DELAY: 10,                                           │   │
+│  │                                                                  │   │
+│  │    // Quality defaults                                           │   │
+│  │    DEFAULT_JPEG_QUALITY: 0.85,                                  │   │
+│  │    DEFAULT_WEBP_QUALITY: 0.80,                                  │   │
+│  │    DEFAULT_PNG_COMPRESSION: 6,                                  │   │
+│  │                                                                  │   │
+│  │    // Memory                                                     │   │
+│  │    MEMORY_WARNING_THRESHOLD: 0.8,                               │   │
+│  │    MEMORY_MAX_USAGE: 0.7,                                       │   │
+│  │    CACHE_MAX_SIZE: 100 * 1024 * 1024,  // 100MB                 │   │
+│  │                                                                  │   │
+│  │    // Safari specific                                            │   │
+│  │    SAFARI_MAX_PIXELS: 16777216                                  │   │
+│  │  };                                                              │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  EVENT SYSTEM                                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  // Subscribe to events                                          │   │
+│  │  ImageConverter.on('processStart', (data) => { ... });          │   │
+│  │  ImageConverter.on('processProgress', (data) => { ... });       │   │
+│  │  ImageConverter.on('processComplete', (data) => { ... });       │   │
+│  │  ImageConverter.on('processError', (data) => { ... });          │   │
+│  │  ImageConverter.on('fileAdded', (data) => { ... });             │   │
+│  │  ImageConverter.on('fileRemoved', (data) => { ... });           │   │
+│  │                                                                  │   │
+│  │  // Unsubscribe                                                  │   │
+│  │  ImageConverter.off('processComplete', handler);                │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  URL PARAMETERS (for direct linking)                                   │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  ?format=webp        - Pre-select output format                  │   │
+│  │  ?quality=80         - Set quality (1-100)                       │   │
+│  │  ?width=1920         - Set width                                 │   │
+│  │  ?height=1080        - Set height                                │   │
+│  │  ?preset=instagram   - Load preset                               │   │
+│  │  ?theme=dark         - Set theme                                 │   │
+│  │  ?tool=collage       - Open specific tool                        │   │
+│  │                                                                  │   │
+│  │  Example:                                                        │   │
+│  │  /image-converter/?format=webp&quality=80&width=1920            │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 29. Testing Requirements
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     TESTING REQUIREMENTS                                │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  UNIT TESTS                                                             │
+│  ├── File validation functions                                         │
+│  ├── Format conversion logic                                           │
+│  ├── Resize calculations                                               │
+│  ├── Quality/compression algorithms                                    │
+│  ├── Filename sanitization                                             │
+│  ├── Utility functions (formatFileSize, etc.)                          │
+│  ├── Color manipulation functions                                      │
+│  ├── ZIP creation                                                       │
+│  └── CRC32 calculation                                                 │
+│                                                                         │
+│  INTEGRATION TESTS                                                      │
+│  ├── Full conversion pipeline                                          │
+│  ├── Batch processing                                                  │
+│  ├── Filter application                                                │
+│  ├── Watermark application                                             │
+│  ├── Collage generation                                                │
+│  ├── Download functionality                                            │
+│  └── Settings save/load                                                │
+│                                                                         │
+│  END-TO-END TESTS                                                       │
+│  ├── Upload → Process → Download flow                                  │
+│  ├── Drag and drop upload                                              │
+│  ├── Clipboard paste                                                   │
+│  ├── Keyboard navigation                                               │
+│  ├── Theme switching                                                   │
+│  ├── Responsive layout                                                 │
+│  └── PWA installation                                                  │
+│                                                                         │
+│  BROWSER TESTING                                                        │
+│  ├── Chrome (latest)                                                   │
+│  ├── Firefox (latest)                                                  │
+│  ├── Safari (latest)                                                   │
+│  ├── Edge (latest)                                                     │
+│  ├── Chrome Mobile                                                     │
+│  └── Safari iOS                                                        │
+│                                                                         │
+│  ACCESSIBILITY TESTING                                                  │
+│  ├── Screen reader testing (NVDA, VoiceOver)                          │
+│  ├── Keyboard-only navigation                                          │
+│  ├── Color contrast verification                                       │
+│  └── Automated a11y audits (axe)                                       │
+│                                                                         │
+│  PERFORMANCE TESTING                                                    │
+│  ├── Lighthouse audits                                                 │
+│  ├── Processing speed benchmarks                                       │
+│  ├── Memory usage monitoring                                           │
+│  └── Large file handling                                               │
+│                                                                         │
+│  TEST COVERAGE TARGET                                                   │
+│  ├── Core functions: 90%                                               │
+│  ├── UI components: 80%                                                │
+│  └── Overall: 85%                                                      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 30. Deployment Guide
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       DEPLOYMENT GUIDE                                  │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  GITHUB PAGES SETUP                                                     │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  1. Create Repository                                            │   │
+│  │     $ git init                                                   │   │
+│  │     $ git add .                                                  │   │
+│  │     $ git commit -m "Initial commit"                            │   │
+│  │     $ git branch -M main                                         │   │
+│  │     $ git remote add origin                                      │   │
+│  │       https://github.com/oathanrex/image-converter.git          │   │
+│  │     $ git push -u origin main                                    │   │
+│  │                                                                  │   │
+│  │  2. Enable GitHub Pages                                          │   │
+│  │     • Go to repository Settings                                  │   │
+│  │     • Navigate to Pages section                                  │   │
+│  │     • Source: Deploy from branch                                 │   │
+│  │     • Branch: main                                               │   │
+│  │     • Folder: / (root)                                          │   │
+│  │     • Save                                                       │   │
+│  │                                                                  │   │
+│  │  3. Access Site                                                  │   │
+│  │     https://oathanrex.github.io/image-converter                 │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PRE-DEPLOYMENT CHECKLIST                                               │
+│  ├── [ ] All tests passing                                             │
+│  ├── [ ] Lighthouse scores meet targets                                │
+│  ├── [ ] Accessibility audit passed                                    │
+│  ├── [ ] All links working                                             │
+│  ├── [ ] Manifest.json valid                                           │
+│  ├── [ ] Service worker tested                                         │
+│  ├── [ ] PWA installable                                               │
+│  ├── [ ] Meta tags complete                                            │
+│  ├── [ ] Open Graph images ready                                       │
+│  ├── [ ] Favicon all sizes                                             │
+│  ├── [ ] README updated                                                │
+│  └── [ ] Version number updated                                        │
+│                                                                         │
+│  GITHUB ACTIONS (Optional CI/CD)                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  # .github/workflows/deploy.yml                                  │   │
+│  │  name: Deploy                                                    │   │
+│  │  on:                                                             │   │
+│  │    push:                                                         │   │
+│  │      branches: [main]                                            │   │
+│  │                                                                  │   │
+│  │  jobs:                                                           │   │
+│  │    test:                                                         │   │
+│  │      runs-on: ubuntu-latest                                      │   │
+│  │      steps:                                                      │   │
+│  │        - uses: actions/checkout@v3                               │   │
+│  │        - name: Run tests                                         │   │
+│  │          run: npm test                                           │   │
+│  │        - name: Lighthouse audit                                  │   │
+│  │          uses: treosh/lighthouse-ci-action@v9                   │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  UPDATE PROCESS                                                         │
+│  ├── 1. Make changes locally                                           │
+│  ├── 2. Test thoroughly                                                │
+│  ├── 3. Update version in manifest.json                                │
+│  ├── 4. Update CHANGELOG.md                                            │
+│  ├── 5. Commit with descriptive message                                │
+│  ├── 6. Push to main branch                                            │
+│  └── 7. GitHub Pages auto-deploys                                      │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 31. Footer Links
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                         FOOTER LINKS                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  REQUIRED LINKS                                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  PORTFOLIO & PROJECTS                                            │   │
+│  │  ├── Portfolio:     https://oathanrex.github.io                 │   │
+│  │  ├── Blog:          https://oathanrex.blogspot.com              │   │
+│  │  └── CodePen:       https://codepen.io/oathanrex                │   │
+│  │                                                                  │   │
+│  │  SOCIAL & CONNECT                                                │   │
+│  │  ├── YouTube:       https://youtube.com/@oathanrex              │   │
+│  │  └── Support:       https://www.buymeacoffee.com/oathanrex      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  FOOTER LAYOUT                                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  ┌─────────────────────────────────────────────────────────┐    │   │
+│  │  │                       FOOTER                             │    │   │
+│  │  ├─────────────────────────────────────────────────────────┤    │   │
+│  │  │                                                         │    │   │
+│  │  │  [Logo] ImageConverter                                  │    │   │
+│  │  │  Convert, resize & edit images privately.               │    │   │
+│  │  │  100% Private — No server uploads, ever!                │    │   │
+│  │  │                                                         │    │   │
+│  │  ├───────────────┬───────────────┬───────────────┬────────┤    │   │
+│  │  │               │               │               │        │    │   │
+│  │  │ MORE PROJECTS │ CONNECT       │ LEGAL         │ SUPPORT│    │   │
+│  │  │               │               │               │        │    │   │
+│  │  │ • Portfolio   │ • YouTube     │ • Privacy     │ ☕ Buy │    │   │
+│  │  │ • Blog        │               │ • Terms       │   Me A │    │   │
+│  │  │ • CodePen     │               │               │ Coffee │    │   │
+│  │  │               │               │               │        │    │   │
+│  │  ├───────────────┴───────────────┴───────────────┴────────┤    │   │
+│  │  │                                                         │    │   │
+│  │  │  © 2024 OathanRex. All rights reserved.                │    │   │
+│  │  │  Made with care for your privacy.                       │    │   │
+│  │  │                                                         │    │   │
+│  │  └─────────────────────────────────────────────────────────┘    │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  SUPPORT BANNER (Above footer)                                          │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  ┌─────────────────────────────────────────────────────────┐    │   │
+│  │  │  Enjoying this tool?                                     │    │   │
+│  │  │  Support the developer and help keep this project free!  │    │   │
+│  │  │                                                          │    │   │
+│  │  │  [☕ Buy Me a Coffee]                                     │    │   │
+│  │  └─────────────────────────────────────────────────────────┘    │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 32. Development Phases
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      DEVELOPMENT PHASES                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  PHASE 1: FOUNDATION (Week 1-2)                                         │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Priority: P0 (Must Have)                                        │   │
+│  │                                                                  │   │
+│  │  ├── Project setup & file structure                              │   │
+│  │  ├── HTML structure with accessibility                           │   │
+│  │  ├── CSS with theme system (light/dark)                         │   │
+│  │  ├── JavaScript modules (Utils, Config, State)                  │   │
+│  │  ├── Upload functionality (drag/drop, click, paste)             │   │
+│  │  ├── Basic format conversion (JPEG, PNG, WebP)                  │   │
+│  │  ├── Basic resize with presets                                   │   │
+│  │  ├── Quality compression slider                                  │   │
+│  │  ├── Single file download                                        │   │
+│  │  ├── Basic preview                                               │   │
+│  │  └── Error handling foundation                                   │   │
+│  │                                                                  │   │
+│  │  Deliverable: Working basic converter                            │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PHASE 2: BATCH & DOWNLOAD (Week 3)                                     │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Priority: P0 (Must Have)                                        │   │
+│  │                                                                  │   │
+│  │  ├── Multi-file upload                                           │   │
+│  │  ├── Image grid display                                          │   │
+│  │  ├── Selection system                                            │   │
+│  │  ├── Batch processing with progress                              │   │
+│  │  ├── Web Worker implementation                                   │   │
+│  │  ├── ZIP download                                                │   │
+│  │  ├── Batch naming patterns                                       │   │
+│  │  ├── Queue management                                            │   │
+│  │  └── Cancel functionality                                        │   │
+│  │                                                                  │   │
+│  │  Deliverable: Full batch processing                              │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PHASE 3: EDITING TOOLS (Week 4-5)                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Priority: P1 (Should Have)                                      │   │
+│  │                                                                  │   │
+│  │  ├── Crop tool with aspect ratios                                │   │
+│  │  ├── Rotate & flip                                               │   │
+│  │  ├── Basic adjustments (brightness, contrast, etc.)             │   │
+│  │  ├── Preset filters (20+ filters)                               │   │
+│  │  ├── Before/after comparison                                     │   │
+│  │  ├── Undo/redo system                                            │   │
+│  │  ├── Real-time preview                                           │   │
+│  │  └── Apply to all/selected                                       │   │
+│  │                                                                  │   │
+│  │  Deliverable: Complete editing suite                             │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PHASE 4: ADVANCED EDITING (Week 6)                                     │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Priority: P1 (Should Have)                                      │   │
+│  │                                                                  │   │
+│  │  ├── Color adjustments (HSL, curves, levels)                    │   │
+│  │  ├── Sharpening & blur effects                                   │   │
+│  │  ├── Noise reduction                                             │   │
+│  │  ├── Vignette effect                                             │   │
+│  │  ├── Film grain                                                  │   │
+│  │  ├── Frame/border options                                        │   │
+│  │  └── Color effects (posterize, threshold, etc.)                 │   │
+│  │                                                                  │   │
+│  │  Deliverable: Professional editing tools                        │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PHASE 5: WATERMARK & TEXT (Week 7)                                     │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Priority: P1 (Should Have)                                      │   │
+│  │                                                                  │   │
+│  │  ├── Text watermark with styling                                │   │
+│  │  ├── Image watermark                                            │   │
+│  │  ├── Position presets & custom positioning                      │   │
+│  │  ├── Opacity & blend modes                                      │   │
+│  │  ├── Tiled/pattern watermark                                    │   │
+│  │  ├── Watermark templates                                        │   │
+│  │  ├── Batch variables ({filename}, {date}, etc.)                │   │
+│  │  └── Custom font upload                                         │   │
+│  │                                                                  │   │
+│  │  Deliverable: Complete watermark system                         │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PHASE 6: SPECIAL FEATURES (Week 8-9)                                   │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Priority: P2 (Nice to Have)                                     │   │
+│  │                                                                  │   │
+│  │  ├── Metadata viewer/editor                                      │   │
+│  │  ├── Metadata stripping options                                  │   │
+│  │  ├── GIF frame extraction                                        │   │
+│  │  ├── GIF creation from images                                    │   │
+│  │  ├── Animated WebP support                                       │   │
+│  │  ├── Sprite sheet creation/extraction                           │   │
+│  │  ├── Photo collage with templates                               │   │
+│  │  ├── Image stacking/merging                                     │   │
+│  │  └── Contact sheet generation                                    │   │
+│  │                                                                  │   │
+│  │  Deliverable: Advanced features                                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PHASE 7: EXPORT & ANALYSIS (Week 10)                                   │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Priority: P2 (Nice to Have)                                     │   │
+│  │                                                                  │   │
+│  │  ├── PDF creation from images                                    │   │
+│  │  ├── Multiple output configurations                              │   │
+│  │  ├── Quality analysis & comparison                               │   │
+│  │  ├── Histogram display                                           │   │
+│  │  ├── Color palette extraction                                   │   │
+│  │  ├── Dominant color analysis                                    │   │
+│  │  ├── Export presets                                             │   │
+│  │  └── Settings import/export                                      │   │
+│  │                                                                  │   │
+│  │  Deliverable: Professional export options                       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  PHASE 8: POLISH & PWA (Week 11-12)                                     │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Priority: P1 (Should Have)                                      │   │
+│  │                                                                  │   │
+│  │  ├── Service Worker implementation                              │   │
+│  │  ├── PWA manifest & icons                                       │   │
+│  │  ├── Offline functionality                                      │   │
+│  │  ├── Session recovery                                           │   │
+│  │  ├── Keyboard shortcuts help                                    │   │
+│  │  ├── Onboarding/tutorial                                        │   │
+│  │  ├── Performance optimization                                   │   │
+│  │  ├── Accessibility audit & fixes                                │   │
+│  │  ├── Cross-browser testing                                      │   │
+│  │  ├── Documentation                                              │   │
+│  │  └── Final QA                                                   │   │
+│  │                                                                  │   │
+│  │  Deliverable: Production-ready application                       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  TIMELINE SUMMARY                                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Phase 1-2: Foundation & Batch     ████████░░░░░░░░░░░░  Week 1-3│   │
+│  │  Phase 3-4: Editing Tools          ░░░░░░░░████████░░░░  Week 4-6│   │
+│  │  Phase 5:   Watermark              ░░░░░░░░░░░░░░██░░░░  Week 7  │   │
+│  │  Phase 6-7: Special & Export       ░░░░░░░░░░░░░░░░████  Week 8-10│  │
+│  │  Phase 8:   Polish & PWA           ░░░░░░░░░░░░░░░░░░██  Week 11-12│ │
+│  │                                                                  │   │
+│  │  Total Estimated Time: 12 weeks                                 │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 33. Success Metrics
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                       SUCCESS METRICS                                   │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  PERFORMANCE METRICS                                                    │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Metric                        Target      Minimum Acceptable   │   │
+│  │  ───────────────────────────────────────────────────────────── │   │
+│  │  Lighthouse Performance        > 95        > 90                 │   │
+│  │  Lighthouse Accessibility      100         100                  │   │
+│  │  Lighthouse Best Practices     > 95        > 90                 │   │
+│  │  Lighthouse SEO                > 95        > 90                 │   │
+│  │  First Contentful Paint        < 1.0s      < 1.5s               │   │
+│  │  Largest Contentful Paint      < 2.0s      < 2.5s               │   │
+│  │  Time to Interactive           < 2.5s      < 3.5s               │   │
+│  │  Cumulative Layout Shift       < 0.1       < 0.25               │   │
+│  │  Total Bundle Size             < 200KB     < 300KB              │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  FUNCTIONALITY METRICS                                                  │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Feature                       Target                            │   │
+│  │  ─────────────────────────────────────────────────────────────  │   │
+│  │  Supported Input Formats       10+                               │   │
+│  │  Supported Output Formats      8+                                │   │
+│  │  Resize Presets                50+                               │   │
+│  │  Filter Presets                30+                               │   │
+│  │  Max Files Per Batch           100                               │   │
+│  │  Max File Size                 50MB                              │   │
+│  │  Processing Speed (1MB)        < 500ms                           │   │
+│  │  Processing Speed (5MB)        < 2s                              │   │
+│  │  Undo History Steps            50                                │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  QUALITY METRICS                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Metric                        Target                            │   │
+│  │  ─────────────────────────────────────────────────────────────  │   │
+│  │  Test Coverage                 > 85%                             │   │
+│  │  Zero Critical Bugs            Yes                               │   │
+│  │  Cross-Browser Compatibility   4+ browsers                      │   │
+│  │  Mobile Responsiveness         100%                              │   │
+│  │  WCAG 2.1 AA Compliance        100%                              │   │
+│  │  Works Offline                 100%                              │   │
+│  │  PWA Installable               Yes                               │   │
+│  │  No External Dependencies      Yes                               │   │
+│  │  No Server Uploads             Yes                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  USER EXPERIENCE METRICS                                                │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Metric                        Target                            │   │
+│  │  ─────────────────────────────────────────────────────────────  │   │
+│  │  Upload to Download (1 file)   < 5 seconds                      │   │
+│  │  Learning Curve                < 5 minutes                       │   │
+│  │  Keyboard Shortcuts            20+                               │   │
+│  │  Helpful Error Messages        100%                              │   │
+│  │  Undo Capability               All operations                   │   │
+│  │  Progress Indicators           All long operations              │   │
+│  │  Responsive Feedback           < 100ms                           │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Document Summary
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        DOCUMENT SUMMARY                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  This PRD defines a complete, production-ready image converter with:   │
+│                                                                         │
+│  CORE CAPABILITIES                                                      │
+│  ├── 10+ input formats                                                  │
+│  ├── 8+ output formats                                                  │
+│  ├── 50+ resize presets                                                │
+│  ├── 30+ filter presets                                                │
+│  ├── Batch processing (100 files)                                      │
+│  ├── Comprehensive editing tools                                       │
+│  ├── Watermark system                                                  │
+│  ├── Collage creation                                                  │
+│  ├── GIF handling                                                      │
+│  ├── PDF creation                                                      │
+│  └── Metadata management                                               │
+│                                                                         │
+│  PRIVACY & SECURITY                                                     │
+│  ├── 100% client-side processing                                       │
+│  ├── Zero server uploads                                               │
+│  ├── No tracking or analytics                                          │
+│  ├── No cookies (except theme)                                         │
+│  └── Complete data privacy                                             │
+│                                                                         │
+│  USER EXPERIENCE                                                        │
+│  ├── Intuitive interface                                               │
+│  ├── Dark/light themes                                                 │
+│  ├── Keyboard shortcuts                                                │
+│  ├── Undo/redo support                                                 │
+│  ├── PWA with offline support                                          │
+│  └── WCAG 2.1 AA accessible                                           │
+│                                                                         │
+│  TECHNICAL EXCELLENCE                                                   │
+│  ├── Vanilla JavaScript (no frameworks)                               │
+│  ├── Web Workers for performance                                       │
+│  ├── Lighthouse 95+ scores                                             │
+│  ├── Cross-browser compatible                                          │
+│  └── Mobile responsive                                                 │
+│                                                                         │
+│  ESTIMATED DEVELOPMENT TIME: 12 weeks                                  │
+│  TOTAL FEATURES: 300+                                                   │
+│                                                                         │
+│  ─────────────────────────────────────────────────────────────────     │
+│                                                                         │
+│  Author:       OathanRex                                               │
+│  Portfolio:    https://oathanrex.github.io                             │
+│  Repository:   https://github.com/oathanrex/image-converter            │
+│  Live URL:     https://oathanrex.github.io/image-converter             │
+│                                                                         │
+│  ─────────────────────────────────────────────────────────────────     │
+│                                                                         │
+│  Version: 2.0.0                                                         │
+│  Status: Ready for Development                                         │
+│  Last Updated: 2024                                                    │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+## NEW SECTION: Business & Sustainability
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    BUSINESS & SUSTAINABILITY                            │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  MONETIZATION STRATEGY (Optional - Keep Core Free)                     │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  REVENUE STREAMS (Non-intrusive)                                 │   │
+│  │                                                                  │   │
+│  │  1. DONATIONS (Primary)                                          │   │
+│  │     ├── Buy Me a Coffee integration                              │   │
+│  │     ├── GitHub Sponsors                                          │   │
+│  │     ├── One-time & recurring options                             │   │
+│  │     └── Prominent but non-intrusive placement                   │   │
+│  │                                                                  │   │
+│  │  2. AFFILIATE LINKS (Secondary)                                  │   │
+│  │     ├── Recommend premium tools (Photoshop, Canva Pro)          │   │
+│  │     ├── Stock photo sites                                        │   │
+│  │     ├── Web hosting recommendations                              │   │
+│  │     └── Clearly labeled as affiliate                            │   │
+│  │                                                                  │   │
+│  │  3. SPONSORED PRESETS (Future)                                   │   │
+│  │     ├── Brand-sponsored filter presets                          │   │
+│  │     ├── Platform-specific presets (Shopify, etc.)               │   │
+│  │     └── Clearly marked as sponsored                             │   │
+│  │                                                                  │   │
+│  │  WHAT STAYS FREE FOREVER                                         │   │
+│  │  ├── All core conversion features                               │   │
+│  │  ├── All editing tools                                          │   │
+│  │  ├── Batch processing                                           │   │
+│  │  ├── No watermarks on output                                    │   │
+│  │  ├── No file limits                                             │   │
+│  │  └── No sign-up required                                        │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  LONG-TERM MAINTENANCE                                                  │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  MAINTENANCE REQUIREMENTS                                        │   │
+│  │  ├── Monthly: Security updates, dependency checks               │   │
+│  │  ├── Quarterly: Browser compatibility testing                   │   │
+│  │  ├── Bi-annually: Feature updates, UX improvements              │   │
+│  │  └── Annually: Major version updates, performance audit         │   │
+│  │                                                                  │   │
+│  │  ESTIMATED EFFORT                                                │   │
+│  │  ├── Maintenance: 4-8 hours/month                               │   │
+│  │  ├── Bug fixes: 2-4 hours/month                                 │   │
+│  │  ├── Feature updates: 10-20 hours/quarter                       │   │
+│  │  └── Total: ~10-15 hours/month average                          │   │
+│  │                                                                  │   │
+│  │  SUSTAINABILITY PLAN                                             │   │
+│  │  ├── Open source community contributions                        │   │
+│  │  ├── Documentation for self-maintenance                         │   │
+│  │  ├── Automated testing for regression                           │   │
+│  │  └── Modular architecture for easy updates                      │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## REVISED: MVP vs Full Product (Clearer Prioritization)
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     MVP vs FULL PRODUCT                                 │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  MVP (Minimum Viable Product) - Launch in 4 weeks                      │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  MUST HAVE (Week 1-4) ████████████████████████████████████████  │   │
+│  │                                                                  │   │
+│  │  Core Conversion                                                 │   │
+│  │  ├── [✓] JPEG, PNG, WebP input/output                           │   │
+│  │  ├── [✓] Quality slider (1-100%)                                │   │
+│  │  ├── [✓] Basic resize (custom + 10 presets)                     │   │
+│  │  └── [✓] Single file download                                   │   │
+│  │                                                                  │   │
+│  │  Upload & UI                                                     │   │
+│  │  ├── [✓] Drag & drop upload                                     │   │
+│  │  ├── [✓] Click to browse                                        │   │
+│  │  ├── [✓] Clipboard paste                                        │   │
+│  │  ├── [✓] Image preview                                          │   │
+│  │  ├── [✓] Light/dark theme                                       │   │
+│  │  └── [✓] Mobile responsive                                      │   │
+│  │                                                                  │   │
+│  │  Basic Batch                                                     │   │
+│  │  ├── [✓] Multi-file upload (up to 20)                          │   │
+│  │  ├── [✓] Progress indicator                                     │   │
+│  │  ├── [✓] ZIP download                                           │   │
+│  │  └── [✓] Error handling                                         │   │
+│  │                                                                  │   │
+│  │  MVP METRICS                                                     │   │
+│  │  ├── Time to build: 4 weeks                                     │   │
+│  │  ├── Files: ~10 (HTML, CSS, 4-5 JS modules)                    │   │
+│  │  ├── Bundle size: < 100KB                                       │   │
+│  │  └── Features: 15-20                                            │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  VERSION 1.5 - Enhanced (Week 5-8)                                      │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  SHOULD HAVE ████████████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░  │   │
+│  │                                                                  │   │
+│  │  Editing Tools                                                   │   │
+│  │  ├── [ ] Crop with aspect ratios                                │   │
+│  │  ├── [ ] Rotate (90°, 180°, custom)                             │   │
+│  │  ├── [ ] Flip horizontal/vertical                               │   │
+│  │  ├── [ ] Basic adjustments (brightness, contrast, saturation)   │   │
+│  │  └── [ ] 15 preset filters                                      │   │
+│  │                                                                  │   │
+│  │  Enhanced Batch                                                  │   │
+│  │  ├── [ ] Up to 50 files                                         │   │
+│  │  ├── [ ] Naming patterns                                        │   │
+│  │  ├── [ ] Web Worker processing                                  │   │
+│  │  └── [ ] Cancel functionality                                   │   │
+│  │                                                                  │   │
+│  │  UX Improvements                                                 │   │
+│  │  ├── [ ] Before/after comparison                                │   │
+│  │  ├── [ ] Keyboard shortcuts (10 essential)                      │   │
+│  │  ├── [ ] Undo/redo (10 steps)                                   │   │
+│  │  └── [ ] Toast notifications                                    │   │
+│  │                                                                  │   │
+│  │  Additional: 4 weeks, ~30 features                              │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  VERSION 2.0 - Professional (Week 9-12)                                 │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  NICE TO HAVE ████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  │   │
+│  │                                                                  │   │
+│  │  Advanced Editing                                                │   │
+│  │  ├── [ ] Color curves & levels                                  │   │
+│  │  ├── [ ] HSL adjustments                                        │   │
+│  │  ├── [ ] Blur effects (Gaussian, tilt-shift)                   │   │
+│  │  ├── [ ] Sharpen                                                │   │
+│  │  ├── [ ] Vignette                                               │   │
+│  │  └── [ ] Film grain                                             │   │
+│  │                                                                  │   │
+│  │  Watermark                                                       │   │
+│  │  ├── [ ] Text watermark                                         │   │
+│  │  ├── [ ] Image watermark                                        │   │
+│  │  ├── [ ] Position presets                                       │   │
+│  │  └── [ ] Opacity control                                        │   │
+│  │                                                                  │   │
+│  │  Pro Features                                                    │   │
+│  │  ├── [ ] Metadata viewer                                        │   │
+│  │  ├── [ ] Metadata stripping                                     │   │
+│  │  ├── [ ] Up to 100 files batch                                  │   │
+│  │  ├── [ ] Preset saving                                          │   │
+│  │  └── [ ] Settings export/import                                 │   │
+│  │                                                                  │   │
+│  │  Additional: 4 weeks, ~40 features                              │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  VERSION 3.0 - Complete (Future)                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  FUTURE ENHANCEMENTS ████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  │   │
+│  │                                                                  │   │
+│  │  Special Features (When time permits)                           │   │
+│  │  ├── [ ] GIF frame extraction                                   │   │
+│  │  ├── [ ] GIF creation                                           │   │
+│  │  ├── [ ] Simple collage (2-4 images)                           │   │
+│  │  ├── [ ] PDF creation                                           │   │
+│  │  ├── [ ] Color palette extraction                               │   │
+│  │  └── [ ] Image comparison analysis                              │   │
+│  │                                                                  │   │
+│  │  PWA & Offline                                                   │   │
+│  │  ├── [ ] Service Worker                                         │   │
+│  │  ├── [ ] Offline support                                        │   │
+│  │  ├── [ ] Install prompt                                         │   │
+│  │  └── [ ] Session recovery                                       │   │
+│  │                                                                  │   │
+│  │  Timeframe: 4-8 additional weeks                                │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## NEW SECTION: Competitive Positioning
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   COMPETITIVE POSITIONING                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  COMPETITOR ANALYSIS                                                    │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Competitor       │ Pros              │ Cons                    │   │
+│  │  ─────────────────┼───────────────────┼─────────────────────── │   │
+│  │                   │                   │                         │   │
+│  │  Squoosh          │ Fast, Google-made │ Single file only,       │   │
+│  │  (squoosh.app)    │ Great compression │ No batch, Limited edit  │   │
+│  │                   │                   │                         │   │
+│  │  TinyPNG          │ Excellent compress│ Server upload (!),      │   │
+│  │  (tinypng.com)    │ API available     │ 20 file limit, No edit  │   │
+│  │                   │                   │                         │   │
+│  │  iLoveIMG         │ Many tools        │ Server upload (!),      │   │
+│  │  (iloveimg.com)   │ Batch support     │ Watermark on free,     │   │
+│  │                   │                   │ Ads, Slow               │   │
+│  │                   │                   │                         │   │
+│  │  Photopea         │ Full Photoshop    │ Complex for simple      │   │
+│  │  (photopea.com)   │ Very powerful     │ tasks, Ads, Heavy       │   │
+│  │                   │                   │                         │   │
+│  │  Canva            │ Design focused    │ Account required,       │   │
+│  │  (canva.com)      │ Templates         │ Limited free, Cloud     │   │
+│  │                   │                   │                         │   │
+│  │  ResizeImage.net  │ Simple            │ Server upload (!),      │   │
+│  │                   │                   │ Ads, Limited features   │   │
+│  │                   │                   │                         │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  OUR UNIQUE SELLING POINTS (USPs)                                       │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  1. 100% PRIVACY                                                 │   │
+│  │     ├── Zero server uploads (unlike 90% of competitors)         │   │
+│  │     ├── No account required                                     │   │
+│  │     ├── No tracking/analytics                                   │   │
+│  │     └── Works completely offline                                │   │
+│  │                                                                  │   │
+│  │  2. ALL-IN-ONE                                                   │   │
+│  │     ├── Convert + Resize + Edit + Batch (combined)              │   │
+│  │     ├── No need to visit multiple tools                         │   │
+│  │     └── Consistent interface for all operations                 │   │
+│  │                                                                  │   │
+│  │  3. TRULY FREE                                                   │   │
+│  │     ├── No watermarks ever                                      │   │
+│  │     ├── No file limits (reasonable batch size)                  │   │
+│  │     ├── No premium upsells blocking features                   │   │
+│  │     └── No ads                                                   │   │
+│  │                                                                  │   │
+│  │  4. MODERN & FAST                                                │   │
+│  │     ├── Web Workers for non-blocking processing                 │   │
+│  │     ├── Modern UI with dark mode                                │   │
+│  │     ├── Mobile-first responsive                                 │   │
+│  │     └── PWA installable                                         │   │
+│  │                                                                  │   │
+│  │  5. DEVELOPER FRIENDLY                                           │   │
+│  │     ├── Open source                                             │   │
+│  │     ├── No framework dependencies                               │   │
+│  │     ├── Self-hostable                                           │   │
+│  │     └── Clean, documented code                                  │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  COMPETITIVE MATRIX                                                     │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Feature              │ Ours │ Squoosh │ TinyPNG │ iLoveIMG    │   │
+│  │  ─────────────────────┼──────┼─────────┼─────────┼───────────  │   │
+│  │  Client-side only     │  ✓   │    ✓    │    ✗    │     ✗       │   │
+│  │  Batch processing     │  ✓   │    ✗    │    ✓    │     ✓       │   │
+│  │  No account needed    │  ✓   │    ✓    │    ✓    │     ✓       │   │
+│  │  Image editing        │  ✓   │    ✗    │    ✗    │     △       │   │
+│  │  Filters/presets      │  ✓   │    ✗    │    ✗    │     ✗       │   │
+│  │  No ads               │  ✓   │    ✓    │    ✓    │     ✗       │   │
+│  │  No watermark         │  ✓   │    ✓    │    ✓    │     ✗       │   │
+│  │  PWA/Offline          │  ✓   │    ✓    │    ✗    │     ✗       │   │
+│  │  Dark mode            │  ✓   │    ✗    │    ✗    │     ✗       │   │
+│  │  Open source          │  ✓   │    ✓    │    ✗    │     ✗       │   │
+│  │  ─────────────────────┼──────┼─────────┼─────────┼───────────  │   │
+│  │  TOTAL (out of 10)    │  10  │    6    │    4    │     3       │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  TARGET POSITIONING STATEMENT                                           │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  "For privacy-conscious creators who need quick image           │   │
+│  │   processing, our Image Converter is the only all-in-one       │   │
+│  │   browser tool that combines conversion, editing, and batch    │   │
+│  │   processing with ZERO server uploads. Unlike TinyPNG or       │   │
+│  │   iLoveIMG, your files never leave your device."               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## NEW SECTION: Key Assumptions & Risks
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   KEY ASSUMPTIONS & RISKS                               │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ASSUMPTIONS                                                            │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  TECHNICAL ASSUMPTIONS                                           │   │
+│  │  ├── Users have modern browsers (Chrome 80+, Firefox 75+, etc.)│   │
+│  │  ├── Canvas API sufficient for all image operations            │   │
+│  │  ├── Web Workers supported by target browsers                  │   │
+│  │  ├── 50MB per file is reasonable limit for browser processing  │   │
+│  │  └── GitHub Pages adequate for hosting (no backend needed)     │   │
+│  │                                                                  │   │
+│  │  USER ASSUMPTIONS                                                │   │
+│  │  ├── Users value privacy over convenience                       │   │
+│  │  ├── Target users process 5-50 images at a time typically      │   │
+│  │  ├── Most users need basic operations (resize, convert)         │   │
+│  │  ├── Professional editing needs are secondary                   │   │
+│  │  └── Users will accept slightly slower processing for privacy   │   │
+│  │                                                                  │   │
+│  │  BUSINESS ASSUMPTIONS                                            │   │
+│  │  ├── Donations can partially offset development time           │   │
+│  │  ├── Portfolio value justifies unpaid development time         │   │
+│  │  ├── Open source community may contribute                      │   │
+│  │  └── No significant hosting costs (GitHub Pages free)          │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  RISKS & MITIGATIONS                                                    │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  RISK                      │ IMPACT │ PROBABILITY │ MITIGATION  │   │
+│  │  ──────────────────────────┼────────┼─────────────┼───────────  │   │
+│  │                            │        │             │             │   │
+│  │  Browser API changes       │ Medium │ Low         │ Feature     │   │
+│  │  break functionality       │        │             │ detection,  │   │
+│  │                            │        │             │ fallbacks   │   │
+│  │                            │        │             │             │   │
+│  │  Memory issues with        │ High   │ Medium      │ Chunk       │   │
+│  │  large files on mobile     │        │             │ processing, │   │
+│  │                            │        │             │ warnings    │   │
+│  │                            │        │             │             │   │
+│  │  Safari/iOS specific       │ Medium │ High        │ Early       │   │
+│  │  bugs                      │        │             │ testing,    │   │
+│  │                            │        │             │ workarounds │   │
+│  │                            │        │             │             │   │
+│  │  Feature creep delays      │ High   │ High        │ Strict MVP, │   │
+│  │  launch                    │        │             │ phase gates │   │
+│  │                            │        │             │             │   │
+│  │  No user adoption          │ Medium │ Medium      │ SEO, social │   │
+│  │                            │        │             │ sharing,    │   │
+│  │                            │        │             │ communities │   │
+│  │                            │        │             │             │   │
+│  │  Maintenance burden        │ Medium │ Medium      │ Modular     │   │
+│  │  becomes unsustainable     │        │             │ code, docs, │   │
+│  │                            │        │             │ automation  │   │
+│  │                            │        │             │             │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  VALIDATION PLAN                                                        │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Before full development:                                        │   │
+│  │  ├── [✓] Validate Canvas API handles all planned operations    │   │
+│  │  ├── [✓] Test Web Workers in all target browsers               │   │
+│  │  ├── [✓] Verify 50MB files work in browser                     │   │
+│  │  ├── [ ] Test on low-end devices (2GB RAM phone)               │   │
+│  │  └── [ ] Survey potential users on feature priorities           │   │
+│  │                                                                  │   │
+│  │  After MVP:                                                      │   │
+│  │  ├── [ ] Collect user feedback (GitHub issues)                 │   │
+│  │  ├── [ ] Monitor error rates                                    │   │
+│  │  ├── [ ] A/B test feature additions                            │   │
+│  │  └── [ ] Review analytics-free usage patterns (if any)         │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## REVISED: Simplified Development Phases
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                SIMPLIFIED DEVELOPMENT PHASES                            │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  PHASE 1: MVP (4 Weeks) - LAUNCH TARGET                                │
+│  ═══════════════════════════════════════                               │
+│                                                                         │
+│  Week 1: Foundation                                                     │
+│  ├── Project setup, file structure                                     │
+│  ├── HTML structure with accessibility                                  │
+│  ├── CSS with light/dark theme                                         │
+│  ├── Basic JavaScript modules                                           │
+│  └── Deliverable: Empty shell, themed, responsive                      │
+│                                                                         │
+│  Week 2: Core Conversion                                                │
+│  ├── Single file upload (drag/drop/click/paste)                        │
+│  ├── Format conversion (JPEG, PNG, WebP)                               │
+│  ├── Quality slider                                                     │
+│  ├── Basic resize (width/height input)                                 │
+│  ├── Preview display                                                    │
+│  └── Deliverable: Working single-file converter                        │
+│                                                                         │
+│  Week 3: Batch & Download                                               │
+│  ├── Multi-file upload (up to 20 files)                               │
+│  ├── Image grid display                                                 │
+│  ├── Process all button                                                 │
+│  ├── Progress indicator                                                 │
+│  ├── Individual download                                                │
+│  ├── ZIP download                                                       │
+│  └── Deliverable: Working batch processor                              │
+│                                                                         │
+│  Week 4: Polish & Launch                                                │
+│  ├── Error handling & messages                                         │
+│  ├── 10 resize presets                                                  │
+│  ├── About section, footer links                                       │
+│  ├── README, documentation                                              │
+│  ├── Cross-browser testing                                              │
+│  ├── Mobile testing                                                     │
+│  └── Deliverable: MVP LAUNCH                                           │
+│                                                                         │
+│  ───────────────────────────────────────────────────────────────────   │
+│  MVP SCOPE: ~20 features, 100% usable product                          │
+│  ───────────────────────────────────────────────────────────────────   │
+│                                                                         │
+│  PHASE 2: ENHANCED (4 Weeks) - After MVP feedback                      │
+│  ═══════════════════════════════════════════════                       │
+│                                                                         │
+│  Week 5-6: Editing Tools                                                │
+│  ├── Crop with aspect ratios                                           │
+│  ├── Rotate (90°, 180°, custom)                                        │
+│  ├── Flip horizontal/vertical                                          │
+│  ├── Brightness, contrast, saturation                                  │
+│  └── Deliverable: Basic editing suite                                  │
+│                                                                         │
+│  Week 7-8: Filters & UX                                                 │
+│  ├── 15 preset filters                                                  │
+│  ├── Before/after comparison                                           │
+│  ├── Undo/redo (10 steps)                                              │
+│  ├── Keyboard shortcuts (10 essential)                                 │
+│  ├── Web Worker processing                                              │
+│  └── Deliverable: v1.5 Release                                         │
+│                                                                         │
+│  ───────────────────────────────────────────────────────────────────   │
+│  v1.5 SCOPE: ~40 features total                                        │
+│  ───────────────────────────────────────────────────────────────────   │
+│                                                                         │
+│  PHASE 3: PROFESSIONAL (4 Weeks) - Based on demand                     │
+│  ═════════════════════════════════════════════════                     │
+│                                                                         │
+│  Week 9-10: Advanced Features                                           │
+│  ├── Watermark (text + image)                                          │
+│  ├── More filters (30 total)                                           │
+│  ├── Color adjustments (HSL)                                           │
+│  ├── Blur/sharpen effects                                              │
+│  └── Deliverable: Pro editing tools                                    │
+│                                                                         │
+│  Week 11-12: Polish & PWA                                               │
+│  ├── Metadata viewer/stripper                                          │
+│  ├── Preset saving                                                      │
+│  ├── Service Worker (offline)                                          │
+│  ├── PWA manifest                                                       │
+│  ├── Performance optimization                                          │
+│  └── Deliverable: v2.0 Release                                         │
+│                                                                         │
+│  ───────────────────────────────────────────────────────────────────   │
+│  v2.0 SCOPE: ~80 features total                                        │
+│  ───────────────────────────────────────────────────────────────────   │
+│                                                                         │
+│  FUTURE PHASES (As time permits)                                        │
+│  ═══════════════════════════════                                       │
+│  ├── GIF handling                                                       │
+│  ├── Simple collage                                                     │
+│  ├── PDF creation                                                       │
+│  ├── Color palette extraction                                          │
+│  └── Advanced analysis                                                  │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## REVISED: Realistic Effort Estimation
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                   REALISTIC EFFORT ESTIMATION                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  DEVELOPMENT EFFORT                                                     │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  Component                │ Hours (Est.) │ Complexity           │   │
+│  │  ─────────────────────────┼──────────────┼───────────────────── │   │
+│  │                           │              │                       │   │
+│  │  HTML/Structure           │     8        │ Low                   │   │
+│  │  CSS/Theming              │    16        │ Medium                │   │
+│  │  Core Converter Module    │    24        │ Medium                │   │
+│  │  Resize Logic             │    12        │ Medium                │   │
+│  │  Upload System            │    16        │ Medium                │   │
+│  │  Batch Processing         │    20        │ High                  │   │
+│  │  ZIP Creation             │    12        │ Medium                │   │
+│  │  Error Handling           │    10        │ Medium                │   │
+│  │  Testing & Debugging      │    20        │ Medium                │   │
+│  │  Documentation            │     8        │ Low                   │   │
+│  │  ─────────────────────────┼──────────────┼───────────────────── │   │
+│  │  MVP TOTAL                │   ~146 hrs   │ 4 weeks @ 40hr/wk   │   │
+│  │                           │              │                       │   │
+│  │  ─────────────────────────┼──────────────┼───────────────────── │   │
+│  │  Crop Tool                │    16        │ Medium                │   │
+│  │  Rotation/Flip            │     8        │ Low                   │   │
+│  │  Basic Adjustments        │    20        │ Medium                │   │
+│  │  Filter Presets           │    24        │ Medium                │   │
+│  │  Comparison View          │    12        │ Medium                │   │
+│  │  Undo/Redo                │    16        │ High                  │   │
+│  │  Web Workers              │    20        │ High                  │   │
+│  │  Keyboard Shortcuts       │     8        │ Low                   │   │
+│  │  Testing Phase 2          │    16        │ Medium                │   │
+│  │  ─────────────────────────┼──────────────┼───────────────────── │   │
+│  │  v1.5 ADDITIONAL          │   ~140 hrs   │ 4 more weeks         │   │
+│  │                           │              │                       │   │
+│  │  ─────────────────────────┼──────────────┼───────────────────── │   │
+│  │  Watermark System         │    24        │ High                  │   │
+│  │  Advanced Filters         │    16        │ Medium                │   │
+│  │  Color Adjustments        │    20        │ High                  │   │
+│  │  Blur/Sharpen             │    12        │ Medium                │   │
+│  │  Metadata Handler         │    20        │ High                  │   │
+│  │  PWA/Service Worker       │    16        │ Medium                │   │
+│  │  Optimization             │    16        │ Medium                │   │
+│  │  Testing Phase 3          │    16        │ Medium                │   │
+│  │  ─────────────────────────┼──────────────┼───────────────────── │   │
+│  │  v2.0 ADDITIONAL          │   ~140 hrs   │ 4 more weeks         │   │
+│  │                           │              │                       │   │
+│  │  ═══════════════════════════════════════════════════════════════│   │
+│  │  TOTAL FOR v2.0           │   ~426 hrs   │ 12 weeks            │   │
+│  │                           │              │                       │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+│  RECOMMENDED APPROACH                                                   │
+│  ┌─────────────────────────────────────────────────────────────────┐   │
+│  │                                                                  │   │
+│  │  1. BUILD MVP FIRST (4 weeks)                                   │   │
+│  │     • Get something live and usable                             │   │
+│  │     • Collect real user feedback                                │   │
+│  │     • Validate core assumptions                                 │   │
+│  │                                                                  │   │
+│  │  2. ITERATE BASED ON FEEDBACK                                   │   │
+│  │     • Users want editing? → Add Phase 2                        │   │
+│  │     • Users want watermarks? → Prioritize that                 │   │
+│  │     • No one cares about GIFs? → Skip that                     │   │
+│  │                                                                  │   │
+│  │  3. AVOID SCOPE CREEP                                           │   │
+│  │     • Stick to phase boundaries                                 │   │
+│  │     • New ideas go to "Future" list                            │   │
+│  │     • Launch early, iterate often                               │   │
+│  │                                                                  │   │
+│  └─────────────────────────────────────────────────────────────────┘   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Summary of Improvements
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    IMPROVEMENTS MADE                                    │
+├─────────────────────────────────────────────────────────────────────────┤
+│                                                                         │
+│  ADDED SECTIONS                                                         │
+│  ├── ✓ Business & Sustainability (monetization, maintenance)          │
+│  ├── ✓ Competitive Positioning (analysis, USPs, matrix)               │
+│  ├── ✓ Key Assumptions & Risks (with mitigations)                     │
+│  └── ✓ Realistic Effort Estimation (hours breakdown)                  │
+│                                                                         │
+│  REVISED SECTIONS                                                       │
+│  ├── ✓ MVP vs Full Product (clearer, tighter phases)                  │
+│  ├── ✓ Development Phases (simplified, realistic timeline)            │
+│  └── ✓ Feature prioritization (Must/Should/Nice-to-have)              │
+│                                                                         │
+│  KEY CHANGES                                                            │
+│  ├── MVP scope reduced to 4-week achievable target                     │
+│  ├── Features clearly categorized by priority                          │
+│  ├── Business sustainability addressed                                  │
+│  ├── Competitive differentiation clarified                             │
+│  ├── Risks identified with mitigations                                 │
+│  └── Hour estimates provided for planning                               │
+│                                                                         │
+│  UPDATED RATING EXPECTATION: 9+ / 10                                   │
+│                                                                         │
+└─────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+**END OF PRD DOCUMENT**
+
+This comprehensive PRD covers all features needed to build a professional-grade image converter without any AI-dependent features. Use this document when prompting Claude to build each phase of the application.                              

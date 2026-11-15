@@ -1,0 +1,154 @@
+Here is a **perfect, universal, English prompt** that you can copy-paste anytime you want AI to review your code at a professional level.
+
+---
+
+# **Code Review Prompt**
+
+"Please perform a full, exhaustive, ultra-detailed technical review of my code.
+Analyze correctness, logic, edge cases, error handling, time and space complexity, performance bottlenecks, memory usage, security vulnerabilities, architecture quality, coding style, naming conventions, readability, maintainability, scalability, and test coverage.
+Identify all potential bugs and real-world failure scenarios.
+After the review, provide:
+
+1. A detailed explanation of every issue,
+2. Step-by-step recommendations for improvement,
+3. An optimized, clean, rewritten version of the code following modern best practices,
+4. Optional advanced enhancements or alternative implementations."
+
+---
+> Review this code for security vulnerabilities, edge cases, and performance bottlenecks. Suggest improvements."
+---
+Below is a **clear, professional version**, suitable for explaining how to ask AI to fix code properly. The meaning and structure are preserved, but the language is polished and natural.
+
+---
+
+## When Asking AI to Fix Code, “This Doesn’t Work” Is Not Enough
+
+If you want AI to correctly fix your code, simply writing *“this is not working”* is not sufficient.
+AI needs **context** and **clues** in order to identify and correct errors effectively.
+
+According to prompt-engineering best practices, when your code has a bug, you should follow this **3-step formula**:
+
+---
+
+## 1. Explain the Error in Detail
+
+You must clearly tell the AI **where** and **how** the problem occurs. Instead of writing *“fix this”*, include the following:
+
+* **Copy-paste the exact error message:**
+  “I am getting this error: `[Error Message Here]`.”
+* **Expected vs. actual behavior:**
+  “I expected [what should have happened], but instead [what is actually happening].”
+* **Describe the behavior:**
+  “The code runs but produces incorrect output” or “The code crashes during execution.”
+
+---
+
+## 2. Use “Chain-of-Thought” Prompting
+
+Ask the AI to think step-by-step. This helps it identify logical mistakes more accurately.
+
+**Example Prompt:**
+
+> “There is a bug in this code. First, analyze the logic step by step to find where it might be wrong. Then fix it and explain what you changed.”
+
+---
+
+## 3. Best Debugging Prompt Templates
+
+You can use the following prompt templates depending on your situation:
+
+| Situation                  | What to Write (Prompt)                                                                                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Wrong Logic**            | “This code runs without errors, but the output is incorrect. Please re-check the logic and provide a corrected version.” |
+| **Error Message Appears**  | “When I run this code, I get `[Error Name]`. Please fix it and explain why this error occurs.”                           |
+| **Code Is Slow**           | “This code works, but it is very slow. Please optimize it and rewrite it for better performance.”                        |
+| **Need a Modern Approach** | “Is there a cleaner or more modern way to write this code? Please update it using best practices.”                       |
+
+---
+
+## Pro Tip: Use a “Self-Correction” Prompt
+
+If the AI keeps making the same mistake, say this:
+
+> **“Review your previous response. Check if there are any syntax errors or logical flaws. Double-check everything and provide a working version of the code.”**
+
+---
+
+## Example of a Good Debugging Prompt
+
+> “I tried the Python code you provided, but I’m getting an `IndexError` on line 15. The loop boundary might be incorrect. Please fix it and provide the full updated code below.”
+---
+
+**If you have a specific piece of code that is not working right now, you can try this.**
+
+TASK:
+Understand the concept, functionality, and behavior of this code,
+and then rewrite similar code, but with better implementation and performance
+than the original.
+
+STRICT RULES (very important):
+1. You will not add any themes, color schemes, UI styles, emojis, icons,
+animations, branding, or creative touches of your own.
+2. Write only clean, professional, and minimal code.
+3. No emojis, decorative comments, or fancy formatting should be used.
+4. CSS and JS should be for functionality only, not visual over-design.
+5. The code must be modular, readable, and optimized.
+6. Use only HTML, CSS, and JavaScript.
+7. The output must be exactly working and directly runnable.
+
+IMPROVEMENT REQUIREMENTS:
+- The code structure should be cleaner.
+- Remove unnecessary repetition.
+- Improve performance and readability.
+- The logic should be clearly separated.
+
+OUTPUT FORMAT:
+- First, provide a short explanation (maximum 5 lines).
+- Then, provide the complete HTML, CSS, and JavaScript code.
+- Do not include any extra commentary, emojis, or personal text.
+---
+
+
+### The Master Prompt for (SEO):
+
+> **"I am sharing my `html` file for an online tool. I need to update the text content and SEO meta-tags for better Google ranking and AdSense approval. Please follow these strict rules:**
+> 1. **SEO Optimization:** Use a human-like, helpful tone. 
+> 2. **AdSense Friendly:** Add a clear FAQ section and use-case descriptions in simple, conversational English.
+> 3. **DO NOT TOUCH THE CODE:** Do not modify any JavaScript logic, CSS styles, or the core canvas functionality. Only update the HTML tags (Title, Meta, H1, H2, P, and Info sections).
+> 4. **Humanize Content:** Ensure the text doesn't sound robotic or AI-generated. Use a 'problem-solver' approach for the user.
+> 
+> 
+> **Here is my current file code:** > [Paste your code here]"
+
+---
+
+> **“Review your previous response. Check if there are any logic, edge cases, error handling, time and space complexity, performance bottlenecks, memory usage, security vulnerabilities, architecture quality, coding style, naming conventions, readability, maintainability, scalability, and test coverage. Identify all potential bugs and real-world failure scenarios. Double-check everything and provide a working version of the code.”**
+
+---
+ Read and understand the full source code 
+ Analyze CSS: variables, selectors, theming, responsive design
+ Analyze HTML structure: semantic correctness, accessibility, SEO
+ Analyze JavaScript: logic, edge cases, error handling, performance
+ Check security vulnerabilities (XSS, injection, etc.)
+ Evaluate architecture, naming, readability, maintainability
+ Assess time/space complexity and memory usage
+ Identify all bugs and real-world failure scenarios
+ Create implementation plan with all fixes
+ Apply all fixes to produce a working version
+ Verify the final code
+ ---
+
+**Perform Comprehensive Bug Fixing**
+> Conduct a comprehensive audit of the provided HTML code to identify and fix all bugs and functional issues. This includes checking for broken links, JavaScript errors, improper element rendering, and any other anomalies that detract from a smooth user experience. Ensure all interactive elements function as expected.
+
+**Refine Color Palette and UI Aesthetics**
+> Review and update the color palette of the HTML page to ensure it is both aesthetically pleasing and accessible. Choose a modern set of colors that meets WCAG 2.1 AA contrast requirements for text and background elements. Provide a CSS file that defines these colors and applies them consistently across all UI components, including buttons, links, and form elements.
+
+**Implement WCAG 2.1 AA Compliance**
+> Refactor the existing HTML code to be fully compliant with WCAG 2.1 Level AA standards. This includes adding ARIA roles and attributes where necessary, ensuring logical heading structures, providing text alternatives for all non-text content, and making sure all interactive elements are keyboard-focusable and operable. Also, verify that all color combinations used in the UI meet the contrast ratio requirements specified by WCAG 2.1 AA.
+
+**Add Semantic HTML5 Elements**
+> Refactor the provided HTML code to use semantic HTML5 elements where appropriate. Specifically, identify sections that can be marked up using <header>, <nav>, <main>, <article>, <section>, and <footer> to improve the document's structure and accessibility.
+
+**Fix ARIA Lable**
+> Review the provided HTML code for accessibility. Implement appropriate ARIA roles and attributes (e.g., `aria-label`, `role`, `aria-expanded`) on interactive elements, form controls, and dynamic content to improve usability for people using assistive technologies like screen readers.

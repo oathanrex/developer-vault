@@ -16,6 +16,7 @@ if str(PROJECT_ROOT) not in sys.path:
 from src.auditor import AdSenseAuditor
 from src.reporter import AuditReporter
 from scripts.sync_policies import sync as sync_policies_func
+from src.enhancer import LowValueContentEliminator
 
 SERVER_INFO = {
     "name": "adsenseready-ai-mcp",
@@ -62,6 +63,47 @@ TOOLS = [
                 }
             },
             "required": ["reason"]
+        }
+    },
+    {
+        "name": "diagnose_thin_content",
+        "description": "Diagnoses an article text or HTML for Google AdSense 'Thin Content' and 'Low Value Content' risks, calculating word deficit and structural gaps.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string",
+                    "description": "The article text or raw HTML to diagnose"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Title of the article (optional)"
+                }
+            },
+            "required": ["content"]
+        }
+    },
+    {
+        "name": "eliminate_low_value_content",
+        "description": "Generates a 1200+ word expansion blueprint, Schema.org FAQPage JSON-LD, and E-E-A-T credentials box to completely resolve Google AdSense 'Low Value Content' penalties.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "topic": {
+                    "type": "string",
+                    "description": "The primary topic of the article"
+                },
+                "current_content": {
+                    "type": "string",
+                    "description": "Current thin article text or draft"
+                },
+                "author_name": {
+                    "type": "string",
+                    "description": "Author name for E-E-A-T byline",
+                    "default": "Oathan Rex"
+                }
+            },
+            "required": ["topic", "current_content"]
         }
     }
 ]
@@ -132,6 +174,46 @@ def handle_call_tool(name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
                 {
                     "type": "text",
                     "text": explanation
+                }
+            ]
+        }
+    elif name == "diagnose_thin_content":
+        content = arguments.get("content", "")
+        title = arguments.get("title", "Article")
+        eliminator = LowValueContentEliminator()
+        diag = eliminator.diagnose(content, title=title)
+        return {
+            "content": [
+                {
+                    "type": "text",
+                    "text": json.dumps(diag, indent=2)
+                }
+            ]
+        }
+    elif name == "eliminate_low_value_content":
+        topic = arguments.get("topic", "")
+        current_content = arguments.get("current_content", "")
+        author_name = arguments.get("author_name", "Oathan Rex")
+        eliminator = LowValueContentEliminator()
+        plan = eliminator.generate_expansion_plan(topic, current_content, author_name=author_name)
+        text_result = f"""
+{plan['blueprint_instructions']}
+
+### 1. Schema.org FAQPage JSON-LD:
+```json
+{plan['faq_schema_ldjson']}
+```
+
+### 2. E-E-A-T Author Credentials Box HTML:
+```html
+{plan['eeat_author_box_html']}
+```
+"""
+        return {
+            "content": [
+                {
+                    "type": "text",
+                    "text": text_result
                 }
             ]
         }

@@ -28,6 +28,7 @@ Google's review system uses a combination of **automated ML classifiers** and **
 **AdSenseReady-AI** bridges this gap:
 - Reverse-engineers Google's 7 approval pillars into a weighted 100-point calibrated index.
 - Detects **instant blockers** before you waste weeks waiting for rejection emails.
+- **Low-Value Content Eliminator:** Diagnoses thin articles (<600 words), detects missing structural elements (FAQs, comparison tables, author bios), and generates a 1,200+ word expansion blueprint.
 - Generates a prioritized, step-by-step remediation action plan with exact fixes.
 - **Evergreen Policy Sync:** Probes Google's official Search Central RSS feeds and AdSense Help documentation, automatically updating rules via GitHub Actions.
 
@@ -73,7 +74,13 @@ python -m src.cli https://mytechblog.com --format markdown --output report.md
 python -m src.cli https://mytechblog.com --format json --output report.json
 ```
 
-### 3. Launch Local Web Studio
+### 3. Eliminate Low-Value Content & Expand Articles
+```bash
+# Diagnose thin content and generate a 1200+ word expansion blueprint
+python -m src.cli --fix-content "https://mytechblog.com/my-short-article" --topic "Article Topic" --author "Oathan Rex"
+```
+
+### 4. Launch Local Web Studio
 ```bash
 python -m src.cli --serve 8080
 # Open http://localhost:8080 in your browser for instant GUI auditing

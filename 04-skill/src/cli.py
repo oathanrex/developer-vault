@@ -15,6 +15,7 @@ from src.auditor import AdSenseAuditor
 from src.reporter import AuditReporter
 from scripts.sync_policies import sync as sync_policies_func
 from src.server import start_server
+from src.enhancer import LowValueContentEliminator
 
 
 def main():
@@ -38,8 +39,15 @@ Examples:
     parser.add_argument("--sync-policies", action="store_true", help="Sync local rules with live Google Publisher Policy updates")
     parser.add_argument("--demo", action="store_true", help="Run auditor on built-in mock demo sites (ready vs rejected)")
     parser.add_argument("--serve", nargs="?", const=8080, type=int, help="Launch local web UI studio on specified port (default: 8080)")
+    parser.add_argument("--fix-content", help="Diagnose thin content and generate a 1200+ word expansion blueprint for an article or URL")
+    parser.add_argument("--topic", default="Technical Guide", help="Topic name for the article expansion (default: 'Technical Guide')")
+    parser.add_argument("--author", default="Oathan Rex", help="Author name for E-E-A-T credentials box (default: 'Oathan Rex')")
 
     args = parser.parse_args()
+
+    if args.fix_content:
+        run_content_fix(args.fix_content, args.topic, args.author, args.format, args.output)
+        return
 
     if args.serve:
         start_server(args.serve)
@@ -86,6 +94,60 @@ Examples:
             print(f"[✓] JSON report successfully written to {args.output}")
         else:
             print(js)
+
+
+def run_content_fix(source: str, topic: str, author: str, out_format: str, output_file: str):
+    eliminator = LowValueContentEliminator()
+    raw_content = source
+
+    # If it's a file path
+    p = Path(source)
+    if p.exists() and p.is_file():
+        with open(p, "r", encoding="utf-8") as f:
+            raw_content = f.read()
+    elif source.startswith("http://") or source.startswith("https://"):
+        auditor = AdSenseAuditor()
+        html, _, _ = auditor.fetch_url(source)
+        if html:
+            raw_content = html
+
+    plan = eliminator.generate_expansion_plan(topic, raw_content, author_name=author)
+    diag = plan["diagnosis"]
+
+    print("=" * 65)
+    print(f" 🚀 Low-Value Content Eliminator: {topic}")
+    print("=" * 65)
+    print(f" Current Substance: {diag['current_word_count']} words (Target: 1,200+ words)")
+    print(f" Risk Assessment:   {diag['risk_level']} (Thin Content Penalty Risk)")
+    print(f" Readability:       {diag['readability_score']}/100 ({diag['readability_label']})")
+    print(f" Additional Needed: +{diag['words_needed']} words of high-substance value\n")
+
+    if diag["structural_gaps"]:
+        print(" 🚨 Detected Structural Deficits:")
+        for gap in diag["structural_gaps"]:
+            print(f"   • {gap}")
+        print()
+
+    print(plan["blueprint_instructions"])
+
+    if output_file:
+        out_content = f"""# High-Value Content Transformation: {topic}
+
+{plan['blueprint_instructions']}
+
+## 1. Schema.org FAQPage JSON-LD
+```json
+{plan['faq_schema_ldjson']}
+```
+
+## 2. E-E-A-T Author Credentials Box HTML
+```html
+{plan['eeat_author_box_html']}
+```
+"""
+        with open(output_file, "w", encoding="utf-8") as f:
+            f.write(out_content)
+        print(f"[✓] Full High-Value Content Blueprint saved to: {output_file}")
 
 
 def run_demo(out_format="terminal", output_file=None):

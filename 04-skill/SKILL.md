@@ -48,7 +48,12 @@ python -m src.cli https://example.com --format json --output adsense_report.json
 python scripts/sync_policies.py
 ```
 
-### 5. Run Built-In Benchmark Test:
+### 5. Eliminate "Low-Value Content" & Expand Thin Articles (1200+ Words):
+```bash
+python -m src.cli --fix-content "https://myblog.com/post-slug" --topic "Post Topic" --author "Your Name"
+```
+
+### 6. Run Built-In Benchmark Test:
 ```bash
 python -m src.cli --demo
 ```

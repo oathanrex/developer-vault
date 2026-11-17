@@ -61,8 +61,9 @@ class TechSEOChecker:
         # 2. Robots.txt crawlability
         if robots_txt is not None:
             robots_lower = robots_txt.lower()
-            blocks_mediapartners = "user-agent: mediapartners-google\ndisallow: /" in robots_lower or "user-agent: mediapartners-google\r\ndisallow: /" in robots_lower
-            blocks_all = "user-agent: *\ndisallow: /" in robots_lower or "user-agent: *\r\ndisallow: /" in robots_lower
+            allows_mediapartners = bool(re.search(r"user-agent:\s*mediapartners-google\s*[\r\n]+\s*allow:\s*/(?:\s|$)", robots_lower))
+            blocks_mediapartners = bool(re.search(r"user-agent:\s*mediapartners-google\s*[\r\n]+\s*disallow:\s*/(?:\s|$)", robots_lower))
+            blocks_all = bool(re.search(r"user-agent:\s*\*\s*[\r\n]+\s*disallow:\s*/(?:\s|$)", robots_lower)) and not allows_mediapartners
 
             if blocks_mediapartners:
                 pillar.checks.append(CheckResult(
@@ -84,7 +85,7 @@ class TechSEOChecker:
                     severity=Severity.BLOCKER,
                     score=0.5,
                     max_score=4.0,
-                    details="Robots.txt disallows all crawlers ('User-agent: * Disallow: /').",
+                    details="Robots.txt disallows all crawlers ('User-agent: * Disallow: /') without an exemption for AdSense.",
                     fix_recommendation="Update robots.txt to allow Googlebot and Mediapartners-Google to crawl public content.",
                     doc_url="https://support.google.com/adsense/answer/10532"
                 ))

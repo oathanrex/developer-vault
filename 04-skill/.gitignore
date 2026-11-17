@@ -13,3 +13,5 @@ htmlcov/
 report.json
 adsense_report.md
 *.html
+*.svg
+perspective_guide.md

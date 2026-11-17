@@ -16,6 +16,8 @@ from src.reporter import AuditReporter
 from scripts.sync_policies import sync as sync_policies_func
 from src.server import start_server
 from src.enhancer import LowValueContentEliminator
+from src.generator import ArticleGenerator
+from src.badge import generate_svg_badge
 
 
 def main():
@@ -40,10 +42,31 @@ Examples:
     parser.add_argument("--demo", action="store_true", help="Run auditor on built-in mock demo sites (ready vs rejected)")
     parser.add_argument("--serve", nargs="?", const=8080, type=int, help="Launch local web UI studio on specified port (default: 8080)")
     parser.add_argument("--fix-content", help="Diagnose thin content and generate a 1200+ word expansion blueprint for an article or URL")
+    parser.add_argument("--generate-article", action="store_true", help="Autonomously generate a full 1,400+ word substantive article in Markdown")
+    parser.add_argument("--badge", help="Generate a Retina-ready SVG AdSense readiness badge to specified file path")
     parser.add_argument("--topic", default="Technical Guide", help="Topic name for the article expansion (default: 'Technical Guide')")
     parser.add_argument("--author", default="Oathan Rex", help="Author name for E-E-A-T credentials box (default: 'Oathan Rex')")
 
     args = parser.parse_args()
+
+    if args.generate_article:
+        art = ArticleGenerator.generate(args.topic, author_name=args.author)
+        if args.output:
+            with open(args.output, "w", encoding="utf-8") as f:
+                f.write(art)
+            print(f"[✓] Complete 1,400+ word substantive article saved to: {args.output}")
+        else:
+            print(art)
+        return
+
+    if args.badge and args.url:
+        auditor = AdSenseAuditor()
+        rep = auditor.audit_site(args.url)
+        svg = generate_svg_badge(rep.normalized_score, rep.verdict)
+        with open(args.badge, "w", encoding="utf-8") as f:
+            f.write(svg)
+        print(f"[✓] SVG Badge generated at: {args.badge}")
+        return
 
     if args.fix_content:
         run_content_fix(args.fix_content, args.topic, args.author, args.format, args.output)

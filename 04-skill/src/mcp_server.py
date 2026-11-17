@@ -17,6 +17,8 @@ from src.auditor import AdSenseAuditor
 from src.reporter import AuditReporter
 from scripts.sync_policies import sync as sync_policies_func
 from src.enhancer import LowValueContentEliminator
+from src.generator import ArticleGenerator
+from src.checkers.app_evaluator import WebAppAdSenseEvaluator
 
 SERVER_INFO = {
     "name": "adsenseready-ai-mcp",
@@ -104,6 +106,39 @@ TOOLS = [
                 }
             },
             "required": ["topic", "current_content"]
+        }
+    },
+    {
+        "name": "generate_full_article",
+        "description": "Autonomously writes a complete 1,200 - 1,500+ word publication-ready master article in Markdown with E-E-A-T author box, Schema.org FAQPage JSON-LD, and zero AI fluff.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "topic": {
+                    "type": "string",
+                    "description": "Topic or guide title"
+                },
+                "author_name": {
+                    "type": "string",
+                    "description": "Author name for credentials box",
+                    "default": "Oathan Rex"
+                }
+            },
+            "required": ["topic"]
+        }
+    },
+    {
+        "name": "evaluate_web_app_monetization",
+        "description": "Runs a specialized 5-point audit on interactive web applications or SaaS tools (calculators, editors, converters) to prepare them for Google AdSense approval without turning them into generic blogs.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string",
+                    "description": "The web app URL"
+                }
+            },
+            "required": ["url"]
         }
     }
 ]
@@ -214,6 +249,34 @@ def handle_call_tool(name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
                 {
                     "type": "text",
                     "text": text_result
+                }
+            ]
+        }
+    elif name == "generate_full_article":
+        topic = arguments.get("topic", "")
+        author_name = arguments.get("author_name", "Oathan Rex")
+        article_md = ArticleGenerator.generate(topic, author_name=author_name)
+        return {
+            "content": [
+                {
+                    "type": "text",
+                    "text": article_md
+                }
+            ]
+        }
+    elif name == "evaluate_web_app_monetization":
+        url = arguments.get("url", "")
+        auditor = AdSenseAuditor()
+        html, _, _ = auditor.fetch_url(url)
+        if not html:
+            html = "<html><body>Error fetching URL</body></html>"
+        internal_links = auditor.extract_links(url, html)
+        res = WebAppAdSenseEvaluator.evaluate_app(url, html, internal_links)
+        return {
+            "content": [
+                {
+                    "type": "text",
+                    "text": json.dumps(res, indent=2)
                 }
             ]
         }

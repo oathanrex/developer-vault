@@ -22,7 +22,9 @@ from .checkers import (
     PolicyProhibitedChecker,
     AdLayoutChecker,
     OrganicFootprintChecker,
-    CMSDetector
+    CMSDetector,
+    WebAppAdSenseEvaluator,
+    UniquenessAnalyzer
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -190,10 +192,21 @@ class AdSenseAuditor:
             "organic_footprint": p7
         }
 
-        # 6. Detect CMS Platform & Tailor Recommendations
+        # 6. Detect CMS Platform & Web App Nature
         cms_data = CMSDetector.detect(homepage_html)
+        
+        # Check if site is an interactive web app / SaaS utility
+        total_home_words = len(re.sub(r"<[^>]+>", " ", homepage_html).split())
+        is_app = WebAppAdSenseEvaluator.is_interactive_app(homepage_html, total_home_words)
+        web_app_data = None
+        if is_app:
+            web_app_data = WebAppAdSenseEvaluator.evaluate_app(target_url, homepage_html, internal_links)
 
-        # 7. Aggregate Composite Scores
+        # 7. Lexical Diversity & Uniqueness Analysis
+        all_text = " ".join(re.sub(r"<[^>]+>", " ", h).strip() for h in crawled_pages.values())
+        lexical_data = UniquenessAnalyzer.evaluate(all_text)
+
+        # 8. Aggregate Composite Scores
         total_score = sum(p.earned_score for p in pillars.values())
         max_possible = sum(p.max_score for p in pillars.values())
         normalized_score = round((total_score / max_possible) * 100, 1) if max_possible > 0 else 0
@@ -210,6 +223,10 @@ class AdSenseAuditor:
                     action_plan.append(f"[HIGH PRIORITY] {c.name}: {c.fix_recommendation or c.details}")
                 elif c.status == CheckStatus.WARNING:
                     action_plan.append(f"[RECOMMENDED] {c.name}: {c.fix_recommendation or c.details}")
+
+        # Add Web App specific guidance if applicable
+        if web_app_data:
+            action_plan.append(f"[WEB APP ROADMAP] Utility App Detected: Add a dedicated /how-it-works or /guide page with 800+ words to pass AdSense without changing your UI.")
 
         # Add CMS specific tips
         if cms_data.get("customized_tips"):
@@ -238,5 +255,7 @@ class AdSenseAuditor:
             pillars=pillars,
             all_blockers=all_blockers,
             action_plan=action_plan,
-            cms_info=cms_data
+            cms_info=cms_data,
+            web_app_eval=web_app_data,
+            lexical_eval=lexical_data
         )

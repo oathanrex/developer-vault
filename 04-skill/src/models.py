@@ -72,6 +72,8 @@ class AuditReport:
     all_blockers: List[CheckResult] = field(default_factory=list)
     action_plan: List[str] = field(default_factory=list)
     cms_info: Optional[Dict[str, Any]] = None
+    web_app_eval: Optional[Dict[str, Any]] = None
+    lexical_eval: Optional[Dict[str, Any]] = None
 
     @property
     def normalized_score(self) -> float:

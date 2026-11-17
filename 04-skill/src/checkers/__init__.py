@@ -10,6 +10,8 @@ from .policy_prohibited import PolicyProhibitedChecker
 from .ad_layout import AdLayoutChecker
 from .organic_footprint import OrganicFootprintChecker
 from .cms_detector import CMSDetector
+from .app_evaluator import WebAppAdSenseEvaluator
+from .uniqueness import UniquenessAnalyzer
 
 __all__ = [
     "LegalTrustChecker",
@@ -19,5 +21,7 @@ __all__ = [
     "PolicyProhibitedChecker",
     "AdLayoutChecker",
     "OrganicFootprintChecker",
-    "CMSDetector"
+    "CMSDetector",
+    "WebAppAdSenseEvaluator",
+    "UniquenessAnalyzer"
 ]

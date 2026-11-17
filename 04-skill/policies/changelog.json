@@ -1,0 +1,37 @@
+[
+  {
+    "version": "2026.11.2",
+    "date": "2026-11-17",
+    "author": "Dynamic PolicySync Engine",
+    "summary": "Automated sync detected updates across Google Publisher Policy endpoints. Latest: '400 publications are now partnering with us on our News AI pilot program.'",
+    "rules_updated": [
+      "synced_all_pillars"
+    ],
+    "announcements_tracked": [
+      "400 publications are now partnering with us on our News AI pilot program.",
+      "3 new ways we're improving Search profiles for publishers"
+    ]
+  },
+  {
+    "version": "2026.11.1",
+    "date": "2026-11-17",
+    "author": "GitHub Action / PolicySync Engine",
+    "summary": "Automated sync detected updates across Google Publisher Policy endpoints.",
+    "rules_updated": [
+      "synced_all_pillars"
+    ]
+  },
+  {
+    "version": "2026.11.0",
+    "date": "2026-11-17",
+    "author": "AdSenseReady-AI Policy Engine",
+    "summary": "Initial 2026 Policy Base: Integrated Google Search Essentials 2026, Scaled Content Spam Updates, EU Certified CMP (IAB TCF 2.2) Mandate, and AdSense E-E-A-T criteria.",
+    "rules_updated": [
+      "legal_trust.google_cookie_disclosure",
+      "content_eeat.ai_filler_detection",
+      "content_eeat.minimum_article_count",
+      "site_navigation_ux.zero_placeholder_pages",
+      "google_publisher_policy.banned_niche_detection"
+    ]
+  }
+]

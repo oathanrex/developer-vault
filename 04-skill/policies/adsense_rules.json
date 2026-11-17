@@ -1,0 +1,365 @@
+{
+  "version": "2026.11.2",
+  "policy_year": 2026,
+  "last_updated": "2026-11-17T13:28:51.469658Z",
+  "approval_threshold_score": 85,
+  "strict_mode_threshold": 92,
+  "pillars": {
+    "legal_trust": {
+      "name": "Mandatory Legal & Trust Foundation",
+      "weight": 20,
+      "description": "Essential trust pages, explicit AdSense cookie disclaimers, GDPR/CCPA compliance, and contact transparency.",
+      "critical_fail_reasons": [
+        "Missing Privacy Policy",
+        "No Contact Information",
+        "Missing Cookie Consent Disclosure"
+      ],
+      "checks": [
+        {
+          "id": "privacy_policy",
+          "name": "Privacy Policy Page Presence",
+          "severity": "BLOCKER",
+          "points": 5,
+          "required_keywords": [
+            "privacy policy",
+            "cookies",
+            "personal data",
+            "third-party",
+            "log files"
+          ],
+          "adsense_specific_requirement": "Must disclose third-party vendors (including Google) use cookies to serve ads based on user prior visits."
+        },
+        {
+          "id": "google_cookie_disclosure",
+          "name": "Google AdSense & DoubleClick DART Cookie Clause",
+          "severity": "BLOCKER",
+          "points": 4,
+          "required_keywords": [
+            "google",
+            "adsense",
+            "doubleclick",
+            "interest-based advertising",
+            "opt-out"
+          ],
+          "adsense_specific_requirement": "Mandatory clause informing visitors how to opt out of personalized advertising (e.g., aboutads.info or Google Ad Settings)."
+        },
+        {
+          "id": "terms_of_service",
+          "name": "Terms of Service / Terms of Use",
+          "severity": "HIGH",
+          "points": 3,
+          "required_keywords": [
+            "terms of service",
+            "terms and conditions",
+            "limitation of liability",
+            "intellectual property"
+          ]
+        },
+        {
+          "id": "about_us_transparency",
+          "name": "Genuine About Us Page with Human E-E-A-T Credibility",
+          "severity": "HIGH",
+          "points": 4,
+          "required_keywords": [
+            "about us",
+            "who we are",
+            "editorial",
+            "mission",
+            "author",
+            "experience"
+          ],
+          "disallowed_patterns": [
+            "lorem ipsum",
+            "replace with your text",
+            "admin is a passionate blogger"
+          ]
+        },
+        {
+          "id": "contact_us_reachability",
+          "name": "Direct Contact Us Page (Email, Physical Location or Real Form)",
+          "severity": "BLOCKER",
+          "points": 3,
+          "required_patterns": [
+            "mailto:",
+            "@",
+            "contact form",
+            "feedback"
+          ]
+        },
+        {
+          "id": "disclaimer_page",
+          "name": "Earnings / Affiliate Disclaimer (if applicable)",
+          "severity": "MEDIUM",
+          "points": 1,
+          "required_keywords": [
+            "disclaimer",
+            "affiliate",
+            "compensation",
+            "educational purposes"
+          ]
+        }
+      ]
+    },
+    "content_eeat": {
+      "name": "Content Depth, Originality & E-E-A-T Quality",
+      "weight": 25,
+      "description": "Prevention of 'Low Value Content' rejections. Enforces article volume, word counts, unique value, and anti-AI-spam signals.",
+      "critical_fail_reasons": [
+        "Thin Content (<500 words average)",
+        "Low Total Post Count (<15 posts)",
+        "AI Hallucination / Boilerplate Text",
+        "Scraped or Duplicated Content"
+      ],
+      "checks": [
+        {
+          "id": "minimum_article_count",
+          "name": "Indexable Substantial Article Volume",
+          "severity": "BLOCKER",
+          "points": 6,
+          "minimum_posts": 20,
+          "recommended_posts": 30,
+          "description": "Google manual reviewers require a fully fleshed-out publication before approving ad serving."
+        },
+        {
+          "id": "average_word_count",
+          "name": "In-Depth Article Substance (Word Count)",
+          "severity": "BLOCKER",
+          "points": 6,
+          "minimum_avg_words": 700,
+          "recommended_avg_words": 1200,
+          "description": "Articles under 500 words trigger the automated 'Thin Content' penalty."
+        },
+        {
+          "id": "ai_filler_detection",
+          "name": "Zero Generic AI Fluff / Templated Phrases",
+          "severity": "HIGH",
+          "points": 5,
+          "banned_ai_markers": [
+            "in conclusion, it is important to remember",
+            "as an ai language model",
+            "delve into the world of",
+            "in this fast-paced digital era",
+            "testament to the fact that",
+            "it is crucial to note that",
+            "without further ado",
+            "tapestry of modern",
+            "beacon of hope"
+          ]
+        },
+        {
+          "id": "heading_hierarchy",
+          "name": "Proper Semantic Heading Hierarchy (H1, H2, H3)",
+          "severity": "MEDIUM",
+          "points": 3,
+          "description": "Content must be broken down logically with distinct subsections, lists, and structured data."
+        },
+        {
+          "id": "media_and_alt_attributes",
+          "name": "Contextual Visual Media with Accessible Alt Text",
+          "severity": "MEDIUM",
+          "points": 2,
+          "description": "Articles should include relevant diagrams, screenshots, or royalty-free imagery with descriptive alt tags."
+        },
+        {
+          "id": "author_byline",
+          "name": "Author Bylines and Editorial Attribution",
+          "severity": "HIGH",
+          "points": 3,
+          "description": "Every article must credit a named author with domain expertise or an editorial bio link."
+        }
+      ]
+    },
+    "technical_seo": {
+      "name": "Technical Crawlability & Web Health",
+      "weight": 15,
+      "description": "Verification that Googlebot and Mediapartners-Google crawlers can parse and index the site without barriers.",
+      "critical_fail_reasons": [
+        "Robots.txt blocking Googlebot/Mediapartners-Google",
+        "Missing XML Sitemap",
+        "Insecure HTTP",
+        "Non-responsive mobile viewport"
+      ],
+      "checks": [
+        {
+          "id": "ssl_https_enforcement",
+          "name": "Active SSL / HTTPS Everywhere",
+          "severity": "BLOCKER",
+          "points": 4,
+          "description": "AdSense will not approve unencrypted HTTP websites."
+        },
+        {
+          "id": "robots_txt_accessibility",
+          "name": "Robots.txt Crawlability (Googlebot & Mediapartners)",
+          "severity": "BLOCKER",
+          "points": 4,
+          "disallowed_rules": [
+            "Disallow: /",
+            "User-agent: Mediapartners-Google\nDisallow: /"
+          ],
+          "description": "Google AdSense ad auction crawlers (Mediapartners-Google) must not be restricted in robots.txt."
+        },
+        {
+          "id": "sitemap_xml_detected",
+          "name": "Valid Accessible XML Sitemap",
+          "severity": "HIGH",
+          "points": 4,
+          "description": "Sitemap must be present at /sitemap.xml or referenced in robots.txt."
+        },
+        {
+          "id": "mobile_responsive_viewport",
+          "name": "Mobile-Friendly Responsive Viewport Meta",
+          "severity": "HIGH",
+          "points": 3,
+          "required_tag": "<meta name=\"viewport\" content=\"width=device-width"
+        }
+      ]
+    },
+    "site_navigation_ux": {
+      "name": "Site Navigation, Architecture & User Experience",
+      "weight": 15,
+      "description": "Clear navigational taxonomy, working internal links, functional search, and zero broken or placeholder pages.",
+      "critical_fail_reasons": [
+        "Site Under Construction",
+        "Broken Menu Links (404)",
+        "No Clear Category Taxonomy",
+        "Placeholder Content"
+      ],
+      "checks": [
+        {
+          "id": "primary_navigation_menu",
+          "name": "Clear Primary Header Menu with Active Links",
+          "severity": "BLOCKER",
+          "points": 5,
+          "description": "Visitors must be able to navigate to all major categories with a maximum of 2 clicks."
+        },
+        {
+          "id": "footer_navigation_links",
+          "name": "Footer Menu with Mandatory Legal Links",
+          "severity": "HIGH",
+          "points": 3,
+          "description": "Footer must link to Privacy Policy, Terms, About, and Contact."
+        },
+        {
+          "id": "zero_broken_links_or_404s",
+          "name": "Absence of Dead Links & 404 Errors in Navigation",
+          "severity": "HIGH",
+          "points": 4,
+          "description": "No menu item should lead to a 404 page or '#'."
+        },
+        {
+          "id": "zero_placeholder_pages",
+          "name": "No 'Under Construction' or 'Coming Soon' Pages",
+          "severity": "BLOCKER",
+          "points": 3,
+          "banned_markers": [
+            "under construction",
+            "coming soon",
+            "sample page",
+            "hello world!",
+            "uncategorized"
+          ]
+        }
+      ]
+    },
+    "google_publisher_policy": {
+      "name": "Google Publisher Policies & Prohibited Niches",
+      "weight": 15,
+      "description": "Automated scanning for restricted categories, copyright infringement, deceptive downloads, and illegal content.",
+      "critical_fail_reasons": [
+        "Copyrighted Torrent/Warez/Crack Links",
+        "Adult/Gambling Content",
+        "Deceptive Click-Bait / Fake Buttons",
+        "Hacking/Malware Tools"
+      ],
+      "checks": [
+        {
+          "id": "banned_niche_detection",
+          "name": "Strict Verification Against Banned Niches",
+          "severity": "BLOCKER",
+          "points": 6,
+          "prohibited_keywords": [
+            "keygen",
+            "warez",
+            "torrent download",
+            "crack download",
+            "mod apk unlimited",
+            "casino online",
+            "sports betting odds",
+            "porn",
+            "adult video",
+            "escort service",
+            "buy weapons",
+            "counterfeit goods",
+            "hack account",
+            "bypass paywall"
+          ]
+        },
+        {
+          "id": "deceptive_ui_buttons",
+          "name": "No Deceptive Fake 'Download' or 'Play Now' Buttons",
+          "severity": "BLOCKER",
+          "points": 5,
+          "description": "AdSense prohibits layouts that trick users into clicking advertisements or fake call-to-actions."
+        },
+        {
+          "id": "copyright_safe_check",
+          "name": "Absence of Unlicensed Streaming or File Downloads",
+          "severity": "BLOCKER",
+          "points": 4,
+          "description": "Hosting, linking to, or embedding pirated movies, music, or premium software is an immediate lifetime ban."
+        }
+      ]
+    },
+    "ad_layout_readiness": {
+      "name": "Ad Placement Ergonomics & Invalid Traffic Prevention",
+      "weight": 5,
+      "description": "Preparation of ad slot geometry, ensuring ads do not overwhelm content or trigger accidental clicks.",
+      "critical_fail_reasons": [
+        "Ads Overwhelming Content",
+        "Cumulative Layout Shift (CLS) Risk",
+        "Sticky Overlays Covering Navigation"
+      ],
+      "checks": [
+        {
+          "id": "content_to_ad_ratio",
+          "name": "Content Superiority Ratio (Content > Ads)",
+          "severity": "HIGH",
+          "points": 3,
+          "description": "Content must be the prominent focus of every page; ads must not push content below the fold."
+        },
+        {
+          "id": "layout_shift_resilience",
+          "name": "Pre-Reserved Dimensions for Ad Units (CLS Prevention)",
+          "severity": "MEDIUM",
+          "points": 2,
+          "description": "Containers must prevent layout shifts when responsive ads load dynamically."
+        }
+      ]
+    },
+    "organic_footprint": {
+      "name": "Organic Search Footprint & Domain Maturity",
+      "weight": 5,
+      "description": "Signs of genuine search engine indexing, domain maturity, and organic traffic foundation.",
+      "critical_fail_reasons": [
+        "Domain Registered Under 7 Days Ago",
+        "Zero Pages Indexed in Google"
+      ],
+      "checks": [
+        {
+          "id": "search_console_indexing_signals",
+          "name": "Google Indexability & Canonical Tags",
+          "severity": "HIGH",
+          "points": 3,
+          "description": "Pages must have valid canonical tags and meta robots allowing 'index, follow'."
+        },
+        {
+          "id": "structured_data_breadcrumbs",
+          "name": "Schema.org Structured Data & Breadcrumbs",
+          "severity": "MEDIUM",
+          "points": 2,
+          "description": "Rich schema (Article, Organization, BreadcrumbList) provides strong E-E-A-T signals to Google."
+        }
+      ]
+    }
+  }
+}

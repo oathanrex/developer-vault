@@ -1,0 +1,20 @@
+---
+description: Google AdSense Readiness Audit Rules for Cursor
+globs: src/**/*.py, policies/*.json, tests/**/*.py
+---
+
+# Cursor Rule: AdSenseReady-AI Engine
+
+When working on this repository or auditing websites for AdSense approval:
+
+1. **Strict 7-Pillar Compliance**:
+   - Never consider a site "Ready" if any `BLOCKER` check fails.
+   - All score calculations are normalized to 0-100 points.
+
+2. **Policy Synchronization**:
+   - `policies/adsense_rules.json` is the single source of truth.
+   - Run `python scripts/sync_policies.py` to pull updates from Google Publisher Policy sources.
+
+3. **Check Implementation**:
+   - Checkers must handle missing HTML tags, network drops, and ill-formed HTML gracefully.
+   - Output must support both terminal visualization and Markdown/JSON export.

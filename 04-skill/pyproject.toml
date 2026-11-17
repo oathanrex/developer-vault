@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "adsenseready-ai"
+version = "2026.11.1"
+description = "Universal AI Skill & Automated Audit Engine for 100% Google AdSense Approval Readiness"
+readme = "README.md"
+requires-python = ">=3.8"
+keywords = ["adsense", "google-adsense", "ai-skill", "seo-audit", "publisher-policies"]
+dependencies = [
+    "rich>=13.0.0"
+]
+
+[project.scripts]
+adsense-audit = "src.cli:main"

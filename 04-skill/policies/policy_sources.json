@@ -1,0 +1,63 @@
+{
+  "version": "2026.11.0",
+  "last_synced": "2026-11-17T13:28:51.469658Z",
+  "sync_interval_days": 7,
+  "sources": [
+    {
+      "id": "publisher_policies",
+      "name": "Google Publisher Policies",
+      "category": "core_compliance",
+      "url": "https://support.google.com/adsense/answer/10502938",
+      "rss_feed": "https://blog.google/products/ads-commerce/rss/",
+      "critical_for_approval": true,
+      "last_hash": "56a891252b399eca8f73980febab1348aff3a87d267b26afc686e25f79116fe0",
+      "last_checked": "2026-11-17T13:28:42.841918Z"
+    },
+    {
+      "id": "program_policies",
+      "name": "AdSense Program Policies",
+      "category": "account_eligibility",
+      "url": "https://support.google.com/adsense/answer/48182",
+      "critical_for_approval": true,
+      "last_hash": "1b595ff8069baed8555054ac1c00f6e5b9d8e291cfc921dda8d5f1f36472516a",
+      "last_checked": "2026-11-17T13:28:45.244533Z"
+    },
+    {
+      "id": "search_essentials",
+      "name": "Google Search Essentials & Quality Guidelines",
+      "category": "seo_indexing",
+      "url": "https://developers.google.com/search/docs/essentials",
+      "rss_feed": "https://blog.google/products/search/rss/",
+      "critical_for_approval": true,
+      "last_hash": "0755947618cf9fd09af03d43134db7a8932a13cb7e9047180cbea7a092f0ef6a",
+      "last_checked": "2026-11-17T13:28:46.465509Z"
+    },
+    {
+      "id": "spam_policies",
+      "name": "Google Search Spam Policies (Thin / Scaled Content)",
+      "category": "content_quality",
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "critical_for_approval": true,
+      "last_hash": "2aea37bc5f07db36c53e386b6fd1d6dbfa1356467d617b670bdd4267a18fd0bd",
+      "last_checked": "2026-11-17T13:28:47.792748Z"
+    },
+    {
+      "id": "eu_consent_cmp",
+      "name": "EU User Consent Policy & Certified CMP Requirements",
+      "category": "legal_privacy",
+      "url": "https://support.google.com/adsense/answer/13554116",
+      "critical_for_approval": true,
+      "last_hash": "636295ed64c957799b6a146960e949f4b9c9538a266508446018eef0553d3286",
+      "last_checked": "2026-11-17T13:28:50.468842Z"
+    },
+    {
+      "id": "ad_placement_policies",
+      "name": "Ad Placement Policies (Accidental Clicks & CLS)",
+      "category": "ux_placement",
+      "url": "https://support.google.com/adsense/answer/1346295",
+      "critical_for_approval": true,
+      "last_hash": "1e0908e28bfdb53f1f6683d98761084d8106d4b583b4d958c47a0a524765f42a",
+      "last_checked": "2026-11-17T13:28:51.469658Z"
+    }
+  ]
+}

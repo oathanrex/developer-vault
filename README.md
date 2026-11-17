@@ -10,7 +10,7 @@
 
 *An authoritative, battle-tested collection of production-grade AI prompts, deterministic Claude execution playbooks, architectural software specifications (PRDs), and developer tools crafted by **[@oathanrex](https://github.com/oathanrex)**.*
 
-[Explore AI Prompts](#-01-ai-prompts--engineering-playbooks) • [Product PRDs](#-02-product-specifications--prds) • [Tools & Audits](#-03-tools--case-studies) • [Claude SOP](#-claude-zero-error-execution-workflow)
+[Explore AI Prompts](#-01-ai-prompts--engineering-playbooks) • [Product PRDs](#-02-product-specifications--prds) • [Tools & Audits](#-03-tools--case-studies) • [AI Skill & MCP](#-04-universal-ai-skills--mcp-servers) • [Claude SOP](#-claude-zero-error-execution-workflow)
 
 ---
 
@@ -50,6 +50,12 @@ developer-vault/
     ├── markdown-renderer/                   # Standalone Primer GitHub Markdown Viewer
     ├── audits/                              # Static site audit checklist & in-depth case study
     └── referrals/                           # Curated developer utilities & partner benefits
+├── 04-skill/                                # Universal AI Skills & Native MCP Servers
+│   ├── src/                                 # 360° Forensic Audit Engine & MCP Server
+│   ├── policies/                            # Dynamic versioned Google AdSense policy ruleset
+│   ├── scripts/sync_policies.py             # Evergreen Google RSS policy sync automation
+│   ├── SKILL.md                             # Universal Agent Skill for Antigravity & AI
+│   └── README.md                            # AdSenseReady-AI Top 1% Documentation
 ```
 
 ---
@@ -109,6 +115,19 @@ The PRD library provides complete, production-ready specifications written accor
 * **Technical Audits & Case Studies** ([`03-tools-and-audits/audits/`](./03-tools-and-audits/audits/)):
   * `static-site-audit-prompt.md`: A 50-point technical checklist covering performance, SEO, accessibility (WCAG), and responsive integrity.
   * `image-converter-audit-case-study.md`: A 247 KB real-world audit detailing memory management, WASM pipelines, and production hardening.
+
+---
+
+## 🎯 04. Universal AI Skills & MCP Servers
+
+### AdSenseReady-AI (`04-skill/`)
+A production-grade, 360-degree forensic Google AdSense readiness audit engine and native **Model Context Protocol (MCP)** server.
+
+* **7-Pillar Evaluation Matrix**: Audits Legal & Trust Foundation, E-E-A-T Content Substance, Technical SEO, Navigation Architecture, Google Publisher Policies, Ad Ergonomics, and Structured Data.
+* **Universal Cross-AI Compatibility**: Compatible with **Antigravity** (`SKILL.md`), **Claude Code** (`CLAUDE.md`), **Cursor** (`.cursorrules`), and **ChatGPT** (`prompts/`).
+* **Native MCP Server** (`04-skill/src/mcp_server.py`): Enables Claude Desktop, Cursor, and Zed to invoke live website audits and policy checks.
+* **Dynamic Policy Sync**: Weekly automated cron workflow (`.github/workflows/policy-sync.yml`) monitors official Google Search Central and AdSense RSS feeds to keep audit rules 100% evergreen.
+* **Full Documentation**: See [`04-skill/README.md`](./04-skill/README.md).
 
 ---
 

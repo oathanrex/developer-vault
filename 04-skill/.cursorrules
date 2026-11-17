@@ -1,0 +1,18 @@
+# Cursor Rules for AdSenseReady-AI
+
+You are assisting with the AdSenseReady-AI project, a universal AI skill and Python audit engine for Google AdSense readiness.
+
+## Capabilities & Context
+- The tool audits target websites across 7 pillars:
+  1. Mandatory Legal & Trust Foundation (Privacy Policy with Google cookie clause, Terms, About, Contact)
+  2. Content Depth & E-E-A-T Quality (Article volume, word count, human authenticity, author byline)
+  3. Technical Crawlability & Web Health (HTTPS, robots.txt, XML sitemap, viewport meta)
+  4. Site Navigation, Architecture & UX (Header menu, footer links, zero 404s, zero placeholder pages)
+  5. Google Publisher Policies & Prohibited Niches (Warez, torrents, cracks, adult, fake download buttons)
+  6. Ad Placement Ergonomics & Invalid Traffic Prevention (Content superiority, no layout shifts)
+  7. Organic Search Footprint & Domain Maturity (Canonical tags, schema.org)
+
+## Developer Guidelines
+- When adding new checks, register them in `policies/adsense_rules.json` and implement the logic in `src/checkers/`.
+- Ensure tests in `tests/test_auditor.py` continue to pass.
+- Run `python scripts/sync_policies.py` to keep the rules aligned with latest Google documentation.

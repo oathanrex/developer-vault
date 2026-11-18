@@ -50,8 +50,6 @@ developer-vault/
     ├── markdown-renderer/                   # Standalone Primer GitHub Markdown Viewer
     ├── audits/                              # Static site audit checklist & in-depth case study
     └── referrals/                           # Curated developer utilities & partner benefits
-├── 04-skill/                                # Universal AI Skills (Standalone: oathanrex/adsenseready-ai)
-│   └── README.md                            # AdSenseReady-AI Project Migration & Gateway
 ```
 
 ---
